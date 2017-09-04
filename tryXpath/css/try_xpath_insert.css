@@ -1,11 +1,16 @@
-.tryxpath-context-f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath-elem-f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    border: solid 10px #ff00ff !important;
+
+.tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
+    border: solid 10px #0000ff !important;
 }
 
-.tryxpath-context-f43c83f3-1920-4222-a721-0cc19c4ba9bf {
+.tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
     border: solid 10px #ff0000 !important;
 }
 
-.tryxpath-elem-f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    border: solid 10px #0000ff !important;
+.tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
+    border: solid 10px #ff00ff !important;
+}
+
+.tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
+    border: solid 10px #00ff00 !important;
 }
