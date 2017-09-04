@@ -1,0 +1,214 @@
+
+// namespace
+if (!tryXpath) {
+    var tryXpath = {};
+}
+tryXpath.functions = {};
+
+(function () {
+    "use strict";
+
+    // alias
+    var tx = tryXpath;
+    var fu = tryXpath.functions;
+
+    fu.execExpr = function(expr, method, opts) {
+        opts = opts || {};
+        var context = opts.context || document;
+        var doc = context.ownerDocument || context;
+        var resolver = opts.resolver ? opts.resolver : null;
+
+        var items, type;
+
+        switch (method) {
+        case "evaluate":
+            resolver = fu.makeResolver(resolver);
+            type = opts.resultType || XPathResult.ANY_TYPE;
+            let result = doc.evaluate(expr, context, resolver, type, null);
+            items = fu.resToArr(result, type);
+            if (type === XPathResult.ANY_TYPE) {
+                type = result.resultType;
+            }
+            break;
+
+        case "querySelector":
+            if (!fu.isDocOrElem(context)) {
+                throw new Error("The context is either Document nor Element.");
+            }
+            let elem = context.querySelector(expr);
+            items = elem ? [elem] : [];
+            type = null;
+            break;
+
+        case "querySelectorAll":
+        default:
+            if (!fu.isDocOrElem(context)) {
+                throw new Error("The context is either Document nor Element.");
+            }
+            let elems = context.querySelectorAll(expr);
+            items = fu.listToArr(elems);
+            type = null;
+            break;
+        }
+
+        return {
+            "items": items,
+            "method": method,
+            "type": type
+        };
+    };
+
+    fu.resToArr = function (res, type) {
+        if (type === undefined || (type === XPathResult.ANY_TYPE)) {
+            type = res.resultType;
+        }
+
+        var arr = [];
+        switch(type) {
+        case XPathResult.NUMBER_TYPE :
+            arr.push(res.numberValue);
+            break;
+        case XPathResult.STRING_TYPE :
+            arr.push(res.stringValue);
+            break;
+        case XPathResult.BOOLEAN_TYPE :
+            arr.push(res.booleanValue);
+            break;
+        case XPathResult.ORDERED_NODE_ITERATOR_TYPE :
+        case XPathResult.UNORDERED_NODE_ITERATOR_TYPE :
+            for (var node = res.iterateNext()
+                 ; node !== null
+                 ; node = res.iterateNext()) {
+                arr.push(node);
+            }
+            break;
+        case XPathResult.ORDERED_NODE_SNAPSHOT_TYPE :
+        case XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE :
+            for (var i = 0; i < res.snapshotLength; i++) {
+                arr.push(res.snapshotItem(i));
+            }
+            break;
+        case XPathResult.ANY_UNORDERED_NODE_TYPE :
+        case XPathResult.FIRST_ORDERED_NODE_TYPE :
+            arr.push(res.singleNodeValue);
+            break;
+        default :
+            throw new Error("The resultType is invalid. " + type);
+        }
+        return arr;
+    };
+    
+    fu.makeResolver = function (obj) {
+        if (obj === null) {
+            return null;
+        }
+        if (typeof(obj) === "function") {
+            return obj;
+        }
+
+        var dict;
+        if (typeof(obj) === "string") {
+            try {
+                dict = JSON.parse(obj);
+            } catch (e) {
+                throw new Error("Invalid resolver. JSON syntax error. " + obj);
+            }
+        } else {
+            dict = obj;
+        }
+
+        if (fu.isValidDict(dict)) {
+            let map = fu.objToMap(dict);
+            return function (str) {
+                if (map.has(str)) {
+                    return map.get(str);
+                }
+                return "";
+            };
+        }
+        throw new Error("Invalid resolver. "
+                        + JSON.stringify(dict, null));
+    };
+
+    fu.isValidDict = function (obj) {
+        if ((obj === null) || (typeof(obj) !== "object")) {
+            return false;
+        }
+        for (var key of Object.keys(obj)) {
+            if (typeof(obj[key]) !== "string") {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    fu.objToMap = function (obj) {
+        var map = new Map();
+        Object.keys(obj).forEach(function(item) {
+            map.set(item, obj[item]);
+        });
+        return map;
+    }
+
+    fu.isDocOrElem = function(obj) {
+        if ((obj.nodeType === 1) || (obj.nodeType === 9)) {
+            return true;
+        }
+        return false;
+    }
+
+    fu.listToArr = function(list) {
+        var elems = [];
+        for (var i = 0; i < list.length; i++) {
+            elems.push(list[i]);
+        }
+        return elems;
+    }
+
+    fu.getItemDetail = function (item) {
+        var typeStr = typeof(item);
+
+        if (typeStr === "string") {
+            return { "type": "String", "name": "", "value": item };
+        }
+        if (typeStr === "number") {
+            return { "type": "Number", "name": "", "value": item.toString() };
+        }
+
+        // item is Attr
+        if (Object.prototype.toString.call(item) === "[object Attr]") {
+            return { "type": "Attr", "name": item.name, "value": item.value };
+        }
+
+        // item is Node
+        return {
+            "type": "Node " + fu.getNodeTypeStr(item.nodeType) + "("
+                + item.nodeType + ")",
+            "name": item.nodeName,
+            "value": item.nodeValue || ""
+        };
+    }
+
+    const nodeTypeMap = new Map([
+        [Node.ELEMENT_NODE, "ELEMENT_NODE"],
+        [Node.ATTRIBUTE_NODE, "ATTRIBUTE_NODE"],
+        [Node.TEXT_NODE, "TEXT_NODE"],
+        [Node.CDATA_SECTION_NODE, "CDATA_SECTION_NODE"],
+        [Node.ENTITY_REFERENCE_NODE, "ENTITY_REFERENCE_NODE"],
+        [Node.ENTITY_NODE, "ENTITY_NODE"],
+        [Node.PROCESSING_INSTRUCTION_NODE, "PROCESSING_INSTRUCTION_NODE"],
+        [Node.COMMENT_NODE, "COMMENT_NODE"],
+        [Node.DOCUMENT_NODE, "DOCUMENT_NODE"],
+        [Node.DOCUMENT_TYPE_NODE, "DOCUMENT_TYPE_NODE"],
+        [Node.DOCUMENT_FRAGMENT_NODE, "DOCUMENT_FRAGMENT_NODE"],
+        [Node.NOTATION_NODE, "NOTATION_NODE"]
+    ]);
+
+    fu.getNodeTypeStr = function(nodeType) {
+        if (nodeTypeMap.has(nodeType)) {
+            return nodeTypeMap.get(nodeType);
+        }
+        return "Unknown";
+    }
+
+})();
