@@ -15,38 +15,32 @@
             return listener(message, sender, sendResponse);
         }
     };
-    genericListener.listeners = {};
+    genericListener.listeners = Object.create(null);
+    chrome.runtime.onMessage.addListener(genericListener);
 
     genericListener.listeners.execute = function(message, sender) {
-        var sendMsg = {};
-        sendMsg.contextExpr = message.contextExpr;
-        sendMsg.contextExprWay = message.contextExprWay;
-        sendMsg.expr = message.expr;
-        sendMsg.exprWay = message.exprWay;
-        sendMsg.exprResultType = message.exprResultType;
-        sendMsg.resolvingDict = message.resolvingDict;
+        var sendMsg = Object.create(null);
+        sendMsg.event = "showResultsInPopup";
 
-        sendMsg.url = window.location.href;
-        sendMsg.title = window.document.title;
-
-        var resolver = null;
-        if (sendMsg.contextExprWay === "XPath"
-            || sendMsg.exprWay === "XPath") {
-            if (!fu.isValidResolver(sendMsg.resolvingDict)) {
-                sendMsg.success = false;
-                sendMsg.message = "Invalid resolver. "
-                    + JSON.stringify(sendMsg.resolvingDict, null, 2);
-                sendMsg.context = null;
-                sendMsg.results = [];
-                sendMsg.event = "showResultsInPopup";
-                chrome.runtime.sendMessage(sendMsg);
-                return ;
+        var res;
+        if (message.context) {
+            try {
+                res = fu.execExpr(message.context.expression, message.context.method, {
+                    "resultType": message.context.resultType,
+                    "resolver": message.context.resolver
+                });
+                if (res.items.length >= 1) {
+                    res.items[0].classList.add("tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf");
+                    sendMsg.message = "The context is found.";
+                } else {
+                    sendMsg.message = "Any context is not found.";
+                }
+            } catch (e) {
+                sendMsg.message = "An error occurred when getting a context. "
+                    + e.message;
             }
-            resolver = fu.makeResolver(sendMsg.resolvingDict);
+            chrome.runtime.sendMessage(sendMsg);
         }
-
     }
-
-    chrome.runtime.onMessage.addListener(genericListener);
 
 })(window);

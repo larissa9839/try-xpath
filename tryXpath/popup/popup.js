@@ -4,7 +4,11 @@ window.addEventListener("load", function () {
 
     // クリックされたらメッセージを発する
     document.getElementById("send").addEventListener("click", function() {
-        var msg = JSON.parse(area.value);
+        try {
+            var msg = JSON.parse(area.value);
+        } catch (e) {
+            result.value = e.message;
+        }
         chrome.tabs.query({ "active": true, "currentWindow": true },
                           function (tabs) {
                               chrome.tabs.sendMessage(tabs[0].id, msg);
@@ -17,7 +21,7 @@ window.addEventListener("load", function () {
             return listener(message, sender, sendResponse);
         }
     };
-    genericListener.listeners = {};
+    genericListener.listeners = Object.create(null);;
 
     genericListener.listeners.showResultsInPopup = function (message, sender){
         result.value = JSON.stringify(message);
