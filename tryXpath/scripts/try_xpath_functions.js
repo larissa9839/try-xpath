@@ -5,7 +5,7 @@ if (!tryXpath) {
 }
 tryXpath.functions = {};
 
-(function () {
+(function (window, undefined) {
     "use strict";
 
     // alias
@@ -212,4 +212,25 @@ tryXpath.functions = {};
         return "Unknown";
     }
 
-})();
+    fu.addClassToItem = function (clas, item) {
+        var typeStr = typeof(item);
+
+        if ((typeStr === "string")
+            || (typeStr === "number")) {
+            return;
+        }
+
+        if (item.nodeType === Node.ELEMENT_NODE) {
+            item.classList.add(clas);
+        }
+    }
+
+    fu.addClassToItems = function (clas, items) {
+        for (var item of items) {
+            fu.addClassToItem(clas, item);
+        }
+    }
+
+
+
+})(window);

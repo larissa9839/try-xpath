@@ -2,6 +2,8 @@
 
 	* tryXpath/scripts/try_xpath_functions.js: Change return value of
 	execExpr function.
+	Define addClassToItem function.
+	Define addClassToItems function.
 
 	* test/unit_test/jasmine/spec/spec.js:
 	Test className behavior.
