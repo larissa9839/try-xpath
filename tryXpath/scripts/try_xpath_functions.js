@@ -190,6 +190,14 @@ tryXpath.functions = {};
         };
     }
 
+    fu.getItemDetails = function (items) {
+        var details = [];
+        for (var i = 0; i < items.length; i++) {
+            details.push(fu.getItemDetail(items[i]));
+        }
+        return details;
+    }
+
     const nodeTypeMap = new Map([
         [Node.ELEMENT_NODE, "ELEMENT_NODE"],
         [Node.ATTRIBUTE_NODE, "ATTRIBUTE_NODE"],
