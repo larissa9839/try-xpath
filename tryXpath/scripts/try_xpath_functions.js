@@ -18,16 +18,17 @@ tryXpath.functions = {};
         var doc = context.ownerDocument || context;
         var resolver = opts.resolver ? opts.resolver : null;
 
-        var items, type;
+        var items, resultType;
 
         switch (method) {
         case "evaluate":
             resolver = fu.makeResolver(resolver);
-            type = opts.resultType || XPathResult.ANY_TYPE;
-            let result = doc.evaluate(expr, context, resolver, type, null);
-            items = fu.resToArr(result, type);
-            if (type === XPathResult.ANY_TYPE) {
-                type = result.resultType;
+            resultType = opts.resultType || XPathResult.ANY_TYPE;
+            let result = doc.evaluate(expr, context, resolver, resultType,
+                                      null);
+            items = fu.resToArr(result, resultType);
+            if (resultType === XPathResult.ANY_TYPE) {
+                resultType = result.resultType;
             }
             break;
 
@@ -37,7 +38,7 @@ tryXpath.functions = {};
             }
             let elem = context.querySelector(expr);
             items = elem ? [elem] : [];
-            type = null;
+            resultType = null;
             break;
 
         case "querySelectorAll":
@@ -47,14 +48,14 @@ tryXpath.functions = {};
             }
             let elems = context.querySelectorAll(expr);
             items = fu.listToArr(elems);
-            type = null;
+            resultType = null;
             break;
         }
 
         return {
             "items": items,
             "method": method,
-            "type": type
+            "resultType": resultType
         };
     };
 

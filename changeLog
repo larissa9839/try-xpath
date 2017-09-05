@@ -1,5 +1,8 @@
 2017-09-05  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_functions.js: Change return value of
+	execExpr function.
+
 	* test/unit_test/jasmine/spec/spec.js:
 	Test className behavior.
 
