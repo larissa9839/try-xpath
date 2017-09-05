@@ -243,7 +243,20 @@ tryXpath.functions = {};
     }
 
     fu.saveItemClass = function (item) {
-        
+        if (!fu.isElementItem(item)) {
+            return null;
+        }
+
+        var clas;
+        if (item.hasAttribute("class")) {
+            clas = item.getAttribute("class");
+        } else {
+            clas = null;
+        }
+        return {
+            "elem": item,
+            "origClass": clas
+        }
     }
 
 })(window);

@@ -6,6 +6,7 @@
 	Define addClassToItems function.
 	Define isElementItem function.
 	Define isNodeItem function.
+	Define saveItemClass function.
 
 	* test/unit_test/jasmine/spec/spec.js:
 	Test className behavior.
