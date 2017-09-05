@@ -1,5 +1,9 @@
 2017-09-05  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Define resetPrev function.
+	Change genericListener.listeners.execute function.
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Change return value of execExpr function.
 	Define addClassToItem function.

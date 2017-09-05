@@ -24,7 +24,7 @@ window.addEventListener("load", function () {
     genericListener.listeners = Object.create(null);;
 
     genericListener.listeners.showResultsInPopup = function (message, sender){
-        result.value = JSON.stringify(message);
+        result.value = JSON.stringify(message, null, 2);
         return ;
     };
 
