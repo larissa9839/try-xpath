@@ -212,15 +212,26 @@ tryXpath.functions = {};
         return "Unknown";
     }
 
-    fu.addClassToItem = function (clas, item) {
-        var typeStr = typeof(item);
-
-        if ((typeStr === "string")
-            || (typeStr === "number")) {
-            return;
+    fu.isNodeItem = function (item) {
+        switch (typeof(item)) {
+        case "string":
+        case "number":
+            return false;
+        default:
+            return true;
         }
+    }
+    
+    fu.isElementItem = function (item) {
+        if (fu.isNodeItem(item)
+            && (item.nodeType === Node.ELEMENT_NODE)) {
+            return true;
+        }
+        return false;
+    }
 
-        if (item.nodeType === Node.ELEMENT_NODE) {
+    fu.addClassToItem = function (clas, item) {
+        if (fu.isElementItem(item)) {
             item.classList.add(clas);
         }
     }
@@ -231,6 +242,8 @@ tryXpath.functions = {};
         }
     }
 
-
+    fu.saveItemClass = function (item) {
+        
+    }
 
 })(window);
