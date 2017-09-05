@@ -259,4 +259,16 @@ tryXpath.functions = {};
         }
     }
 
+    fu.restoreItemClass = function (savedClass) {
+        if (savedClass === null) {
+            return null;
+        }
+
+        if (savedClass.origClass === null) {
+            savedClass.elem.removeAttribute("class");
+        } else {
+            savedClass.elem.setAttribute("class", savedClass.origClass);
+        }
+    }
+
 })(window);

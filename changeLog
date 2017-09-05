@@ -7,6 +7,7 @@
 	Define isElementItem function.
 	Define isNodeItem function.
 	Define saveItemClass function.
+	Define restoreItemClass function.
 
 	* test/unit_test/jasmine/spec/spec.js:
 	Test className behavior.
