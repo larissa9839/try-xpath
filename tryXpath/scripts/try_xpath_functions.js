@@ -279,4 +279,10 @@ tryXpath.functions = {};
         return savedClasses;
     }
 
+    fu.restoreItemClasses = function (savedClasses) {
+        for (var savedClass of savedClasses) {
+            fu.restoreItemClass(savedClass);
+        }
+    }
+
 })(window);

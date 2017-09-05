@@ -9,6 +9,7 @@
 	Define saveItemClass function.
 	Define restoreItemClass function.
 	Define saveItemClasses function.
+	Define restoreItemClasses function.
 	
 	* test/unit_test/jasmine/spec/spec.js:
 	Test className behavior.
