@@ -271,4 +271,12 @@ tryXpath.functions = {};
         }
     }
 
+    fu.saveItemClasses = function (items) {
+        var savedClasses = [];
+        for (var item of items) {
+            savedClasses.push(fu.saveItemClass(item));
+        }
+        return savedClasses;
+    }
+
 })(window);
