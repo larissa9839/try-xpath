@@ -1,7 +1,10 @@
 2017-09-05  larissa9839  <larissa9839@gmail.com>
 
+	* test/unit_test/jasmine/spec/spec.js:
+	Test className behavior.
+
 	* tryXpath/scripts/try_xpath_content.js:
-	  Define genericListener.listener.execute()
+	Define genericListener.listener.execute()
 
 2017-09-04  larissa9839  <larissa9839@gmail.com>
 
