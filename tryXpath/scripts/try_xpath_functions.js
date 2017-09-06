@@ -301,4 +301,23 @@ tryXpath.functions = {};
         }
     }
 
+    fu.getParentElement = function (item) {
+        if (fu.isAttrItem(item)) {
+            let parent = item.ownerElement;
+            return parent ? parent : null;
+        }
+
+        if (fu.isNodeItem(item)) {
+            let parent = item.parentElement;
+            if (parent) {
+                return parent;
+            }
+            parent = item.parentNode;
+            if (parent && (parent.nodeType === Node.ELEMENT_NODE)) {
+                return parent;
+            }
+        }
+        return null;
+    }
+
 })(window);
