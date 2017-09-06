@@ -19,12 +19,17 @@
     var savedClasses = [];
     var savedContextClass = null;
     var savedFocusedClass = null;
+    var contextItem = null;
     var currentItems = [];
 
     function resetPrev() {
         currentItems = [];
+        fu.restoreItemClass(savedFocusedClass);
+        savedFocusedClass = null;
         fu.restoreItemClasses(savedClasses);
+        savedClasses = [];
         fu.restoreItemClass(savedContextClass);
+        savedContextClass = null;
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -100,17 +105,39 @@
             return;
         }
 
+        contextItem = contItem;
         currentItems = mainRes.items;
         savedContextClass = fu.saveItemClass(contItem);
-        fu.addClassToItem(contextClass, contItem);
+        fu.addClassToItem(contextClass, contextItem);
         savedClasses = fu.saveItemClasses(currentItems);
         fu.addClassToItems(elemClass, currentItems);
 
-        sendMsg.message = "success";
+        sendMsg.message = "Success.";
         sendMsg.main.itemDetails = fu.getItemDetails(currentItems);
         chrome.runtime.sendMessage(sendMsg);
         prevMsg = sendMsg;
         return;
+    }
+
+    genericListener.listeners.focusItem = function(message, sender) {
+        fu.restoreItemClass(savedFocusedClass);
+        savedFocusedClass = null;
+        
+        var item = currentItems[message.index];
+        if (!item) {
+            return;
+        }
+
+        var elem;
+        if (fu.isElementItem(item)) {
+            elem = item;
+        } else {
+            elem = fu.getParentElement(item);
+        }
+        savedFocusedClass = fu.saveItemClass(elem);
+        elem.blur();
+        elem.focus();
+        fu.addClassToItem(focusedClass, elem);
     }
 
 })(window);

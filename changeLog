@@ -1,4 +1,12 @@
+2017-09-07  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js: 
+	Define genericListener.listeners.focusItem function.
+	
 2017-09-06  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/css/try_xpath_insert.css
+	  Change color.
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define isAttrItem function.
