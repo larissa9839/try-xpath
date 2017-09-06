@@ -2,6 +2,8 @@
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define isAttrItem function.
+	Fix isNodeItem function. Now this function returns false when
+	argument is Attr.
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Change genericListener.listeners.execute function to return

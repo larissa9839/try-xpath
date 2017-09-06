@@ -225,6 +225,10 @@ tryXpath.functions = {};
     }
 
     fu.isNodeItem = function (item) {
+        if (fu.isAttrItem(item)) {
+            return false;
+        }
+
         switch (typeof(item)) {
         case "string":
         case "number":
