@@ -107,8 +107,10 @@
         fu.addClassToItems(elemClass, currentItems);
 
         sendMsg.message = "success";
-        // sendMsg.main.itemDetails is needed.
+        sendMsg.main.itemDetails = fu.getItemDetails(currentItems);
         chrome.runtime.sendMessage(sendMsg);
+        prevMsg = sendMsg;
+        return;
     }
 
 })(window);
