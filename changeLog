@@ -1,5 +1,8 @@
 2017-09-06  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_functions.js:
+	Define isAttrItem function.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Change genericListener.listeners.execute function to return
 	itemDetails.

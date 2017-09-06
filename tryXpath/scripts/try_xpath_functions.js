@@ -177,7 +177,7 @@ tryXpath.functions = {};
         }
 
         // item is Attr
-        if (Object.prototype.toString.call(item) === "[object Attr]") {
+        if (fu.isAttrItem(item)) {
             return { "type": "Attr", "name": item.name, "value": item.value };
         }
 
@@ -218,6 +218,10 @@ tryXpath.functions = {};
             return nodeTypeMap.get(nodeType);
         }
         return "Unknown";
+    }
+
+    fu.isAttrItem = function (item) {
+        return Object.prototype.toString.call(item) === "[object Attr]";
     }
 
     fu.isNodeItem = function (item) {
