@@ -4,6 +4,7 @@
 	Change genericListener.listeners.execute function.
 	sendMsg.main.resultType and sendMsg.context.resultType have been
 	added.
+	Fix genericListener.listeners.requestShowResultsInPopup function.
 
 	* tryXpath/popup/popup.js:
 	Define sendToActiveTab function.

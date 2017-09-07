@@ -144,8 +144,10 @@
 
     genericListener.listeners.requestShowResultsInPopup = function(message,
                                                                    sender) {
-        prevMsg.event = "showResultsInPopup";
-        chrome.runtime.sendMessage(prevMsg);
+        if (prevMsg) {
+            prevMsg.event = "showResultsInPopup";
+            chrome.runtime.sendMessage(prevMsg);
+        }
     };
 
 })(window);
