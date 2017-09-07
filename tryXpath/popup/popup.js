@@ -2,6 +2,13 @@ window.addEventListener("load", function () {
     var area = document.getElementById("area");
     var result = document.getElementById("result");
 
+    function sendToActiveTab(msg) {
+        chrome.tabs.query({ "active": true, "currentWindow": true },
+                          function (tabs) {
+                              chrome.tabs.sendMessage(tabs[0].id, msg);
+                          });
+    }
+
     // クリックされたらメッセージを発する
     document.getElementById("send").addEventListener("click", function() {
         try {
@@ -9,10 +16,7 @@ window.addEventListener("load", function () {
         } catch (e) {
             result.value = e.message;
         }
-        chrome.tabs.query({ "active": true, "currentWindow": true },
-                          function (tabs) {
-                              chrome.tabs.sendMessage(tabs[0].id, msg);
-                          });
+        sendToActiveTab(msg);
     });
 
     function genericListener(message, sender, sendResponse) {
@@ -22,11 +26,12 @@ window.addEventListener("load", function () {
         }
     };
     genericListener.listeners = Object.create(null);;
+    chrome.runtime.onMessage.addListener(genericListener);
 
     genericListener.listeners.showResultsInPopup = function (message, sender){
         result.value = JSON.stringify(message, null, 2);
         return ;
     };
 
-    chrome.runtime.onMessage.addListener(genericListener);
+    sendToActiveTab({ "event": "requestShowResultsInPopup" });
 });

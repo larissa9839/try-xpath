@@ -1,8 +1,14 @@
 2017-09-07  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Define sendToActiveTab function.
+	When the window is loaded "requestShowResultsInPopup" message is
+	sent.
+
 	* tryXpath/scripts/try_xpath_content.js: 
 	Define genericListener.listeners.focusItem function.
-	
+	Define genericListener.listeners.requestShowResultsInPopup function.
+
 2017-09-06  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/css/try_xpath_insert.css

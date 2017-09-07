@@ -140,4 +140,10 @@
         fu.addClassToItem(focusedClass, elem);
     }
 
+    genericListener.listeners.requestShowResultsInPopup = function(message,
+                                                                   sender) {
+        prevMsg.event = "showResultsInPopup";
+        chrome.runtime.sendMessage(prevMsg);
+    };
+
 })(window);
