@@ -19,6 +19,15 @@ window.addEventListener("load", function () {
         sendToActiveTab(msg);
     });
 
+    window.addEventListener("unload", function () {
+        chrome.runtime.sendMessage({
+            "event": "storePopupState",
+            "state": {
+                "area": area.value
+            }
+        });
+    });
+
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
@@ -28,10 +37,15 @@ window.addEventListener("load", function () {
     genericListener.listeners = Object.create(null);;
     chrome.runtime.onMessage.addListener(genericListener);
 
-    genericListener.listeners.showResultsInPopup = function (message, sender){
+    genericListener.listeners.showResultsInPopup = function (message) {
         result.value = JSON.stringify(message, null, 2);
         return ;
     };
 
+    genericListener.listeners.restorePopupState = function (message) {
+        area.value = message.state.area;
+    };
+
     sendToActiveTab({ "event": "requestShowResultsInPopup" });
+    chrome.runtime.sendMessage({ "event": "requestRestorePopupState" });
 });
