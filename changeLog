@@ -1,5 +1,10 @@
 2017-09-07  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Change genericListener.listeners.execute function.
+	sendMsg.main.resultType and sendMsg.context.resultType have been
+	added.
+
 	* tryXpath/popup/popup.js:
 	Define sendToActiveTab function.
 	When the window is loaded "requestShowResultsInPopup" message is

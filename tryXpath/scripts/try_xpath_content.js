@@ -87,6 +87,7 @@
                 return;
             }
             contItem = contRes.items[0];
+            sendMsg.context.resultType = contRes.resultType;
             sendMsg.context.itemDetail = fu.getItemDetail(contItem);
         }
 
@@ -113,6 +114,7 @@
         fu.addClassToItems(elemClass, currentItems);
 
         sendMsg.message = "Success.";
+        sendMsg.main.resultType = mainRes.resultType;
         sendMsg.main.itemDetails = fu.getItemDetails(currentItems);
         chrome.runtime.sendMessage(sendMsg);
         prevMsg = sendMsg;
