@@ -3,6 +3,8 @@
 	* tryXpath/scripts/try_xpath_content.js:
 	Define restoreAllClass function.
 	Define genericListener.listeners.restoreAllClass function.
+	Rename genericListener.listeners.restoreAllClass
+	-> genericListener.listeners.resetStyle
 
 2017-09-07  larissa9839  <larissa9839@gmail.com>
 

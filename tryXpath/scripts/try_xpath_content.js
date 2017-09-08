@@ -130,7 +130,7 @@
         return;
     }
 
-    genericListener.listeners.focusItem = function(message, sender) {
+    genericListener.listeners.focusItem = function(message) {
         fu.restoreItemClass(savedFocusedClass);
         savedFocusedClass = null;
         
@@ -158,7 +158,7 @@
         }
     };
 
-    genericListener.listeners.restoreAllClass = function () {
+    genericListener.listeners.resetStyle = function () {
         restoreAllClass();
     };
 
