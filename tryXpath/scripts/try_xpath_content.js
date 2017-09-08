@@ -145,10 +145,13 @@
         } else {
             elem = fu.getParentElement(item);
         }
+
         savedFocusedClass = fu.saveItemClass(elem);
+        fu.addClassToItem(focusedClass, elem);
+
         elem.blur();
         elem.focus();
-        fu.addClassToItem(focusedClass, elem);
+        elem.scrollIntoView();
     };
 
     genericListener.listeners.requestShowResultsInPopup = function() {
