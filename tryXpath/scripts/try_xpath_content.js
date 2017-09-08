@@ -22,6 +22,29 @@
     var contextItem = null;
     var currentItems = [];
 
+    function focusItem(item) {
+        fu.restoreItemClass(savedFocusedClass);
+        savedFocusedClass = null;
+        
+        if (!item) {
+            return;
+        }
+
+        var elem;
+        if (fu.isElementItem(item)) {
+            elem = item;
+        } else {
+            elem = fu.getParentElement(item);
+        }
+
+        savedFocusedClass = fu.saveItemClass(elem);
+        fu.addClassToItem(focusedClass, elem);
+
+        elem.blur();
+        elem.focus();
+        elem.scrollIntoView();
+    };
+
     function restoreAllClass() {
         fu.restoreItemClass(savedFocusedClass);
         savedFocusedClass = null;
@@ -131,27 +154,7 @@
     }
 
     genericListener.listeners.focusItem = function(message) {
-        fu.restoreItemClass(savedFocusedClass);
-        savedFocusedClass = null;
-        
-        var item = currentItems[message.index];
-        if (!item) {
-            return;
-        }
-
-        var elem;
-        if (fu.isElementItem(item)) {
-            elem = item;
-        } else {
-            elem = fu.getParentElement(item);
-        }
-
-        savedFocusedClass = fu.saveItemClass(elem);
-        fu.addClassToItem(focusedClass, elem);
-
-        elem.blur();
-        elem.focus();
-        elem.scrollIntoView();
+        focusItem(currentItems[message.index]);
     };
 
     genericListener.listeners.requestShowResultsInPopup = function() {

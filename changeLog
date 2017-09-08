@@ -8,6 +8,7 @@
 	Define genericListener.listeners.setStyle function.
 	Modify genericListener.listeners.focusItem function to use
 	scrollIntoView.
+	Define focusItem fucntion.
 	
 2017-09-07  larissa9839  <larissa9839@gmail.com>
 
