@@ -162,4 +162,13 @@
         restoreAllClass();
     };
 
+    genericListener.listeners.setStyle = function () {
+        restoreAllClass();        
+
+        savedContextClass = fu.saveItemClass(contextItem);
+        fu.addClassToItem(contextClass, contextItem);
+        savedClasses = fu.saveItemClasses(currentItems);
+        fu.addClassToItems(elemClass, currentItems);
+    };
+
 })(window);

@@ -5,6 +5,7 @@
 	Define genericListener.listeners.restoreAllClass function.
 	Rename genericListener.listeners.restoreAllClass
 	-> genericListener.listeners.resetStyle
+	Define genericListener.listeners.setStyle function.
 
 2017-09-07  larissa9839  <larissa9839@gmail.com>
 
