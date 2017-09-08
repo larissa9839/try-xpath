@@ -15,21 +15,29 @@
 
     const dummyItemDetail = { "type": "", "name": "", "value": "" };
 
-    var prevMsg;
+    var prevMsg = null;
     var savedClasses = [];
     var savedContextClass = null;
     var savedFocusedClass = null;
     var contextItem = null;
     var currentItems = [];
 
-    function resetPrev() {
-        currentItems = [];
+    function restoreAllClass() {
         fu.restoreItemClass(savedFocusedClass);
         savedFocusedClass = null;
         fu.restoreItemClasses(savedClasses);
         savedClasses = [];
         fu.restoreItemClass(savedContextClass);
         savedContextClass = null;
+    };
+
+    function resetPrev() {
+        restoreAllClass();
+
+        contextItem = null;
+        currentItems = [];
+
+        prevMsg = null;
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -108,7 +116,8 @@
 
         contextItem = contItem;
         currentItems = mainRes.items;
-        savedContextClass = fu.saveItemClass(contItem);
+
+        savedContextClass = fu.saveItemClass(contextItem);
         fu.addClassToItem(contextClass, contextItem);
         savedClasses = fu.saveItemClasses(currentItems);
         fu.addClassToItems(elemClass, currentItems);
@@ -140,14 +149,17 @@
         elem.blur();
         elem.focus();
         fu.addClassToItem(focusedClass, elem);
-    }
+    };
 
-    genericListener.listeners.requestShowResultsInPopup = function(message,
-                                                                   sender) {
+    genericListener.listeners.requestShowResultsInPopup = function() {
         if (prevMsg) {
             prevMsg.event = "showResultsInPopup";
             chrome.runtime.sendMessage(prevMsg);
         }
+    };
+
+    genericListener.listeners.restoreAllClass = function () {
+        restoreAllClass();
     };
 
 })(window);
