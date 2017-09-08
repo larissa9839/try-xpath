@@ -157,6 +157,10 @@
         focusItem(currentItems[message.index]);
     };
 
+    genericListener.listeners.focusContextItem = function() {
+        focusItem(contextItem);
+    };
+
     genericListener.listeners.requestShowResultsInPopup = function() {
         if (prevMsg) {
             prevMsg.event = "showResultsInPopup";
