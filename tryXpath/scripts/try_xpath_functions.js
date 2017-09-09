@@ -44,7 +44,8 @@ tryXpath.functions = {};
         case "querySelectorAll":
         default:
             if (!fu.isDocOrElem(context)) {
-                throw new Error("The context is either Document nor Element.");
+                throw new Error(
+                    "The context is neither Document nor Element.");
             }
             let elems = context.querySelectorAll(expr);
             items = fu.listToArr(elems);
@@ -318,6 +319,22 @@ tryXpath.functions = {};
             }
         }
         return null;
-    }
+    };
+
+    fu.getOwnerDocument = function (item) {
+        if (fu.isAttrItem(item)) {
+            let elem = item.ownerElement;
+            if (elem) {
+                return elem.ownerDocument;
+            }
+            return item.ownerDocument;
+        }
+
+        if (fu.isNodeItem(item)) {
+            return item.ownerDocument;
+        }
+
+        return null;
+    };
 
 })(window);
