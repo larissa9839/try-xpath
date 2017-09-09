@@ -1,3 +1,8 @@
+2017-09-09  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/background/try_xpath_background.js:
+	Define genericListener.listeners.focusItemInTab function.
+
 2017-09-08  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:

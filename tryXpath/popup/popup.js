@@ -18,6 +18,14 @@ window.addEventListener("load", function () {
         }
         sendToActiveTab(msg);
     });
+    document.getElementById("send-to-all").addEventListener("click", function() {
+        try {
+            var msg = JSON.parse(area.value);
+        } catch (e) {
+            result.value = e.message;
+        }
+        chrome.runtime.sendMessage(msg);
+    });
 
     window.addEventListener("unload", function () {
         chrome.runtime.sendMessage({
@@ -37,7 +45,8 @@ window.addEventListener("load", function () {
     genericListener.listeners = Object.create(null);;
     chrome.runtime.onMessage.addListener(genericListener);
 
-    genericListener.listeners.showResultsInPopup = function (message) {
+    genericListener.listeners.showResultsInPopup = function (message, sender) {
+        message.tabId = sender.tab.id;
         result.value = JSON.stringify(message, null, 2);
         return ;
     };
