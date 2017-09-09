@@ -15,13 +15,16 @@ tryXpath.functions = {};
     fu.execExpr = function(expr, method, opts) {
         opts = opts || {};
         var context = opts.context || document;
-        var doc = context.ownerDocument || context;
         var resolver = opts.resolver ? opts.resolver : null;
+        var doc = opts.document || fu.getOwnerDocument(context) || context;
 
         var items, resultType;
 
         switch (method) {
         case "evaluate":
+            if (!fu.isNodeItem(context) && !fu.isAttrItem(context)) {
+                throw new Error("The context is either Nor nor Attr.");
+            }
             resolver = fu.makeResolver(resolver);
             resultType = opts.resultType || XPathResult.ANY_TYPE;
             let result = doc.evaluate(expr, context, resolver, resultType,
