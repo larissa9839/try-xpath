@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TryXpath show all results</title>
+    <script src="show_all_results.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <table>
+        <caption>information</caption>
+        <tbody>
+          <tr><th>Message</th><td id="message"></td></tr>
+          <tr><th>Title</th><td id="title"></td></tr>
+          <tr><th>URL</th><td id="url"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table>
+        <caption>context information</caption>
+        <tbody>
+          <tr><th>Method</th><td id="context-method"></td></tr>
+          <tr><th>Expression</th><td id="context-expression"></td></tr>
+          <tr><th>Specified resultType</th><td id="context-specified-result-type"></td></tr>
+          <tr><th>resultType</th><td id="context-result-type"></td></tr>
+          <tr><th>Resolver</th><td id="context-resolver"></td></tr>
+        </tbody>
+      </table>
+      <table id="context-detail">
+        <caption>context detail</caption>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table>
+        <caption>main information</caption>
+        <tbody>
+          <tr><th>Method</th><td id="main-method"></td></tr>
+          <tr><th>Expression</th><td id="main-expression"></td></tr>
+          <tr><th>Specified resultType</th><td id="main-specified-result-type"></td></tr>
+          <tr><th>resultType</th><td id="main-result-type"></td></tr>
+          <tr><th>Resolver</th><td id="main-resolver"></td></tr>
+        </tbody>
+      </table>
+      <table id="main-details">
+        <caption>main details</caption>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
