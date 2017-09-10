@@ -161,12 +161,19 @@
         focusItem(contextItem);
     };
 
-    genericListener.listeners.requestShowResultsInPopup = function() {
+    genericListener.listeners.requestShowResultsInPopup = function () {
         if (prevMsg) {
             prevMsg.event = "showResultsInPopup";
             chrome.runtime.sendMessage(prevMsg);
         }
     };
+
+    genericListener.listeners.requestShowAllResults = fucntion () {
+        if (prevMsg) {
+            prevMsg.event = "showAllResults";
+            chrome.runtime.sendMessage(prevMsg);
+        }
+    }
 
     genericListener.listeners.resetStyle = function () {
         restoreAllClass();
