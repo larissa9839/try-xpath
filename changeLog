@@ -1,5 +1,9 @@
 2017-09-10  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_functions.js: 
+	Define createDetailTableHeader function.
+	Define appendDetailRows function.
+	
 	* tryXpath/pages/show_all_results.js:
 	Create this file.
 	Define showAllResults function. This is not finished.

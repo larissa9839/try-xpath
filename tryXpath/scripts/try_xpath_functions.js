@@ -340,4 +340,84 @@ tryXpath.functions = {};
         return null;
     };
 
+    fu.createDetailTableHeader = function (opts) {
+        opts = opts || {};
+        var doc = opts.document || document;
+
+        var tr = doc.createElement("tr");
+        var th = doc.createElement("th");
+        th.textContent = "Index";
+        tr.appendChild(th);
+        
+        th = doc.createElement("th");
+        th.textContent = "Type";
+        tr.appendChild(th);
+
+        th = doc.createElement("th");
+        th.textContent = "Name";
+        tr.appendChild(th);
+
+        th = doc.createElement("th");
+        th.textContent = "Value";
+        tr.appendChild(th);
+
+        th = doc.createElement("th");
+        th.textContent = "Focus";
+        tr.appendChild(th);
+
+        return tr;
+    };
+
+    fu.appendDetailRows = function (parent, details, opts) {
+        opts = opts || {};
+        var doc = opts.document || document;
+        var chunkSize = opts.chunkSize || 1000;
+        var callback = opts.callback ? opts.callback : null;
+
+        var index = 0;
+
+        function processChunk() {
+            var frag = doc.createDocumentFragment();
+            for (var i = 0
+                 ; (i < chunkSize) && (index < details.length)
+                 ; i++, index++) {
+                var detail = details[index];
+                var tr = doc.createElement("tr");
+
+                var td = doc.createElement("td");
+                td.textContent = index;
+                tr.appendChild(td);
+
+                td = doc.createElement("td");
+                td.textContent = detail.type;
+                tr.appendChild(td);
+
+                td = doc.createElement("td");
+                td.textContent = detail.name;
+                tr.appendChild(td);
+
+                td = doc.createElement("td");
+                td.textContent = detail.value;
+                tr.appendChild(td);
+
+                td = doc.createElement("td");
+                var button = doc.createElement("button");
+                button.textContent = "Focus";
+                button.setAttribute("data-index", index);
+                td.appendChild(button);
+                tr.appendChild(td);
+
+                frag.appendChild(tr);
+            }
+            parent.appendChild(frag);
+            if (index < details.length) {
+                window.setTimeout(processChunk, 0);
+            } else {
+                if (callback) { callback(); }
+            }
+        };
+
+        window.setTimeout(processChunk, 0);
+    };
+
 })(window);
