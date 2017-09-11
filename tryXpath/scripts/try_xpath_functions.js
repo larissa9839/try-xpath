@@ -224,6 +224,30 @@ tryXpath.functions = {};
         return "Unknown";
     }
 
+    const xpathResultMap = new Map([
+        [XPathResult.ANY_TYPE, "ANY_TYPE"],
+        [XPathResult.NUMBER_TYPE , "NUMBER_TYPE"],
+        [XPathResult.STRING_TYPE , "STRING_TYPE"],
+        [XPathResult.BOOLEAN_TYPE , "BOOLEAN_TYPE"],
+        [XPathResult.UNORDERED_NODE_ITERATOR_TYPE ,
+         "UNORDERED_NODE_ITERATOR_TYPE"],
+        [XPathResult.ORDERED_NODE_ITERATOR_TYPE ,
+         "ORDERED_NODE_ITERATOR_TYPE"],
+        [XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE ,
+         "UNORDERED_NODE_SNAPSHOT_TYPE"],
+        [XPathResult.ORDERED_NODE_SNAPSHOT_TYPE ,
+         "ORDERED_NODE_SNAPSHOT_TYPE"],
+        [XPathResult.ANY_UNORDERED_NODE_TYPE, "ANY_UNORDERED_NODE_TYPE"],
+        [XPathResult.FIRST_ORDERED_NODE_TYPE, "FIRST_ORDERED_NODE_TYPE"]
+    ]);
+
+    fu.getXpathResultStr = function (resultType) {
+        if (xpathResultMap.has(resultType)) {
+            return xpathResultMap.get(resultType);
+        }
+        return "Unknown";
+    };
+
     fu.isAttrItem = function (item) {
         return Object.prototype.toString.call(item) === "[object Attr]";
     }

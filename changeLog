@@ -2,6 +2,7 @@
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Change type string in detail.
+	Define getXpathResultStr function.
 
 	* tryXpath/pages/show_all_results.html:
 	Modify texts.
