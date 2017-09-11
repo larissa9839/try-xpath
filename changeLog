@@ -1,5 +1,9 @@
 2017-09-11  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Define makeTypeStr function;
+	Modify to set type string to resultType.
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Change type string in detail.
 	Define getXpathResultStr function.

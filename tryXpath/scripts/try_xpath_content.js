@@ -65,6 +65,10 @@
         executionCount++;
     };
 
+    function makeTypeStr(resultType) {
+        return fu.getXpathResultStr(resultType) + "(" + resultType + ")";
+    };
+
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
@@ -83,8 +87,9 @@
         sendMsg.executionId = executionCount;
         sendMsg.href = window.location.href;
         sendMsg.title = window.document.title;
+
         sendMsg.main = Object.create(null);
-        sendMsg.main.specifiedResultType = main.resultType;
+        sendMsg.main.specifiedResultType = makeTypeStr(main.resultType);
         sendMsg.main.expression = main.expression;
         sendMsg.main.method = main.method;
         sendMsg.main.resolver = main.resolver;
@@ -96,7 +101,8 @@
         if (message.context) {
             let cont = message.context;
             sendMsg.context = Object.create(null);
-            sendMsg.context.specifiedResultType = cont.resultType;
+            sendMsg.context.specifiedResultType
+                = makeTypeStr(cont.resultType);
             sendMsg.context.expression = cont.expression;
             sendMsg.context.method = cont.method;
             sendMsg.context.resolver = cont.resolver;
@@ -121,7 +127,7 @@
                 return;
             }
             contItem = contRes.items[0];
-            sendMsg.context.resultType = contRes.resultType;
+            sendMsg.context.resultType = makeTypeStr(contRes.resultType);
             sendMsg.context.itemDetail = fu.getItemDetail(contItem);
         }
 
@@ -149,7 +155,7 @@
         fu.addClassToItems(elemClass, currentItems);
 
         sendMsg.message = "Success.";
-        sendMsg.main.resultType = mainRes.resultType;
+        sendMsg.main.resultType = makeTypeStr(mainRes.resultType);
         sendMsg.main.itemDetails = fu.getItemDetails(currentItems);
         chrome.runtime.sendMessage(sendMsg);
         prevMsg = sendMsg;
