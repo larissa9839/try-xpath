@@ -8,10 +8,13 @@
 
     var document = window.document;
 
+    var relatedTabId;
+    var executionId;
+
     function showAllResults(results) {
         document.getElementById("message").textContent = results.message;
         document.getElementById("title").textContent = results.title;
-        document.getElementById("url").textContent = results.url;
+        document.getElementById("url").textContent = results.href;
 
         if (results.context) {
             document.getElementById("context-method").textContent
@@ -50,7 +53,33 @@
         chrome.runtime.sendMessage({ "event": "loadResults" },
                                    function (results) {
             if (results) {
+                relatedTabId = results.tabId;
+                executionId = results.executionId;
                 showAllResults(results);
+            }
+        });
+
+        var contDetail = document.getElementById("context-detail");
+        contDetail.addEventListener("click", function(event) {
+            var target = event.target;
+            if (target.tagName.toLowerCase() === "button") {
+                chrome.tabs.sendMessage(relatedTabId, {
+                    "event": "focusContextItem",
+                    "executionId": executionId
+                });
+            }
+        });
+
+        var mainDetails = document.getElementById("main-details");
+        mainDetails.addEventListener("click", function(event) {
+            var target = event.target;
+            if (target.tagName.toLowerCase() === "button") {
+                let ind = parseInt(target.getAttribute("data-index"), 10);
+                chrome.tabs.sendMessage(relatedTabId, {
+                    "event": "focusItem",
+                    "executionId": executionId,
+                    "index": ind
+                });
             }
         });
     });

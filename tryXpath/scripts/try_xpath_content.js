@@ -16,6 +16,7 @@
     const dummyItemDetail = { "type": "", "name": "", "value": "" };
 
     var prevMsg = null;
+    var executionCount = 0;
     var savedClasses = [];
     var savedContextClass = null;
     var savedFocusedClass = null;
@@ -61,6 +62,7 @@
         currentItems = [];
 
         prevMsg = null;
+        executionCount++;
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -78,6 +80,7 @@
         var sendMsg = Object.create(null);
         var main = message.main;
         sendMsg.event = "showResultsInPopup";
+        sendMsg.executionId = executionCount;
         sendMsg.href = window.location.href;
         sendMsg.title = window.document.title;
         sendMsg.main = Object.create(null);
@@ -154,11 +157,15 @@
     }
 
     genericListener.listeners.focusItem = function(message) {
-        focusItem(currentItems[message.index]);
+        if (message.executionId === executionCount) {
+            focusItem(currentItems[message.index]);
+        }
     };
 
-    genericListener.listeners.focusContextItem = function() {
-        focusItem(contextItem);
+    genericListener.listeners.focusContextItem = function(message) {
+        if (message.executionId === executionCount) {
+            focusItem(contextItem);
+        }
     };
 
     genericListener.listeners.requestShowResultsInPopup = function () {
