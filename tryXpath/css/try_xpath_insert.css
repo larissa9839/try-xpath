@@ -1,20 +1,20 @@
 
 .tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    border: solid 10px #0000ff !important;
+    border: solid 10px rgb(0,0,255) !important;
 }
 
 .tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    border: solid 10px #ff0000 !important;
+    border: solid 10px rgb(255,0,0) !important;
 }
 
 .tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    border: solid 10px #00ff00 !important;
+    border: solid 10px rgb(0,255,0) !important;
 }
 
 .tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    border: solid 10px #ff00ff !important;
+    border: solid 10px rgb(255,0,255) !important;
 }
 
 .tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    border: solid 10px #00ff00 !important;
+    border: solid 10px rgb(0,255,0) !important;
 }

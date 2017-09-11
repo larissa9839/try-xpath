@@ -1,0 +1,12 @@
+table {
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: solid 1px;
+}
+
+th {
+    background-color: rgb(255,255,0);
+}
