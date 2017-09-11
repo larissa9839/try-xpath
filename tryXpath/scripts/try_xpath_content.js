@@ -168,7 +168,7 @@
         }
     };
 
-    genericListener.listeners.requestShowAllResults = fucntion () {
+    genericListener.listeners.requestShowAllResults = function () {
         if (prevMsg) {
             prevMsg.event = "showAllResults";
             chrome.runtime.sendMessage(prevMsg);

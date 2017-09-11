@@ -3,6 +3,7 @@
     "use strict";
 
     var popupState = null;
+    var results = {};
 
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
@@ -31,6 +32,13 @@
             "event": "focusItem",
             "index": message.index
         });
+    };
+
+    genericListener.listeners.showAllResults = function(message, sender) {
+        delete message.event;
+        results = message;
+        results.tabId = sender.tab.id;
+        chrome.tabs.create({ "url": "/pages/show_all_results.html" });
     };
 
 })(window);
