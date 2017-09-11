@@ -41,4 +41,10 @@
         chrome.tabs.create({ "url": "/pages/show_all_results.html" });
     };
 
+    genericListener.listeners.loadResults = function (message, sender,
+                                                      sendResponse) {
+        sendResponse(results);
+        return true;
+    };
+
 })(window);

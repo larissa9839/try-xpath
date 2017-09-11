@@ -46,41 +46,12 @@
         fu.appendDetailRows(mainTbody, results.main.itemDetails);
     };
 
-    // test showAllResults
     window.addEventListener("load", function() {
-        var details = [];
-        for (var i = 0; i < 20000; i++) {
-            let detail = {};
-            detail.type = "type" + i;
-            detail.name = "name" + i;
-            detail.value = "value" + i;
-            details.push(detail);
-        }
-
-        showAllResults({
-            "message": "message value",
-            "title": "title value",
-            "url": "URL VALUE",
-            "context": {
-                "method": "CONTEXT METHOD",
-                "expression": "CONTEXT EXPRESSION",
-                "specifiedResultType": "CONTEXT SPECIFIED",
-                "resultType": "CONTEXT RESULTTYPE",
-                "resolver": "CONTEXT RESOLVER",
-                "itemDetail": {
-                    "type": "CONTEXT ITEM TYPE",
-                    "name": "CONTEXT ITEM NAME",
-                    "value": "CONTEXT ITEM VALUE"
-                }
-            },
-            "main": {
-                "method": "MAIN METHOD",
-                "expression": "MAIN EXPRESSION",
-                "specifiedResultType": "MAIN SPECIFIED",
-                "resultType": "MAIN RESULTTYPE",
-                "resolver": "MAIN RESOLVER",
-                "itemDetails": details
-            },
+        chrome.runtime.sendMessage({ "event": "loadResults" },
+                                   function (results) {
+            if (results) {
+                showAllResults(results);
+            }
         });
     });
 
