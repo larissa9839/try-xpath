@@ -187,7 +187,7 @@ tryXpath.functions = {};
 
         // item is Node
         return {
-            "type": "Node " + fu.getNodeTypeStr(item.nodeType) + "("
+            "type": "Node " + fu.getNodeTypeStr(item.nodeType) + "(nodeType="
                 + item.nodeType + ")",
             "name": item.nodeName,
             "value": item.nodeValue || ""
