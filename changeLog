@@ -1,5 +1,9 @@
 2017-09-11  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/show_all_results.css:
+	Create this file.
+	
+
 	* tryXpath/pages/show_all_results.js:
 	Modify event listeners to use executionId.
 
