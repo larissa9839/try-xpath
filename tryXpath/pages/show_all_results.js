@@ -17,40 +17,44 @@
         document.getElementById("url").textContent = results.href;
 
         if (results.context) {
+            let cont = results.context;
             document.getElementById("context-method").textContent
-                = results.context.method;
+                = cont.method;
             document.getElementById("context-expression").textContent
-                = results.context.expression;
+                = cont.expression;
             document.getElementById("context-specified-result-type")
                 .textContent
-                = results.context.specifiedResultType;
+                = cont.specifiedResultType;
             document.getElementById("context-result-type").textContent
-                = results.context.resultType;
+                = cont.resultType;
             document.getElementById("context-resolver").textContent
-                = results.context.resolver;
-            var contTbody = document.getElementById("context-detail")
+                = cont.resolver;
+            let contTbody = document.getElementById("context-detail")
                 .getElementsByTagName("tbody")[0];
             contTbody.appendChild(fu.createDetailTableHeader());
-            fu.appendDetailRows(contTbody, [results.context.itemDetail]);
+            if (cont.itemDetail) {
+                fu.appendDetailRows(contTbody, [cont.itemDetail]);
+            }
         } else {
             let area = document.getElementById("context-area");
             area.parentNode.removeChild(area);
         }
 
-        document.getElementById("main-method").textContent
-            = results.main.method;
+        var main = results.main;
+        document.getElementById("main-method").textContent = main.method;
         document.getElementById("main-expression").textContent
-            = results.main.expression;
+            = main.expression;
         document.getElementById("main-specified-result-type").textContent
-            = results.main.specifiedResultType;
+            = main.specifiedResultType;
         document.getElementById("main-result-type").textContent
-            = results.main.resultType;
-        document.getElementById("main-resolver").textContent
-            = results.main.resolver;
+            = main.resultType;
+        document.getElementById("main-resolver").textContent = main.resolver;
+        document.getElementById("main-count").textContent
+            = main.itemDetails.length;
         var mainTbody = document.getElementById("main-details")
             .getElementsByTagName("tbody")[0];
         mainTbody.appendChild(fu.createDetailTableHeader());
-        fu.appendDetailRows(mainTbody, results.main.itemDetails);
+        fu.appendDetailRows(mainTbody, main.itemDetails);
     };
 
     window.addEventListener("load", function() {

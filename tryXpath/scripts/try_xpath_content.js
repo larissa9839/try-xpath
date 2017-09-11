@@ -13,8 +13,6 @@
     const focusedClass
           = "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
 
-    const dummyItemDetail = { "type": "", "name": "", "value": "" };
-
     var prevMsg = null;
     var executionCount = 0;
     var savedClasses = [];
@@ -89,24 +87,26 @@
         sendMsg.title = window.document.title;
 
         sendMsg.main = Object.create(null);
-        sendMsg.main.specifiedResultType = makeTypeStr(main.resultType);
-        sendMsg.main.expression = main.expression;
         sendMsg.main.method = main.method;
+        sendMsg.main.expression = main.expression;
+        sendMsg.main.specifiedResultType = makeTypeStr(main.resultType);
+        sendMsg.main.resultType = "";
         sendMsg.main.resolver = main.resolver;
         sendMsg.main.itemDetails = [];
 
-        var contItem = document;
+        contextItem = document;
 
         var contRes;
         if (message.context) {
             let cont = message.context;
             sendMsg.context = Object.create(null);
+            sendMsg.context.method = cont.method;
+            sendMsg.context.expression = cont.expression;
             sendMsg.context.specifiedResultType
                 = makeTypeStr(cont.resultType);
-            sendMsg.context.expression = cont.expression;
-            sendMsg.context.method = cont.method;
             sendMsg.context.resolver = cont.resolver;
-            sendMsg.context.itemDetail = dummyItemDetail;
+            sendMsg.context.itemDetail = null;
+
             try {
                 contRes = fu.execExpr(cont.expression, cont.method, {
                     "resultType": cont.resultType,
@@ -121,20 +121,24 @@
             }
 
             if (contRes.items.length === 0) {
-                sendMsg.message = "A context is not found."
+                sendMsg.message = "A context is not found.";
                 chrome.runtime.sendMessage(sendMsg);
                 prevMsg = sendMsg;
                 return;
             }
-            contItem = contRes.items[0];
+            contextItem = contRes.items[0];
+
+            savedContextClass = fu.saveItemClass(contextItem);
+            fu.addClassToItem(contextClass, contextItem);
+
             sendMsg.context.resultType = makeTypeStr(contRes.resultType);
-            sendMsg.context.itemDetail = fu.getItemDetail(contItem);
+            sendMsg.context.itemDetail = fu.getItemDetail(contextItem);
         }
 
         var mainRes;
         try {
             mainRes = fu.execExpr(main.expression, main.method, {
-                "context": contItem,
+                "context": contextItem,
                 "resultType": main.resultType,
                 "resolver": main.resolver
             });
@@ -146,11 +150,8 @@
             return;
         }
 
-        contextItem = contItem;
         currentItems = mainRes.items;
 
-        savedContextClass = fu.saveItemClass(contextItem);
-        fu.addClassToItem(contextClass, contextItem);
         savedClasses = fu.saveItemClasses(currentItems);
         fu.addClassToItems(elemClass, currentItems);
 
