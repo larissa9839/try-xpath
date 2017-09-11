@@ -1,5 +1,9 @@
 2017-09-11  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/show_all_results.js:
+	Modify showAllResults function. Remove context-area when
+	results.context does not exist.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Define makeTypeStr function;
 	Modify to set type string to resultType.

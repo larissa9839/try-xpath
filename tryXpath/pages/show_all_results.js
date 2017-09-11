@@ -32,7 +32,11 @@
                 .getElementsByTagName("tbody")[0];
             contTbody.appendChild(fu.createDetailTableHeader());
             fu.appendDetailRows(contTbody, [results.context.itemDetail]);
+        } else {
+            let area = document.getElementById("context-area");
+            area.parentNode.removeChild(area);
         }
+
         document.getElementById("main-method").textContent
             = results.main.method;
         document.getElementById("main-expression").textContent
