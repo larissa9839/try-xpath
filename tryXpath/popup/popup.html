@@ -6,27 +6,51 @@
 <script src="popup.js"></script>
 </head>
   <body>
+    <div><button id="execute">Excute</button></div>
     <div>
       <h1>Main</h1>
-      <div>
-        <label>Way 
-          <select id="main-way">
-            <option data-method="evaluate" data-type="0">XPath ANY_TYPE</option>
-            <option data-method="evaluate" data-type="1">XPath NUMBER_TYPE</option>
-            <option data-method="evaluate" data-type="2">XPath STRING_TYPE</option>
-            <option data-method="evaluate" data-type="3">XPath BOOLEAN_TYPE</option>
-            <option data-method="evaluate" data-type="4">XPath UNORDERED_NODE_ITERATOR_TYPE</option>
-            <option data-method="evaluate" data-type="5">XPath ORDERED_NODE_ITERATOR_TYPE</option>
-            <option data-method="evaluate" data-type="6">XPath UNORDERED_NODE_SNAPSHOT_TYPE</option>
-            <option data-method="evaluate" data-type="7">XPath ORDERED_NODE_SNAPSHOT_TYPE</option>
-            <option data-method="evaluate" data-type="8">XPath ANY_UNORDERED_NODE_TYPE</option>
-            <option data-method="evaluate" data-type="9">XPath FIRST_ORDERED_NODE_TYPE</option>
-            <option data-method="querySelector" data-type="">querySelector</option>
-            <option data-method="querySelectorAll" data-type="">querySelectorAll</option>
-          </select>
-        </label>
+      <div id="main-body">
+        <div>
+          <label>Way 
+            <select id="main-way">
+              <option data-method="evaluate" data-type="ANY_TYPE">XPath ANY_TYPE</option>
+              <option data-method="evaluate" data-type="NUMBER_TYPE">XPath NUMBER_TYPE</option>
+              <option data-method="evaluate" data-type="STRING_TYPE">XPath STRING_TYPE</option>
+              <option data-method="evaluate" data-type="BOOLEAN_TYPE">XPath BOOLEAN_TYPE</option>
+              <option data-method="evaluate" data-type="UNORDERED_NODE_ITERATOR_TYPE">XPath UNORDERED_NODE_ITERATOR_TYPE</option>
+              <option data-method="evaluate" data-type="ORDERED_NODE_ITERATOR_TYPE">XPath ORDERED_NODE_ITERATOR_TYPE</option>
+              <option data-method="evaluate" data-type="UNORDERED_NODE_SNAPSHOT_TYPE">XPath UNORDERED_NODE_SNAPSHOT_TYPE</option>
+              <option data-method="evaluate" data-type="ORDERED_NODE_SNAPSHOT_TYPE">XPath ORDERED_NODE_SNAPSHOT_TYPE</option>
+              <option data-method="evaluate" data-type="ANY_UNORDERED_NODE_TYPE">XPath ANY_UNORDERED_NODE_TYPE</option>
+              <option data-method="evaluate" data-type="FIRST_ORDERED_NODE_TYPE">XPath FIRST_ORDERED_NODE_TYPE</option>
+              <option data-method="querySelector" data-type="">querySelector</option>
+              <option data-method="querySelectorAll" data-type="">querySelectorAll</option>
+            </select>
+          </label>
+        </div>
+        <div><label>Expression <input type="text" id="main-expression"></label></div>
       </div>
-      <div><label>Expression <input type="text" id="main-expression"></input></label></div>
+    </div>
+    <div>
+      <h1><label><input type="checkbox" id="context">Context</label></h1>
+      <div id="context-body">
+        <div>
+          <label>Way 
+            <select id="context-way">
+              <option data-method="evaluate" data-type="ANY_TYPE">XPath ANY_TYPE</option>
+              <option data-method="evaluate" data-type="UNORDERED_NODE_ITERATOR_TYPE">XPath UNORDERED_NODE_ITERATOR_TYPE</option>
+              <option data-method="evaluate" data-type="ORDERED_NODE_ITERATOR_TYPE">XPath ORDERED_NODE_ITERATOR_TYPE</option>
+              <option data-method="evaluate" data-type="UNORDERED_NODE_SNAPSHOT_TYPE">XPath UNORDERED_NODE_SNAPSHOT_TYPE</option>
+              <option data-method="evaluate" data-type="ORDERED_NODE_SNAPSHOT_TYPE">XPath ORDERED_NODE_SNAPSHOT_TYPE</option>
+              <option data-method="evaluate" data-type="ANY_UNORDERED_NODE_TYPE">XPath ANY_UNORDERED_NODE_TYPE</option>
+              <option data-method="evaluate" data-type="FIRST_ORDERED_NODE_TYPE">XPath FIRST_ORDERED_NODE_TYPE</option>
+              <option data-method="querySelector" data-type="">querySelector</option>
+              <option data-method="querySelectorAll" data-type="">querySelectorAll</option>
+            </select>
+          </label>
+        </div>
+        <div><label>Expression <input type="text" id="context-expression"></label></div>
+      </div>
     </div>
     <hr />
     <div><textarea id="area" value=""></textarea></div>

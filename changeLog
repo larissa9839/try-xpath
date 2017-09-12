@@ -1,5 +1,11 @@
 2017-09-12  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Add context.
+
+	* tryXpath/popup/popup.html:
+	Add context.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Modify genericListener.listeners.execute function.
 	Modify makeTypeStr function.
