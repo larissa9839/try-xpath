@@ -64,7 +64,10 @@
     };
 
     function makeTypeStr(resultType) {
-        return fu.getXpathResultStr(resultType) + "(" + resultType + ")";
+        if (resultType) {
+            return fu.getXpathResultStr(resultType) + "(" + resultType + ")";
+        }
+        return "";
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -86,30 +89,31 @@
         sendMsg.href = window.location.href;
         sendMsg.title = window.document.title;
 
+        var mainType = fu.getXpathResultNum(main.resultType);
         sendMsg.main = Object.create(null);
         sendMsg.main.method = main.method;
         sendMsg.main.expression = main.expression;
-        sendMsg.main.specifiedResultType = makeTypeStr(main.resultType);
+        sendMsg.main.specifiedResultType = makeTypeStr(mainType);
         sendMsg.main.resultType = "";
         sendMsg.main.resolver = main.resolver;
         sendMsg.main.itemDetails = [];
 
         contextItem = document;
 
-        var contRes;
         if (message.context) {
             let cont = message.context;
+            let contType = fu.getXpathResultNum(cont.resultType);
             sendMsg.context = Object.create(null);
             sendMsg.context.method = cont.method;
             sendMsg.context.expression = cont.expression;
-            sendMsg.context.specifiedResultType
-                = makeTypeStr(cont.resultType);
+            sendMsg.context.specifiedResultType = makeTypeStr(contType);
             sendMsg.context.resolver = cont.resolver;
             sendMsg.context.itemDetail = null;
 
+            let contRes;
             try {
                 contRes = fu.execExpr(cont.expression, cont.method, {
-                    "resultType": cont.resultType,
+                    "resultType": contType,
                     "resolver": cont.resolver
                 });
             } catch (e) {
@@ -139,7 +143,7 @@
         try {
             mainRes = fu.execExpr(main.expression, main.method, {
                 "context": contextItem,
-                "resultType": main.resultType,
+                "resultType": mainType,
                 "resolver": main.resolver
             });
         } catch (e) {

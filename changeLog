@@ -1,5 +1,9 @@
 2017-09-12  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Modify genericListener.listeners.execute function.
+	Modify makeTypeStr function.
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Remove xpathResultMap variable.
 	Define xpathResultMaps variable.
