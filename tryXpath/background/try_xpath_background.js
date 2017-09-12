@@ -27,13 +27,6 @@
         }
     }
 
-    genericListener.listeners.focusItemInTab = function(message) {
-        chrome.tabs.sendMessage(message.tabId, {
-            "event": "focusItem",
-            "index": message.index
-        });
-    };
-
     genericListener.listeners.showAllResults = function(message, sender) {
         delete message.event;
         results = message;

@@ -224,28 +224,54 @@ tryXpath.functions = {};
         return "Unknown";
     }
 
-    const xpathResultMap = new Map([
-        [XPathResult.ANY_TYPE, "ANY_TYPE"],
-        [XPathResult.NUMBER_TYPE , "NUMBER_TYPE"],
-        [XPathResult.STRING_TYPE , "STRING_TYPE"],
-        [XPathResult.BOOLEAN_TYPE , "BOOLEAN_TYPE"],
-        [XPathResult.UNORDERED_NODE_ITERATOR_TYPE ,
-         "UNORDERED_NODE_ITERATOR_TYPE"],
-        [XPathResult.ORDERED_NODE_ITERATOR_TYPE ,
-         "ORDERED_NODE_ITERATOR_TYPE"],
-        [XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE ,
-         "UNORDERED_NODE_SNAPSHOT_TYPE"],
-        [XPathResult.ORDERED_NODE_SNAPSHOT_TYPE ,
-         "ORDERED_NODE_SNAPSHOT_TYPE"],
-        [XPathResult.ANY_UNORDERED_NODE_TYPE, "ANY_UNORDERED_NODE_TYPE"],
-        [XPathResult.FIRST_ORDERED_NODE_TYPE, "FIRST_ORDERED_NODE_TYPE"]
-    ]);
+    const xpathResultMaps = {
+        "numToStr" : new Map([
+            [XPathResult.ANY_TYPE, "ANY_TYPE"],
+            [XPathResult.NUMBER_TYPE , "NUMBER_TYPE"],
+            [XPathResult.STRING_TYPE , "STRING_TYPE"],
+            [XPathResult.BOOLEAN_TYPE , "BOOLEAN_TYPE"],
+            [XPathResult.UNORDERED_NODE_ITERATOR_TYPE ,
+             "UNORDERED_NODE_ITERATOR_TYPE"],
+            [XPathResult.ORDERED_NODE_ITERATOR_TYPE ,
+             "ORDERED_NODE_ITERATOR_TYPE"],
+            [XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE ,
+             "UNORDERED_NODE_SNAPSHOT_TYPE"],
+            [XPathResult.ORDERED_NODE_SNAPSHOT_TYPE ,
+             "ORDERED_NODE_SNAPSHOT_TYPE"],
+            [XPathResult.ANY_UNORDERED_NODE_TYPE, "ANY_UNORDERED_NODE_TYPE"],
+            [XPathResult.FIRST_ORDERED_NODE_TYPE, "FIRST_ORDERED_NODE_TYPE"]
+        ]),
+
+        "strToNum" : new Map([
+            ["ANY_TYPE", XPathResult.ANY_TYPE],
+            ["NUMBER_TYPE", XPathResult.NUMBER_TYPE],
+            ["STRING_TYPE", XPathResult.STRING_TYPE],
+            ["BOOLEAN_TYPE", XPathResult.BOOLEAN_TYPE],
+            ["UNORDERED_NODE_ITERATOR_TYPE",
+             XPathResult.UNORDERED_NODE_ITERATOR_TYPE],
+            ["ORDERED_NODE_ITERATOR_TYPE",
+             XPathResult.ORDERED_NODE_ITERATOR_TYPE],
+            ["UNORDERED_NODE_SNAPSHOT_TYPE",
+             XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE],
+            ["ORDERED_NODE_SNAPSHOT_TYPE",
+             XPathResult.ORDERED_NODE_SNAPSHOT_TYPE],
+            ["ANY_UNORDERED_NODE_TYPE", XPathResult.ANY_UNORDERED_NODE_TYPE],
+            ["FIRST_ORDERED_NODE_TYPE", XPathResult.FIRST_ORDERED_NODE_TYPE]
+        ])
+    }
 
     fu.getXpathResultStr = function (resultType) {
-        if (xpathResultMap.has(resultType)) {
-            return xpathResultMap.get(resultType);
+        if (xpathResultMaps.numToStr.has(resultType)) {
+            return xpathResultMaps.numToStr.get(resultType);
         }
         return "Unknown";
+    };
+
+    fu.getXpathResultNum = function (resultTypeStr) {
+        if (xpathResultMaps.strToNum.has(resultTypeStr)) {
+            return xpathResultMaps.strToNum.get(resultTypeStr);
+        }
+        return NaN;
     };
 
     fu.isAttrItem = function (item) {
