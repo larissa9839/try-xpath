@@ -72,7 +72,6 @@
     };
 
     genericListener.listeners.restorePopupState = function (message) {
-        area.value = message.state.area;
     };
 
     window.addEventListener("load", function () {
@@ -124,31 +123,6 @@
 
         sendToActiveTab({ "event": "requestShowResultsInPopup" });
         chrome.runtime.sendMessage({ "event": "requestRestorePopupState" });
-    });
-
-    window.addEventListener("load", function () {
-        var area = document.getElementById("area");
-        var result = document.getElementById("result");
-
-
-        // クリックされたらメッセージを発する
-        document.getElementById("send").addEventListener("click", function() {
-            try {
-                var msg = JSON.parse(area.value);
-            } catch (e) {
-                result.value = e.message;
-            }
-            sendToActiveTab(msg);
-        });
-        document.getElementById("send-to-all").addEventListener("click", function() {
-            try {
-                var msg = JSON.parse(area.value);
-            } catch (e) {
-                result.value = e.message;
-            }
-            chrome.runtime.sendMessage(msg);
-        });
-
     });
 
     window.addEventListener("unload", function () {
