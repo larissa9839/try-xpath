@@ -21,6 +21,18 @@
                           });
     };
 
+    function collectPopupState() {
+        var state = Object.create(null);
+        state.mainWayIndex = mainWay.selectedIndex;
+        state.mainExpressionValue = mainExpression.value;
+        state.contextCheckboxChecked = contextCheckbox.checked;
+        state.contextWayIndex = contextWay.selectedIndex;
+        state.contextExpressionValue = contextExpression.value;
+        state.resolverCheckboxChecked = resolverCheckbox.checked;
+        state.resolverExpressionValue = resolverExpression.value;
+        return state;
+    };
+
     function makeExecuteMessage() {
         var msg = Object.create(null);
         msg.event = "execute";
@@ -72,6 +84,14 @@
     };
 
     genericListener.listeners.restorePopupState = function (message) {
+        var state = message.state;
+        mainWay.selectedIndex = state.mainWayIndex;
+        mainExpression.value = state.mainExpressionValue;
+        contextCheckbox.checked = state.contextCheckboxChecked;
+        contextWay.selectedIndex = state.contextWayIndex;
+        contextExpression.value = state.contextExpressionValue;
+        resolverCheckbox.checked = state.resolverCheckboxChecked;
+        resolverExpression.value = state.resolverExpressionValue;
     };
 
     window.addEventListener("load", function () {
@@ -126,11 +146,10 @@
     });
 
     window.addEventListener("unload", function () {
+        var state = collectPopupState();
         chrome.runtime.sendMessage({
             "event": "storePopupState",
-            "state": {
-                "area": area.value
-            }
+            "state": state
         });
     });
 

@@ -2,6 +2,7 @@
 
 	* tryXpath/popup/popup.js:
 	Remove test code.
+	Define collectPopupState function.
 
 	* tryXpath/popup/popup.html:
 	Add results area.
