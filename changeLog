@@ -2,9 +2,11 @@
 
 	* tryXpath/popup/popup.js:
 	Modify makeExecuteMessage function.
-
+	Modify event listener(window "load") to adapt changing ids.
+	
 	* tryXpath/popup/popup.html:
 	Add resolver area.
+	Change element's id.
 
 2017-09-12  larissa9839  <larissa9839@gmail.com>
 

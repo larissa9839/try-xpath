@@ -66,10 +66,10 @@
     window.addEventListener("load", function () {
         mainWay = document.getElementById("main-way");
         mainExpression = document.getElementById("main-expression");
-        contextCheckbox = document.getElementById("context");
+        contextCheckbox = document.getElementById("context-switch");
         contextWay = document.getElementById("context-way");
         contextExpression = document.getElementById("context-expression");
-        resolverCheckbox = document.getElementById("resolver");
+        resolverCheckbox = document.getElementById("resolver-switch");
         resolverExpression = document.getElementById("resolver-expression");
 
         document.getElementById("execute")
