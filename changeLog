@@ -1,3 +1,11 @@
+2017-09-13  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.js:
+	Modify makeExecuteMessage function.
+
+	* tryXpath/popup/popup.html:
+	Add resolver area.
+
 2017-09-12  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/popup/popup.js:
