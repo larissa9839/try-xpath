@@ -1,5 +1,14 @@
 2017-09-13  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.html:
+	Add results area.
+
+	* tryXpath/popup/popup.js:
+	Modify the file to handle results area.
+
+	* tryXpath/scripts/try_xpath_functions.js:
+	Copy emptyChildNodes function.
+
 	* tryXpath/popup/popup.js:
 	Modify makeExecuteMessage function.
 	Modify event listener(window "load") to adapt changing ids.

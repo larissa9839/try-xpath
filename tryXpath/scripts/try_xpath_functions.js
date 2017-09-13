@@ -470,4 +470,10 @@ tryXpath.functions = {};
         window.setTimeout(processChunk, 0);
     };
 
+    fu.emptyChildNodes = function (elem) {
+        while (elem.firstChild) {
+            elem.removeChild(elem.firstChild);
+        }
+    };
+
 })(window);

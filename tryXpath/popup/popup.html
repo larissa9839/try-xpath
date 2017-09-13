@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-<meta charset="utf-8">
-<script src="popup.js"></script>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <script src="../scripts/try_xpath_functions.js"></script>
+    <script src="popup.js"></script>
+  </head>
   <body>
     <div><button id="execute">Execute</button></div>
     <div>
@@ -66,7 +67,18 @@
         <div><label>Resolver <input type="text" id="resolver-expression"></label></div>
       </div>
     </div>
-    <hr />
+    <div>
+      <h1>Results</h1>
+      <div>Message: <span id="results-message"></span></div>
+      <div>Count: <span id="results-count"></span></div>
+      <div><button id="show-all-results">Show all results</button><button id="set-style">Set style</button><button id="reset-style">Reset style</button></div>
+      <table id="results-detals">
+        <caption>Details</caption>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <hr>
     <div><textarea id="area" value=""></textarea></div>
     <div><button id="send">send</button><button id="send-to-all">send to all</button></div>
     <div><textarea id="result" value=""></textarea><div>

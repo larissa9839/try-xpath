@@ -2,10 +2,17 @@
 (function (window) {
     "use strict";
 
+    // alias
+    var tx = tryXpath;
+    var fu = tryXpath.functions;
+
     var document = window.document;
 
     var mainWay, mainExpression, contextCheckbox, contextWay,
-        contextExpression, resolverCheckbox, resolverExpression;
+        contextExpression, resolverCheckbox, resolverExpression,
+        resultsMessage, resultsTbody, resultsCount;
+
+    var relatedTabId, executionId;
 
     function sendToActiveTab(msg) {
         chrome.tabs.query({ "active": true, "currentWindow": true },
@@ -53,10 +60,15 @@
     genericListener.listeners = Object.create(null);;
     chrome.runtime.onMessage.addListener(genericListener);
 
-    genericListener.listeners.showResultsInPopup = function (message, sender) {
-        message.tabId = sender.tab.id;
-        result.value = JSON.stringify(message, null, 2);
-        return ;
+    genericListener.listeners.showResultsInPopup = function (message, sender){
+        relatedTabId = sender.tab.id;
+        executionId = message.executionId;
+
+        resultsMessage.textContent = message.message;
+        resultsCount.textContent = message.main.itemDetails.length;
+        fu.emptyChildNodes(resultsTbody);
+        fu.appendDetailRows(resultsTbody,
+                            message.main.itemDetails.slice(0, 10));
     };
 
     genericListener.listeners.restorePopupState = function (message) {
@@ -71,11 +83,44 @@
         contextExpression = document.getElementById("context-expression");
         resolverCheckbox = document.getElementById("resolver-switch");
         resolverExpression = document.getElementById("resolver-expression");
+        resultsMessage = document.getElementById("results-message");
+        resultsCount = document.getElementById("results-count");
+        resultsTbody = document.getElementById("results-detals")
+            .getElementsByTagName("tbody")[0];
 
         document.getElementById("execute")
             .addEventListener("click", function() {
                 sendToActiveTab(makeExecuteMessage());
             });
+
+        document.getElementById("set-style")
+            .addEventListener("click", function() {
+                sendToActiveTab({ "event": "setStyle" });
+            });
+
+        document.getElementById("reset-style")
+            .addEventListener("click", function() {
+                sendToActiveTab({ "event": "resetStyle" });
+            });
+
+        document.getElementById("show-all-results")
+            .addEventListener("click", function() {
+                sendToActiveTab({ "event": "requestShowAllResults" });
+            });
+
+        resultsTbody.addEventListener("click", function(event) {
+            var target = event.target;
+            if (target.tagName.toLowerCase() === "button") {
+                let ind = parseInt(target.getAttribute("data-index"), 10);
+                chrome.tabs.sendMessage(relatedTabId, {
+                    "event": "focusItem",
+                    "executionId": executionId,
+                    "index": ind
+                });
+            }
+        });
+
+        resultsTbody.appendChild(fu.createDetailTableHeader());
 
         sendToActiveTab({ "event": "requestShowResultsInPopup" });
         chrome.runtime.sendMessage({ "event": "requestRestorePopupState" });
