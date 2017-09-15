@@ -10,3 +10,8 @@ h1 {
     font-size: 130%;
     border-bottom: solid 3px rgb(128,128,128);
 }
+
+dt {
+    clear: both;
+    float: left;
+}

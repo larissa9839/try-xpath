@@ -1,82 +1,89 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="popup.css"/>
-    <script src="../scripts/try_xpath_functions.js"></script>
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <div><button id="execute">Execute</button></div>
-    <div>
-      <h1>Main</h1>
-      <div id="main-body">
-        <div>
-          <label>Way 
-            <select id="main-way">
-              <option data-method="evaluate" data-type="ANY_TYPE">XPath ANY_TYPE</option>
-              <option data-method="evaluate" data-type="NUMBER_TYPE">XPath NUMBER_TYPE</option>
-              <option data-method="evaluate" data-type="STRING_TYPE">XPath STRING_TYPE</option>
-              <option data-method="evaluate" data-type="BOOLEAN_TYPE">XPath BOOLEAN_TYPE</option>
-              <option data-method="evaluate" data-type="UNORDERED_NODE_ITERATOR_TYPE">XPath UNORDERED_NODE_ITERATOR_TYPE</option>
-              <option data-method="evaluate" data-type="ORDERED_NODE_ITERATOR_TYPE">XPath ORDERED_NODE_ITERATOR_TYPE</option>
-              <option data-method="evaluate" data-type="UNORDERED_NODE_SNAPSHOT_TYPE">XPath UNORDERED_NODE_SNAPSHOT_TYPE</option>
-              <option data-method="evaluate" data-type="ORDERED_NODE_SNAPSHOT_TYPE">XPath ORDERED_NODE_SNAPSHOT_TYPE</option>
-              <option data-method="evaluate" data-type="ANY_UNORDERED_NODE_TYPE">XPath ANY_UNORDERED_NODE_TYPE</option>
-              <option data-method="evaluate" data-type="FIRST_ORDERED_NODE_TYPE">XPath FIRST_ORDERED_NODE_TYPE</option>
-              <option data-method="querySelector" data-type="">querySelector</option>
-              <option data-method="querySelectorAll" data-type="">querySelectorAll</option>
-            </select>
-          </label>
-        </div>
-        <div><label>Expression <input type="text" id="main-expression"></label></div>
-      </div>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css"/>
+<script src="../scripts/try_xpath_functions.js"></script>
+<script src="popup.js"></script>
+</head>
+<body>
+<div><button id="execute">Execute</button></div>
+<div>
+  <h1>Main</h1>
+  <div id="main-body">
+    <dl>
+      <dt><label for="main-way">Way</label></dt>
+      <dd>
+        <select id="main-way">
+          <option data-method="evaluate" data-type="ANY_TYPE">XPath ANY_TYPE</option>
+          <option data-method="evaluate" data-type="NUMBER_TYPE">XPath NUMBER_TYPE</option>
+          <option data-method="evaluate" data-type="STRING_TYPE">XPath STRING_TYPE</option>
+          <option data-method="evaluate" data-type="BOOLEAN_TYPE">XPath BOOLEAN_TYPE</option>
+          <option data-method="evaluate" data-type="UNORDERED_NODE_ITERATOR_TYPE">XPath UNORDERED_NODE_ITERATOR_TYPE</option>
+          <option data-method="evaluate" data-type="ORDERED_NODE_ITERATOR_TYPE">XPath ORDERED_NODE_ITERATOR_TYPE</option>
+          <option data-method="evaluate" data-type="UNORDERED_NODE_SNAPSHOT_TYPE">XPath UNORDERED_NODE_SNAPSHOT_TYPE</option>
+          <option data-method="evaluate" data-type="ORDERED_NODE_SNAPSHOT_TYPE">XPath ORDERED_NODE_SNAPSHOT_TYPE</option>
+          <option data-method="evaluate" data-type="ANY_UNORDERED_NODE_TYPE">XPath ANY_UNORDERED_NODE_TYPE</option>
+          <option data-method="evaluate" data-type="FIRST_ORDERED_NODE_TYPE">XPath FIRST_ORDERED_NODE_TYPE</option>
+          <option data-method="querySelector" data-type="">querySelector</option>
+          <option data-method="querySelectorAll" data-type="">querySelectorAll</option>
+        </select>
+      </dd>
+      <dt><label for="main-expression">Expression</label></dt>
+      <dd><input type="text" id="main-expression"></dd>
+    </dl>
+  </div>
+</div>
+<div>
+  <h1><input type="checkbox" id="context-switch"><label for="context-switch">Context</label></h1>
+  <div id="context-body">
+    <div>The first node of the results is used as the CONTEXT. (document.evaluate(expr, CONTEXT, ...), CONTEXT.querySelector(...), CONTEXT.querySelectorAll(...))</div>
+    <dl>
+      <dt><label for="context-way">Way</label></dt>
+      <dd>
+        <select id="context-way">
+          <option data-method="evaluate" data-type="ANY_TYPE">XPath ANY_TYPE</option>
+          <option data-method="evaluate" data-type="UNORDERED_NODE_ITERATOR_TYPE">XPath UNORDERED_NODE_ITERATOR_TYPE</option>
+          <option data-method="evaluate" data-type="ORDERED_NODE_ITERATOR_TYPE">XPath ORDERED_NODE_ITERATOR_TYPE</option>
+          <option data-method="evaluate" data-type="UNORDERED_NODE_SNAPSHOT_TYPE">XPath UNORDERED_NODE_SNAPSHOT_TYPE</option>
+          <option data-method="evaluate" data-type="ORDERED_NODE_SNAPSHOT_TYPE">XPath ORDERED_NODE_SNAPSHOT_TYPE</option>
+          <option data-method="evaluate" data-type="ANY_UNORDERED_NODE_TYPE">XPath ANY_UNORDERED_NODE_TYPE</option>
+          <option data-method="evaluate" data-type="FIRST_ORDERED_NODE_TYPE">XPath FIRST_ORDERED_NODE_TYPE</option>
+          <option data-method="querySelector" data-type="">querySelector</option>
+          <option data-method="querySelectorAll" data-type="">querySelectorAll</option>
+        </select>
+      </dd>
+      <dt><label for="context-expression">Expression</label></dt>
+      <dd><input type="text" id="context-expression"></dd>
+    </dl>
+  </div>
+</div>
+<div>
+  <h1><input type="checkbox" id="resolver-switch"><label for="resolver-switch">namespaceResolver</label></h1>
+  <div id="resolver-body">
+    <div>You can specify the behavior of the namespaceResolver function. If you want to get the P elements which are in the "http://www.w3.org/1999/xhtml" namespace, please do as follows.
+      <ol>
+        <li>Enter {"x":"http://www.w3.org/1999/xhtml"} in the resolver input field.</li>
+        <li>Enter //x:p in the expression input field.</li>
+        <li>Click execute button.</li>
+      </ol>
     </div>
-    <div>
-      <h1><label><input type="checkbox" id="context-switch">Context</label></h1>
-      <div id="context-body">
-        <div>The first node of the results is used as the CONTEXT. (document.evaluate(expr, CONTEXT, ...), CONTEXT.querySelector(...), CONTEXT.querySelectorAll(...))</div>
-        <div>
-          <label>Way 
-            <select id="context-way">
-              <option data-method="evaluate" data-type="ANY_TYPE">XPath ANY_TYPE</option>
-              <option data-method="evaluate" data-type="UNORDERED_NODE_ITERATOR_TYPE">XPath UNORDERED_NODE_ITERATOR_TYPE</option>
-              <option data-method="evaluate" data-type="ORDERED_NODE_ITERATOR_TYPE">XPath ORDERED_NODE_ITERATOR_TYPE</option>
-              <option data-method="evaluate" data-type="UNORDERED_NODE_SNAPSHOT_TYPE">XPath UNORDERED_NODE_SNAPSHOT_TYPE</option>
-              <option data-method="evaluate" data-type="ORDERED_NODE_SNAPSHOT_TYPE">XPath ORDERED_NODE_SNAPSHOT_TYPE</option>
-              <option data-method="evaluate" data-type="ANY_UNORDERED_NODE_TYPE">XPath ANY_UNORDERED_NODE_TYPE</option>
-              <option data-method="evaluate" data-type="FIRST_ORDERED_NODE_TYPE">XPath FIRST_ORDERED_NODE_TYPE</option>
-              <option data-method="querySelector" data-type="">querySelector</option>
-              <option data-method="querySelectorAll" data-type="">querySelectorAll</option>
-            </select>
-          </label>
-        </div>
-        <div><label>Expression <input type="text" id="context-expression"></label></div>
-      </div>
-    </div>
-    <div>
-      <h1><label><input type="checkbox" id="resolver-switch">namespaceResolver</label></h1>
-      <div id="resolver-body">
-        <div>You can specify the behavior of the namespaceResolver function. If you want to get the P elements which are in the "http://www.w3.org/1999/xhtml" namespace, please do as follows.
-          <ol>
-            <li>Enter {"x":"http://www.w3.org/1999/xhtml"} in the resolver input field.</li>
-            <li>Enter //x:p in the expression input field.</li>
-            <li>Click execute button.</li>
-          </ol>
-        </div>
-        <div><label>Resolver <input type="text" id="resolver-expression"></label></div>
-      </div>
-    </div>
-    <div>
-      <h1>Results</h1>
-      <div>Message: <span id="results-message"></span></div>
-      <div>Count: <span id="results-count"></span></div>
-      <div><button id="show-all-results">Show all results</button><button id="set-style">Set style</button><button id="reset-style">Reset style</button></div>
-      <table id="results-detals">
-        <caption>Details</caption>
-        <tbody></tbody>
-      </table>
-    </div>
-  </body>
+    <dl>
+      <dt><label for="resolver-expression">Resolver</label></dt>
+      <dd><input type="text" id="resolver-expression"></dd>
+    </dl>
+  </div>
+</div>
+<div>
+  <h1>Results</h1>
+  <div>Message: <span id="results-message"></span></div>
+  <div>Count: <span id="results-count"></span></div>
+  <div><button id="show-all-results">Show all results</button><button id="set-style">Set style</button><button id="reset-style">Reset style</button></div>
+  <table id="results-detals">
+    <caption>Details</caption>
+    <tbody></tbody>
+  </table>
+</div>
+</body>
 </html>
