@@ -79,6 +79,7 @@
         resultsMessage.textContent = message.message;
         resultsCount.textContent = message.main.itemDetails.length;
         fu.emptyChildNodes(resultsTbody);
+        resultsTbody.appendChild(fu.createDetailTableHeader());
         fu.appendDetailRows(resultsTbody,
                             message.main.itemDetails.slice(0, 10));
     };

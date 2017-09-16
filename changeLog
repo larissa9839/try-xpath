@@ -1,7 +1,11 @@
 2017-09-16  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Modify genericListener.listeners.showResultsInPopup function. The
+	header is shown when the details table is updated.
+
 	* tryXpath/css/try_xpath_insert.css:
-	Modiry styles.
+	Modify styles.
 
 	* tryXpath/pages/show_all_results.css:
 	Modify styles.
