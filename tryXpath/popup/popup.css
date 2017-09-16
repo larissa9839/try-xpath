@@ -41,3 +41,19 @@ input[type="text"] {
     border: solid 1px black;
     padding: 2px;
 }
+
+table {
+    width: 100%;
+    border: none;
+    margin: 0px;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: solid 1px;
+}
+
+th {
+    background-color: rgb(255,255,0);
+}
