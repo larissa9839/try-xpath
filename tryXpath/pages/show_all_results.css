@@ -1,4 +1,10 @@
+body {
+    width: 800px;
+}
+
 table {
+    box-sizing: border-box;
+    width: 100%;
     border-collapse: collapse;
 }
 
