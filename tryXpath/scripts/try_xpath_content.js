@@ -20,10 +20,13 @@
     var savedClasses = [];
     var savedContextClass = null;
     var savedFocusedClass = null;
+    var savedFocusedAncestorClasses = [];
     var contextItem = null;
     var currentItems = [];
 
     function focusItem(item) {
+        fu.restoreItemClasses(savedFocusedAncestorClasses);
+        savedFocusedAncestorClasses = [];
         fu.restoreItemClass(savedFocusedClass);
         savedFocusedClass = null;
         
@@ -32,14 +35,19 @@
         }
 
         var elem;
+        var ancestors;
         if (fu.isElementItem(item)) {
             elem = item;
+            savedFocusedClass = fu.saveItemClass(elem);
+            fu.addClassToItem(focusedClass, elem);
+            ancestors = fu.getAncestorElements(elem);
         } else {
             elem = fu.getParentElement(item);
+            ancestors = fu.getAncestorElements(elem);
+            ancestors.unshift(elem);
         }
-
-        savedFocusedClass = fu.saveItemClass(elem);
-        fu.addClassToItem(focusedClass, elem);
+        savedFocusedAncestorClasses = fu.saveItemClasses(ancestors);
+        fu.addClassToItems(focusedAncestorClass, ancestors);
 
         elem.blur();
         elem.focus();
@@ -47,6 +55,8 @@
     };
 
     function restoreAllClass() {
+        fu.restoreItemClasses(savedFocusedAncestorClasses);
+        savedFocusedAncestorClasses = [];
         fu.restoreItemClass(savedFocusedClass);
         savedFocusedClass = null;
         fu.restoreItemClasses(savedClasses);
