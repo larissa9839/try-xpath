@@ -1,5 +1,8 @@
 2017-09-17  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_functions.js:
+	Define getAncestorElements function.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Fix makeTypeStr function.
 

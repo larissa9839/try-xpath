@@ -12,6 +12,8 @@
           = "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
     const focusedClass
           = "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
+    const focusedAncestorClass
+       = "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
 
     var prevMsg = null;
     var executionCount = 0;

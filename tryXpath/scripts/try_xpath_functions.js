@@ -374,6 +374,27 @@ tryXpath.functions = {};
         return null;
     };
 
+    fu.getAncestorElements = function (elem) {
+        var ancs = [];
+
+        var cur = elem;
+        var parent = cur.parentElement;
+        while (parent) {
+            ancs.push(parent);
+            cur = parent;
+            parent = cur.parentElement;
+        }
+
+        parent = cur.parentNode;
+        while (parent && (parent.nodeType === Node.ELEMENT_NODE)) {
+            ancs.push(cur);
+            cur = parent;
+            parent = cur.parentNode;
+        }
+        
+        return ancs;
+    };
+
     fu.getOwnerDocument = function (item) {
         if (fu.isAttrItem(item)) {
             let elem = item.ownerElement;
