@@ -35,17 +35,16 @@
         }
 
         var elem;
-        var ancestors;
         if (fu.isElementItem(item)) {
             elem = item;
-            savedFocusedClass = fu.saveItemClass(elem);
-            fu.addClassToItem(focusedClass, elem);
-            ancestors = fu.getAncestorElements(elem);
         } else {
             elem = fu.getParentElement(item);
-            ancestors = fu.getAncestorElements(elem);
-            ancestors.unshift(elem);
         }
+
+        var ancestors = fu.getAncestorElements(elem);
+
+        savedFocusedClass = fu.saveItemClass(elem);
+        fu.addClassToItem(focusedClass, elem);
         savedFocusedAncestorClasses = fu.saveItemClasses(ancestors);
         fu.addClassToItems(focusedAncestorClass, ancestors);
 
