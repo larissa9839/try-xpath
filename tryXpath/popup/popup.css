@@ -46,11 +46,13 @@ table {
     border: none;
     margin: 0px;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 td,
 th {
     border: solid 1px;
+    word-wrap: break-word;
 }
 
 th {

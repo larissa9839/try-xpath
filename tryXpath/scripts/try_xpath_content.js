@@ -64,7 +64,8 @@
     };
 
     function makeTypeStr(resultType) {
-        if (resultType) {
+        if ((typeof(resultType) === "number")
+            && (resultType === resultType)) {
             return fu.getXpathResultStr(resultType) + "(" + resultType + ")";
         }
         return "";

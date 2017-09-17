@@ -1,4 +1,15 @@
+2017-09-17  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Fix makeTypeStr function.
+
 2017-09-16  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/pages/show_all_results.css:
+	Fix a table width.
+
+	* tryXpath/popup/popup.css:
+	Fix a table width.
 
 	* tryXpath/popup/popup.js:
 	Modify genericListener.listeners.showResultsInPopup function. The

@@ -6,11 +6,13 @@ table {
     box-sizing: border-box;
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 td,
 th {
     border: solid 1px;
+    word-wrap: break-word;
 }
 
 th {
