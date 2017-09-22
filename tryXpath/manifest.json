@@ -27,8 +27,7 @@
         {
             "matches": ["<all_urls>"],
             "js": ["scripts/try_xpath_functions.js",
-                   "scripts/try_xpath_content.js"],
-            "css": ["css/try_xpath_insert.css"]
+                   "scripts/try_xpath_content.js"]
         }
     ],
 

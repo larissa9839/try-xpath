@@ -4,6 +4,19 @@
 
     var popupState = null;
     var results = {};
+    var css = "";
+
+    (function loadCss() {
+        var req = new XMLHttpRequest();
+        req.open("GET", chrome.runtime.getURL("/css/try_xpath_insert.css"));
+        req.responseType = "text";
+        req.onreadystatechange = function () {
+            if (req.readyState === XMLHttpRequest.DONE) {
+                css = req.responseText;
+            }
+        };
+        req.send();
+    })();
 
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
