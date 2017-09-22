@@ -54,9 +54,11 @@
     };
 
     genericListener.listeners.insertCss = function (message, sender) {
-        chrome.tabs.insertCSS(sender.tab.id, { "code": css }, function () {
-            var lastError = chrome.runtime.lastError;
-            console.log(lastError);
+        var id = sender.tab.id;
+        chrome.tabs.insertCSS(id, { "code": css }, function () {
+            if (chrome.runtime.lastError === null) {
+                chrome.tabs.sendMessage(id, { "event": "finishInsertCss" });
+            };
         });
     };
 

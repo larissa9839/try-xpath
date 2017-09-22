@@ -1,5 +1,9 @@
 2017-09-22  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Define cssInserted variable.
+	Define genericListener.listeners.finishInsertCss function.
+
 	* tryXpath/manifest.json:
 	Add "activeTab" to permissions property.
 
