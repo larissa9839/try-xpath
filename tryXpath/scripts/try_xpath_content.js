@@ -94,6 +94,10 @@
     genericListener.listeners.execute = function(message, sender) {
         resetPrev();
 
+        chrome.runtime.sendMessage({
+            "event": "insertCss"
+        });
+
         var sendMsg = Object.create(null);
         var main = message.main;
         sendMsg.event = "showResultsInPopup";

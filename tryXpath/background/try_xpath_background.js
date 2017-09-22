@@ -53,4 +53,11 @@
         return true;
     };
 
+    genericListener.listeners.insertCss = function (message, sender) {
+        chrome.tabs.insertCSS(sender.tab.id, { "code": css }, function () {
+            var lastError = chrome.runtime.lastError;
+            console.log(lastError);
+        });
+    };
+
 })(window);
