@@ -74,4 +74,10 @@
         return true;
     };
 
+    genericListener.listeners.loadOptions = function (message, sender,
+                                                      sendResponse) {
+        sendResponse({ "classes": classes, "css": css });
+        return true;
+    };
+
 })(window);
