@@ -6,14 +6,12 @@
     var tx = tryXpath;
     var fu = tryXpath.functions;
 
-    const elemClass
-          = "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
-    const contextClass
-          = "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
-    const focusedClass
-          = "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
-    const focusedAncestorClass
-       = "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf";
+    var classes = {
+        "element": "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "context": "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "focused": "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "focusedAncestor": "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf"
+    };
 
     var prevMsg = null;
     var executionCount = 0;
@@ -24,6 +22,10 @@
     var contextItem = null;
     var currentItems = [];
     var cssInserted = false;
+
+    chrome.runtime.sendMessage({ "event": "loadClasses" }, function(res) {
+        classes = res;
+    });
 
     function focusItem(item) {
         fu.restoreItemClasses(savedFocusedAncestorClasses);
@@ -45,9 +47,9 @@
         var ancestors = fu.getAncestorElements(elem);
 
         savedFocusedClass = fu.saveItemClass(elem);
-        fu.addClassToItem(focusedClass, elem);
+        fu.addClassToItem(classes.focused, elem);
         savedFocusedAncestorClasses = fu.saveItemClasses(ancestors);
-        fu.addClassToItems(focusedAncestorClass, ancestors);
+        fu.addClassToItems(classes.focusedAncestor, ancestors);
 
         elem.blur();
         elem.focus();
@@ -152,7 +154,7 @@
             contextItem = contRes.items[0];
 
             savedContextClass = fu.saveItemClass(contextItem);
-            fu.addClassToItem(contextClass, contextItem);
+            fu.addClassToItem(classes.context, contextItem);
 
             sendMsg.context.resultType = makeTypeStr(contRes.resultType);
             sendMsg.context.itemDetail = fu.getItemDetail(contextItem);
@@ -176,7 +178,7 @@
         currentItems = mainRes.items;
 
         savedClasses = fu.saveItemClasses(currentItems);
-        fu.addClassToItems(elemClass, currentItems);
+        fu.addClassToItems(classes.element, currentItems);
 
         sendMsg.message = "Success.";
         sendMsg.main.resultType = makeTypeStr(mainRes.resultType);
@@ -220,9 +222,9 @@
         restoreAllClass();        
 
         savedContextClass = fu.saveItemClass(contextItem);
-        fu.addClassToItem(contextClass, contextItem);
+        fu.addClassToItem(classes.context, contextItem);
         savedClasses = fu.saveItemClasses(currentItems);
-        fu.addClassToItems(elemClass, currentItems);
+        fu.addClassToItems(classes.element, currentItems);
     };
 
     genericListener.listeners.finishInsertCss = function () {

@@ -5,6 +5,12 @@
     var popupState = null;
     var results = {};
     var css = "";
+    var classes = {
+        "element": "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "context": "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "focused": "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "focusedAncestor": "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf"
+    };
 
     (function loadCss() {
         var req = new XMLHttpRequest();
@@ -60,6 +66,12 @@
                 chrome.tabs.sendMessage(id, { "event": "finishInsertCss" });
             };
         });
+    };
+
+    genericListener.listeners.loadClasses = function (message, sender,
+                                                      sendResponse) {
+        sendResponse(classes);
+        return true;
     };
 
 })(window);

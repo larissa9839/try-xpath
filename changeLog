@@ -1,3 +1,14 @@
+2017-09-23  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Define classes variable.
+	Remove variables. elemClass, contextClass, focusedClass,
+	focusedAncestorClass.
+
+	* tryXpath/background/try_xpath_background.js:
+	Define classes variable.
+	Define genericListener.listeners.loadClasses function.
+
 2017-09-22  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
