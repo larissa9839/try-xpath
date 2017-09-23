@@ -1,6 +1,12 @@
 2017-09-23  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/background/try_xpath_background.js:
+	Define genericListener.listeners.changeOptions function.
+
+	* tryXpath/pages/options.js:
+	Add a feature which save the options.
+
+	* tryXpath/background/try_xpath_background.js:
 	Define genericListener.listeners.loadOptions function.
 
 	* tryXpath/pages/options.js:

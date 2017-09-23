@@ -80,4 +80,9 @@
         return true;
     };
 
+    genericListener.listeners.changeOptions = function (message) {
+        classes = message.classes;
+        css = message.css;
+    };
+
 })(window);
