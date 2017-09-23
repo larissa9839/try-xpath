@@ -4,6 +4,13 @@
 
     var document = window.document;
 
+    const defaultClasses = {
+        "element": "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "context": "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "focused": "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
+        "focusedAncestor": "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf"
+    };
+
     var elements = {};
     elements.test = document.createElement("div");
 
@@ -24,6 +31,18 @@
             }
         }
         return true;
+    };
+
+    function loadDefaultCss(callback) {
+        var req = new XMLHttpRequest();
+        req.open("GET", chrome.runtime.getURL("/css/try_xpath_insert.css"));
+        req.responseType = "text";
+        req.onreadystatechange = function () {
+            if (req.readyState === XMLHttpRequest.DONE) {
+                callback(req.responseText);
+            }
+        };
+        req.send();
     };
 
     window.addEventListener("load", function () {
@@ -63,6 +82,17 @@
             elements.message.textContent = "Success.";
         });
 
+        document.getElementById("show-default").addEventListener(
+            "click", function () {
+                elements.elementClass.value = defaultClasses.element;
+                elements.contextClass.value = defaultClasses.context;
+                elements.focusedClass.value = defaultClasses.focused;
+                elements.ancestorClass.value = defaultClasses.focusedAncestor;
+
+                loadDefaultCss(function (css) {
+                    elements.style.value = css;
+                });
+            });
     });
 
 })(window);

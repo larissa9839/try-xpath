@@ -1,3 +1,8 @@
+2017-09-24  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/pages/options.js:
+	Define loadDefaultCss function.
+
 2017-09-23  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/background/try_xpath_background.js:
