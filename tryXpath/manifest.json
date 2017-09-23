@@ -7,6 +7,13 @@
         "32": "icons/icon_32.png"
     },
 
+    "applications": {
+        "gecko": {
+            "id": "{ba6bb880-bcbe-4792-a020-fcfab8d67027}",
+            "strict_min_version": "55.0.0"
+        }
+    },
+
     "permissions": [
         "activeTab"
     ],
@@ -32,10 +39,7 @@
         }
     ],
 
-    "applications": {
-        "gecko": {
-            "id": "{ba6bb880-bcbe-4792-a020-fcfab8d67027}",
-            "strict_min_version": "55.0.0"
-        }
+    "options_ui": {
+        "page": "/pages/options.html"
     }
 }
