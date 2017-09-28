@@ -80,10 +80,14 @@
         return true;
     };
 
-    genericListener.listeners.changeOptions = function (message) {
-        classes = message.classes;
-        css = message.css;
-    };
+    chrome.storage.onChanged.addListener(changes => {
+        if (changes.classes && changes.classes.newValue) {
+            classes = changes.classes.newValue;
+        }
+        if (changes.css && changes.css.newValue) {
+            css = changes.css.newValue;
+        }
+    });
 
 
     chrome.storage.sync.get({ "classes": classes, "css": null }, items => {
