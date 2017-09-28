@@ -1,5 +1,8 @@
 2017-09-28  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/background/try_xpath_background.js:
+	Set cssOrigin in genericListener.listeners.insertCss.
+
 	* tryXpath/pages/options.js:
 	Remove elements variable.
 	Modify this file to use => operator.

@@ -61,7 +61,7 @@
 
     genericListener.listeners.insertCss = function (message, sender) {
         var id = sender.tab.id;
-        chrome.tabs.insertCSS(id, { "code": css }, function () {
+        chrome.tabs.insertCSS(id, {"code":css, "cssOrigin":"author"}, () => {
             if (chrome.runtime.lastError === null) {
                 chrome.tabs.sendMessage(id, { "event": "finishInsertCss" });
             };
