@@ -88,7 +88,9 @@
 
     chrome.storage.sync.get({ "classes": classes, "css": null }, items => {
         classes = items.classes;
-        if (items.css === null) {
+        if (items.css !== null) {
+            css = items.css;
+        } else {
             loadDefaultCss(text => {
                 css = text;
             });

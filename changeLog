@@ -1,5 +1,15 @@
 2017-09-28  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/options.js:
+	Change save button behavior. This button save the options to
+	storage.sync.
+
+	* tryXpath/background/try_xpath_background.js:
+	Fix loading css.
+
+	* tryXpath/pages/options.js:
+	Change save button behavior.
+
 	* tryXpath/background/try_xpath_background.js:
 	Modify this file. The css is loaded from storage.sync when the
 	background script is loaded.

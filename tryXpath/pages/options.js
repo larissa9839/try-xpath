@@ -74,12 +74,17 @@
                 return;
             }
 
-            chrome.runtime.sendMessage({
-                "event": "changeOptions",
-                "css": style,
-                "classes": classes
+            chrome.storage.sync.set({
+                "classes": classes,
+                "css": style
+            }, () => {
+                var err = chrome.runtime.lastError;
+                if (err) {
+                    elements.message.textContent = "Failure. " + err.message;
+                } else {
+                    elements.message.textContent = "Success.";
+                }
             });
-            elements.message.textContent = "Success.";
         });
 
         document.getElementById("show-default").addEventListener(
