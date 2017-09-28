@@ -2,6 +2,7 @@
 
 	* tryXpath/pages/options.js:
 	Remove elements variable.
+	Modify this file to use => operator.
 
 	* tryXpath/background/try_xpath_background.js:
 	Remove genericListener.listeners.changeOptions function.

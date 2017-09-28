@@ -45,7 +45,7 @@
         req.send();
     };
 
-    window.addEventListener("load", function () {
+    window.addEventListener("load", () => {
         elementClass = document.getElementById("element-class");
         contextClass = document.getElementById("context-class");
         focusedClass = document.getElementById("focused-class");
@@ -53,7 +53,7 @@
         style = document.getElementById("style");
         message = document.getElementById("message");
 
-        chrome.runtime.sendMessage({ "event": "loadOptions" }, function (res){
+        chrome.runtime.sendMessage({ "event": "loadOptions" }, res => {
             elementClass.value = res.classes.element;
             contextClass.value = res.classes.context;
             focusedClass.value = res.classes.focused;
@@ -61,7 +61,7 @@
             style.value = res.css;
         });
 
-        document.getElementById("save").addEventListener("click", function() {
+        document.getElementById("save").addEventListener("click", () => {
             var styleValue = style.value;
             var classes = Object.create(null);
             classes.element = elementClass.value;
@@ -88,13 +88,13 @@
         });
 
         document.getElementById("show-default").addEventListener(
-            "click", function () {
+            "click", () => {
                 elementClass.value = defaultClasses.element;
                 contextClass.value = defaultClasses.context;
                 focusedClass.value = defaultClasses.focused;
                 ancestorClass.value = defaultClasses.focusedAncestor;
-
-                loadDefaultCss(function (css) {
+                
+                loadDefaultCss(css => {
                     style.value = css;
                 });
             });
