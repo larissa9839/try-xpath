@@ -12,17 +12,17 @@
         "focusedAncestor": "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf"
     };
 
-    (function loadCss() {
+    function loadDefaultCss(callback) {
         var req = new XMLHttpRequest();
         req.open("GET", chrome.runtime.getURL("/css/try_xpath_insert.css"));
         req.responseType = "text";
         req.onreadystatechange = function () {
             if (req.readyState === XMLHttpRequest.DONE) {
-                css = req.responseText;
+                callback(req.responseText);
             }
         };
         req.send();
-    })();
+    };
 
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
@@ -84,5 +84,15 @@
         classes = message.classes;
         css = message.css;
     };
+
+
+    chrome.storage.sync.get({ "classes": classes, "css": null }, items => {
+        classes = items.classes;
+        if (items.css === null) {
+            loadDefaultCss(text => {
+                css = text;
+            });
+        }
+    });
 
 })(window);
