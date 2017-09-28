@@ -95,7 +95,7 @@
         resolverExpression.value = state.resolverExpressionValue;
     };
 
-    window.addEventListener("load", function () {
+    window.addEventListener("load", () => {
         mainWay = document.getElementById("main-way");
         mainExpression = document.getElementById("main-expression");
         contextCheckbox = document.getElementById("context-switch");
@@ -108,27 +108,24 @@
         resultsTbody = document.getElementById("results-detals")
             .getElementsByTagName("tbody")[0];
 
-        document.getElementById("execute")
-            .addEventListener("click", function() {
-                sendToActiveTab(makeExecuteMessage());
-            });
+        document.getElementById("execute").addEventListener("click", () => {
+            sendToActiveTab(makeExecuteMessage());
+        });
 
-        document.getElementById("set-style")
-            .addEventListener("click", function() {
-                sendToActiveTab({ "event": "setStyle" });
-            });
+        document.getElementById("set-style").addEventListener("click", () => {
+            sendToActiveTab({ "event": "setStyle" });
+        });
 
-        document.getElementById("reset-style")
-            .addEventListener("click", function() {
-                sendToActiveTab({ "event": "resetStyle" });
-            });
+        document.getElementById("reset-style").addEventListener("click",()=> {
+            sendToActiveTab({ "event": "resetStyle" });
+        });
 
-        document.getElementById("show-all-results")
-            .addEventListener("click", function() {
+        document.getElementById("show-all-results").addEventListener(
+            "click", () => {
                 sendToActiveTab({ "event": "requestShowAllResults" });
             });
 
-        resultsTbody.addEventListener("click", function(event) {
+        resultsTbody.addEventListener("click", event => {
             var target = event.target;
             if (target.tagName.toLowerCase() === "button") {
                 let ind = parseInt(target.getAttribute("data-index"), 10);
@@ -140,18 +137,19 @@
             }
         });
 
+        window.addEventListener("unload", () => {
+            var state = collectPopupState();
+            chrome.runtime.sendMessage({
+                "event": "storePopupState",
+                "state": state
+            });
+        });
+
         resultsTbody.appendChild(fu.createDetailTableHeader());
 
         sendToActiveTab({ "event": "requestShowResultsInPopup" });
         chrome.runtime.sendMessage({ "event": "requestRestorePopupState" });
     });
 
-    window.addEventListener("unload", function () {
-        var state = collectPopupState();
-        chrome.runtime.sendMessage({
-            "event": "storePopupState",
-            "state": state
-        });
-    });
 
 })(window);

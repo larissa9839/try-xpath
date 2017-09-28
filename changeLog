@@ -1,5 +1,8 @@
 2017-09-28  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Modify the code.
+	
 	* tryXpath/background/try_xpath_background.js:
 	Set cssOrigin in genericListener.listeners.insertCss.
 
