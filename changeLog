@@ -1,5 +1,8 @@
 2017-09-28  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/options.js:
+	Remove elements variable.
+
 	* tryXpath/background/try_xpath_background.js:
 	Remove genericListener.listeners.changeOptions function.
 	Add a listener to chrome.storage.onChanged to change classes and

@@ -11,16 +11,16 @@
         "focusedAncestor": "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf"
     };
 
-    var elements = {};
-    elements.test = document.createElement("div");
+    var elementClass, contextClass, focusedClass, ancestorClass, style,
+        message, testElement;
 
     function isValidClass(clas) {
         try {
-            elements.test.classList.add(clas);
+            testElement.classList.add(clas);
         } catch (e) {
             return false;
         }
-        elements.test.setAttribute("class", "");
+        testElement.setAttribute("class", "");
         return true;
     };
 
@@ -46,58 +46,61 @@
     };
 
     window.addEventListener("load", function () {
-        elements.elementClass = document.getElementById("element-class");
-        elements.contextClass = document.getElementById("context-class");
-        elements.focusedClass = document.getElementById("focused-class");
-        elements.ancestorClass = document.getElementById("ancestor-class");
-        elements.style = document.getElementById("style");
-        elements.message = document.getElementById("message");
+        elementClass = document.getElementById("element-class");
+        contextClass = document.getElementById("context-class");
+        focusedClass = document.getElementById("focused-class");
+        ancestorClass = document.getElementById("ancestor-class");
+        style = document.getElementById("style");
+        message = document.getElementById("message");
 
         chrome.runtime.sendMessage({ "event": "loadOptions" }, function (res){
-            elements.elementClass.value = res.classes.element;
-            elements.contextClass.value = res.classes.context;
-            elements.focusedClass.value = res.classes.focused;
-            elements.ancestorClass.value = res.classes.focusedAncestor;
-            elements.style.value = res.css;
+            elementClass.value = res.classes.element;
+            contextClass.value = res.classes.context;
+            focusedClass.value = res.classes.focused;
+            ancestorClass.value = res.classes.focusedAncestor;
+            style.value = res.css;
         });
 
         document.getElementById("save").addEventListener("click", function() {
-            var style = elements.style.value;
+            var styleValue = style.value;
             var classes = Object.create(null);
-            classes.element = elements.elementClass.value;
-            classes.context = elements.contextClass.value;
-            classes.focused = elements.focusedClass.value;
-            classes.focusedAncestor = elements.ancestorClass.value;
+            classes.element = elementClass.value;
+            classes.context = contextClass.value;
+            classes.focused = focusedClass.value;
+            classes.focusedAncestor = ancestorClass.value;
 
             if (!isValidClasses(classes)) {
-                elements.message.textContent = "There is a invalid class.";
+                message.textContent = "There is a invalid class.";
                 return;
             }
 
             chrome.storage.sync.set({
                 "classes": classes,
-                "css": style
+                "css": styleValue
             }, () => {
                 var err = chrome.runtime.lastError;
                 if (err) {
-                    elements.message.textContent = "Failure. " + err.message;
+                    message.textContent = "Failure. " + err.message;
                 } else {
-                    elements.message.textContent = "Success.";
+                    message.textContent = "Success.";
                 }
             });
         });
 
         document.getElementById("show-default").addEventListener(
             "click", function () {
-                elements.elementClass.value = defaultClasses.element;
-                elements.contextClass.value = defaultClasses.context;
-                elements.focusedClass.value = defaultClasses.focused;
-                elements.ancestorClass.value = defaultClasses.focusedAncestor;
+                elementClass.value = defaultClasses.element;
+                contextClass.value = defaultClasses.context;
+                focusedClass.value = defaultClasses.focused;
+                ancestorClass.value = defaultClasses.focusedAncestor;
 
                 loadDefaultCss(function (css) {
-                    elements.style.value = css;
+                    style.value = css;
                 });
             });
     });
+
+
+    testElement = document.createElement("div");
 
 })(window);
