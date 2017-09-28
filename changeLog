@@ -1,4 +1,15 @@
+2017-09-29  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.js:
+	Modify this file. Some elements are linked to some checkboxes.
+
 2017-09-28  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.html
+	Add ids.
+
+	* tryXpath/popup/popup.css (.none):
+	Add a hidden element style.
 
 	* tryXpath/popup/popup.js:
 	Modify the code.

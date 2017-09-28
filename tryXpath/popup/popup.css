@@ -72,3 +72,7 @@ th {
     box-sizing: border-box;
     width: 33%;
 }
+
+.none {
+    display: none;
+}

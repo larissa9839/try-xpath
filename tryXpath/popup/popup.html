@@ -36,8 +36,8 @@
   </div>
 </div>
 <div>
-  <h1><input type="checkbox" id="context-switch"><label for="context-switch">Context</label></h1>
-  <div id="context-body">
+  <h1 id="context-header"><input type="checkbox" id="context-switch"><label for="context-switch">Context</label></h1>
+  <div id="context-body" class="none">
     <div>The first node of the results is used as the CONTEXT. (document.evaluate(expr, CONTEXT, ...), CONTEXT.querySelector(...), CONTEXT.querySelectorAll(...))</div>
     <dl>
       <dt><label for="context-way">Way</label></dt>
@@ -60,8 +60,8 @@
   </div>
 </div>
 <div>
-  <h1><input type="checkbox" id="resolver-switch"><label for="resolver-switch">namespaceResolver</label></h1>
-  <div id="resolver-body">
+  <h1 id="resolver-header"><input type="checkbox" id="resolver-switch"><label for="resolver-switch">namespaceResolver</label></h1>
+  <div id="resolver-body" class="none">
     <div>You can specify the behavior of the namespaceResolver function. If you want to get the P elements which are in the "http://www.w3.org/1999/xhtml" namespace, please do as follows.
       <ol>
         <li>Enter {"x":"http://www.w3.org/1999/xhtml"} in the resolver input field.</li>

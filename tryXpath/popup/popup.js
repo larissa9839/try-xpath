@@ -8,9 +8,12 @@
 
     var document = window.document;
 
-    var mainWay, mainExpression, contextCheckbox, contextWay,
-        contextExpression, resolverCheckbox, resolverExpression,
-        resultsMessage, resultsTbody, resultsCount;
+    const noneClass = "none";
+
+    var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
+        contextWay, contextExpression, resolverHeader, resolverBody,
+        resolverCheckbox, resolverExpression, resultsMessage, resultsTbody,
+        resultsCount;
 
     var relatedTabId, executionId;
 
@@ -31,6 +34,22 @@
         state.resolverCheckboxChecked = resolverCheckbox.checked;
         state.resolverExpressionValue = resolverExpression.value;
         return state;
+    };
+
+    function changeContextVisible () {
+        if (contextCheckbox.checked) {
+            contextBody.classList.remove(noneClass);
+        } else {
+            contextBody.classList.add(noneClass);
+        }
+    };
+
+    function changeResolverVisible () {
+        if (resolverCheckbox.checked) {
+            resolverBody.classList.remove(noneClass);
+        } else {
+            resolverBody.classList.add(noneClass);
+        }
     };
 
     function makeExecuteMessage() {
@@ -98,10 +117,14 @@
     window.addEventListener("load", () => {
         mainWay = document.getElementById("main-way");
         mainExpression = document.getElementById("main-expression");
+        contextHeader = document.getElementById("context-header");
         contextCheckbox = document.getElementById("context-switch");
+        contextBody = document.getElementById("context-body");
         contextWay = document.getElementById("context-way");
         contextExpression = document.getElementById("context-expression");
+        resolverHeader = document.getElementById("resolver-header");
         resolverCheckbox = document.getElementById("resolver-switch");
+        resolverBody = document.getElementById("resolver-body");
         resolverExpression = document.getElementById("resolver-expression");
         resultsMessage = document.getElementById("results-message");
         resultsCount = document.getElementById("results-count");
@@ -111,6 +134,12 @@
         document.getElementById("execute").addEventListener("click", () => {
             sendToActiveTab(makeExecuteMessage());
         });
+
+        contextHeader.addEventListener("click", changeContextVisible);
+        contextHeader.addEventListener("keydown", changeContextVisible);
+
+        resolverHeader.addEventListener("click", changeResolverVisible);
+        resolverHeader.addEventListener("keydown", changeResolverVisible);
 
         document.getElementById("set-style").addEventListener("click", () => {
             sendToActiveTab({ "event": "setStyle" });
