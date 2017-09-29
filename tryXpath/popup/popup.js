@@ -141,10 +141,10 @@
         });
 
         contextHeader.addEventListener("click", changeContextVisible);
-        contextHeader.addEventListener("keydown", changeContextVisible);
+        contextHeader.addEventListener("keypress", changeContextVisible);
 
         resolverHeader.addEventListener("click", changeResolverVisible);
-        resolverHeader.addEventListener("keydown", changeResolverVisible);
+        resolverHeader.addEventListener("keypress", changeResolverVisible);
 
         document.getElementById("set-style").addEventListener("click", () => {
             sendToActiveTab({ "event": "setStyle" });
