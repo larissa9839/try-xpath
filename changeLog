@@ -1,5 +1,11 @@
 2017-09-29  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.css:
+	Set style to #open-options.
+
+	* tryXpath/popup/popup.html:
+	Add "Open options" button.
+
 	* tryXpath/popup/popup.js:
 	Modify the file. "keypress" event is used instead of "keydown"
 	event.

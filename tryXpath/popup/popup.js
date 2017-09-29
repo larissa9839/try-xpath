@@ -152,6 +152,16 @@
         resolverHeader.addEventListener("click", changeResolverVisible);
         resolverHeader.addEventListener("keypress", changeResolverVisible);
 
+        document.getElementById("show-all-results").addEventListener(
+            "click", () => {
+                sendToActiveTab({ "event": "requestShowAllResults" });
+            });
+
+        document.getElementById("open-options").addEventListener(
+            "click", () => {
+                chrome.runtime.openOptionsPage();
+            });
+
         document.getElementById("set-style").addEventListener("click", () => {
             sendToActiveTab({ "event": "setStyle" });
         });
@@ -159,11 +169,6 @@
         document.getElementById("reset-style").addEventListener("click",()=> {
             sendToActiveTab({ "event": "resetStyle" });
         });
-
-        document.getElementById("show-all-results").addEventListener(
-            "click", () => {
-                sendToActiveTab({ "event": "requestShowAllResults" });
-            });
 
         resultsTbody.addEventListener("click", event => {
             var target = event.target;

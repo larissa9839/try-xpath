@@ -67,10 +67,11 @@ th {
 }
 
 #show-all-results,
+#open-options,
 #set-style,
 #reset-style {
     box-sizing: border-box;
-    width: 33%;
+    width: 50%;
 }
 
 .none {
