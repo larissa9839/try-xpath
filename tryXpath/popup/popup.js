@@ -18,10 +18,9 @@
     var relatedTabId, executionId;
 
     function sendToActiveTab(msg) {
-        chrome.tabs.query({ "active": true, "currentWindow": true },
-                          function (tabs) {
-                              chrome.tabs.sendMessage(tabs[0].id, msg);
-                          });
+        chrome.tabs.query({ "active": true, "currentWindow": true }, tabs => {
+            chrome.tabs.sendMessage(tabs[0].id, msg);
+        });
     };
 
     function collectPopupState() {
@@ -105,13 +104,19 @@
 
     genericListener.listeners.restorePopupState = function (message) {
         var state = message.state;
-        mainWay.selectedIndex = state.mainWayIndex;
-        mainExpression.value = state.mainExpressionValue;
-        contextCheckbox.checked = state.contextCheckboxChecked;
-        contextWay.selectedIndex = state.contextWayIndex;
-        contextExpression.value = state.contextExpressionValue;
-        resolverCheckbox.checked = state.resolverCheckboxChecked;
-        resolverExpression.value = state.resolverExpressionValue;
+
+        if (state !== null) {
+            mainWay.selectedIndex = state.mainWayIndex;
+            mainExpression.value = state.mainExpressionValue;
+            contextCheckbox.checked = state.contextCheckboxChecked;
+            contextWay.selectedIndex = state.contextWayIndex;
+            contextExpression.value = state.contextExpressionValue;
+            resolverCheckbox.checked = state.resolverCheckboxChecked;
+            resolverExpression.value = state.resolverExpressionValue;
+        }
+
+        changeContextVisible();
+        changeResolverVisible();
     };
 
     window.addEventListener("load", () => {

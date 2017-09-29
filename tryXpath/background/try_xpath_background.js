@@ -38,12 +38,10 @@
     }
 
     genericListener.listeners.requestRestorePopupState = function (message) {
-        if (popupState) {
-            chrome.runtime.sendMessage({
-                "event": "restorePopupState",
-                "state": popupState
-            });
-        }
+        chrome.runtime.sendMessage({
+            "event": "restorePopupState",
+            "state": popupState
+        });
     }
 
     genericListener.listeners.showAllResults = function(message, sender) {
