@@ -140,6 +140,12 @@
             sendToActiveTab(makeExecuteMessage());
         });
 
+        mainExpression.addEventListener("keypress", event => {
+            if (event.key === "Enter") {
+                sendToActiveTab(makeExecuteMessage());
+            }
+        });
+
         contextHeader.addEventListener("click", changeContextVisible);
         contextHeader.addEventListener("keypress", changeContextVisible);
 

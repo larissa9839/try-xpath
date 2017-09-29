@@ -3,6 +3,8 @@
 	* tryXpath/popup/popup.js:
 	Modify the file. "keypress" event is used instead of "keydown"
 	event.
+	Modify this file. The main expression will be executed when Enter
+	key is pressed.
 
 	* tryXpath/background/try_xpath_background.js: 
 	Modify genericListener.listeners.requestRestorePopupState to send
