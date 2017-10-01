@@ -1,7 +1,12 @@
 2017-10-01  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Modify window load event handler. A execute message is sent when a
+	user press the Enter to the some input field.
+
 	* tryXpath/scripts/try_xpath_content.js: 
 	Add the MPL 2.0 Licence header.
+	Move the code which calls chrome.runtime.sendMessage.
 
 	* tryXpath/popup/popup.js: 
 	Add the MPL 2.0 Licence header.

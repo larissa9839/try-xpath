@@ -151,9 +151,19 @@
 
         contextHeader.addEventListener("click", changeContextVisible);
         contextHeader.addEventListener("keypress", changeContextVisible);
+        contextExpression.addEventListener("keypress", event => {
+            if (event.key === "Enter") {
+                sendToActiveTab(makeExecuteMessage());
+            }
+        });
 
         resolverHeader.addEventListener("click", changeResolverVisible);
         resolverHeader.addEventListener("keypress", changeResolverVisible);
+        resolverExpression.addEventListener("keypress", event => {
+            if (event.key === "Enter") {
+                sendToActiveTab(makeExecuteMessage());
+            }
+        });
 
         document.getElementById("show-all-results").addEventListener(
             "click", () => {

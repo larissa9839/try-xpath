@@ -26,10 +26,6 @@
     var currentItems = [];
     var cssInserted = false;
 
-    chrome.runtime.sendMessage({ "event": "loadClasses" }, function(res) {
-        classes = res;
-    });
-
     function focusItem(item) {
         fu.restoreItemClasses(savedFocusedAncestorClasses);
         savedFocusedAncestorClasses = [];
@@ -233,5 +229,10 @@
     genericListener.listeners.finishInsertCss = function () {
         cssInserted = true;
     };
+
+
+    chrome.runtime.sendMessage({ "event": "loadClasses" }, res => {
+        classes = res;
+    });
 
 })(window);
