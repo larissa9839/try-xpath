@@ -176,11 +176,13 @@ tryXpath.functions = {};
     fu.getItemDetail = function (item) {
         var typeStr = typeof(item);
 
-        if (typeStr === "string") {
+        switch (typeof(item)) {
+        case "string":
             return { "type": "String", "name": "", "value": item };
-        }
-        if (typeStr === "number") {
+        case "number":
             return { "type": "Number", "name": "", "value": item.toString() };
+        case "boolean":
+            return { "type": "Boolean", "name": "", "value": item.toString()};
         }
 
         // item is Attr
