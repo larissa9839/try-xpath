@@ -18,7 +18,7 @@ tryXpath.functions = {};
     fu.execExpr = function(expr, method, opts) {
         opts = opts || {};
         var context = opts.context || document;
-        var resolver = opts.resolver ? opts.resolver : null;
+        var resolver = ("resolver" in opts) ? opts.resolver : null;
         var doc = opts.document || fu.getOwnerDocument(context) || context;
 
         var items, resultType;
@@ -119,7 +119,8 @@ tryXpath.functions = {};
             try {
                 dict = JSON.parse(obj);
             } catch (e) {
-                throw new Error("Invalid resolver. JSON syntax error. " + obj);
+                throw new Error("Invalid resolver [" + obj + "]. : "
+                                + e.message);                
             }
         } else {
             dict = obj;

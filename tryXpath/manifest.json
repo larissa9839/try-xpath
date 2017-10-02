@@ -2,7 +2,7 @@
     "name": "Try XPath",
     "description": "This add-on shows the results of XPath expressions.",
     "manifest_version": 2,
-    "version": "1.0",
+    "version": "1.0.0",
     "icons": {
         "48": "icons/icon_48.png"
     },

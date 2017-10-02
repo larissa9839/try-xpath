@@ -1,5 +1,8 @@
 2017-10-02  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/manifest.json:
+	Change version from "1.0" to "1.0.0".
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Fix getItemDetails function. This function handle Boolean type.
 
