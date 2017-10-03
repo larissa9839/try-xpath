@@ -2,6 +2,11 @@
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Modify focusItem. This function use attribute instead of class.
+	Define removeAttrs function.
+	Remove restoreAllClass function.
+	Modify this file. This file use removeAttrs instead of restoreAllClass.
+	Modify resetPrev function.
+	Define dummyItem and dummyItems constans.
 
 	* test/unit_test/jasmine/spec/spec.js:
 	Define removeAttrFromItem function.

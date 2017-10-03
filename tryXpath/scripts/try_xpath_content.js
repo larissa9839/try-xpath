@@ -9,6 +9,9 @@
     var tx = tryXpath;
     var fu = tryXpath.functions;
 
+    const dummyItem = "";
+    const dummyItems = [];
+
     var attributes = {
         "element": "data-tryxpath-element",
         "context": "data-tryxpath-context",
@@ -29,10 +32,10 @@
     var savedContextClass = null;
     var savedFocusedClass = null;
     var savedFocusedAncestorClasses = [];
-    var contextItem = "";
-    var currentItems = [];
-    var focusedItem = "";
-    var focusedAncestorItems = [];
+    var contextItem = dummyItem;
+    var currentItems = dummyItems;
+    var focusedItem = dummyItem;
+    var focusedAncestorItems = dummyItems;
     var cssInserted = false;
 
     function focusItem(item) {
@@ -44,39 +47,37 @@
             return;
         }
 
-        var elem;
         if (fu.isElementItem(item)) {
-            elem = item;
+            focusedItem = item;
         } else {
-            elem = fu.getParentElement(item);
+            focusedItem = fu.getParentElement(item);
         }
 
-        var ancestors = fu.getAncestorElements(elem);
+        focusedAncestorItems = fu.getAncestorElements(focusedItem);
 
-        fu.setAttrToItem(attributes.focused, "true", elem);
-        fu.setIndexToItems(attributes.focusedAncestor, ancestors);
+        fu.setAttrToItem(attributes.focused, "true", focusedItem);
+        fu.setIndexToItems(attributes.focusedAncestor, focusedAncestorItems);
 
-        elem.blur();
-        elem.focus();
-        elem.scrollIntoView();
+        focusedItem.blur();
+        focusedItem.focus();
+        focusedItem.scrollIntoView();
     };
 
-    function restoreAllClass() {
-        fu.restoreItemClasses(savedFocusedAncestorClasses);
-        savedFocusedAncestorClasses = [];
-        fu.restoreItemClass(savedFocusedClass);
-        savedFocusedClass = null;
-        fu.restoreItemClasses(savedClasses);
-        savedClasses = [];
-        fu.restoreItemClass(savedContextClass);
-        savedContextClass = null;
+    function removeAttrs () {
+        fu.removeAttrFromItems(attributes.focusedAncestor,
+                               focusedAncestorItems);
+        fu.removeAttrFromItem(attributes.focused, focusedItem);
+        fu.removeAttrFromItems(attributes.element, currentItems);
+        fu.removeAttrFromItem(attributes.context, contextItem);
     };
 
     function resetPrev() {
-        restoreAllClass();
+        removeAttrs();
 
-        contextItem = null;
-        currentItems = [];
+        contextItem = dummyItem;
+        currentItems = dummyItems;
+        focusedItem = dummyItem;
+        focusedAncestorItems = dummyItems;
 
         prevMsg = null;
         executionCount++;
@@ -218,11 +219,11 @@
     }
 
     genericListener.listeners.resetStyle = function () {
-        restoreAllClass();
+        removeAttrs();
     };
 
     genericListener.listeners.setStyle = function () {
-        restoreAllClass();        
+        removeAttrs();
 
         savedContextClass = fu.saveItemClass(contextItem);
         fu.addClassToItem(classes.context, contextItem);
