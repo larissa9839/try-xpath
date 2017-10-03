@@ -225,10 +225,8 @@
     genericListener.listeners.setStyle = function () {
         removeAttrs();
 
-        savedContextClass = fu.saveItemClass(contextItem);
-        fu.addClassToItem(classes.context, contextItem);
-        savedClasses = fu.saveItemClasses(currentItems);
-        fu.addClassToItems(classes.element, currentItems);
+        fu.setAttrToItem(attributes.context, "true", contextItem);
+        fu.setIndexToItems(attributes.element, currentItems);
     };
 
     genericListener.listeners.finishInsertCss = function () {

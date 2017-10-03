@@ -7,6 +7,9 @@
 	Modify this file. This file use removeAttrs instead of restoreAllClass.
 	Modify resetPrev function.
 	Define dummyItem and dummyItems constans.
+	Modify genericListener.listeners.setStyle. This function use attribute
+	instead of class.
+
 
 	* test/unit_test/jasmine/spec/spec.js:
 	Define removeAttrFromItem function.
