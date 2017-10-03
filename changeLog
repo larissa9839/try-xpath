@@ -1,3 +1,15 @@
+2017-10-03  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Modify genericListener.listeners.execute function.
+
+	* tryXpath/scripts/try_xpath_functions.js:
+	Define setAttrToItem function.
+	Define setIndexToItems function.
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Define attributes variable.
+
 2017-10-02  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/manifest.json:

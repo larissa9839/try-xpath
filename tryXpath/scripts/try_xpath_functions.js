@@ -157,14 +157,14 @@ tryXpath.functions = {};
             map.set(item, obj[item]);
         });
         return map;
-    }
+    };
 
     fu.isDocOrElem = function(obj) {
         if ((obj.nodeType === 1) || (obj.nodeType === 9)) {
             return true;
         }
         return false;
-    }
+    };
 
     fu.listToArr = function(list) {
         var elems = [];
@@ -172,7 +172,7 @@ tryXpath.functions = {};
             elems.push(list[i]);
         }
         return elems;
-    }
+    };
 
     fu.getItemDetail = function (item) {
         var typeStr = typeof(item);
@@ -198,7 +198,7 @@ tryXpath.functions = {};
             "name": item.nodeName,
             "value": item.nodeValue || ""
         };
-    }
+    };
 
     fu.getItemDetails = function (items) {
         var details = [];
@@ -206,7 +206,7 @@ tryXpath.functions = {};
             details.push(fu.getItemDetail(items[i]));
         }
         return details;
-    }
+    };
 
     const nodeTypeMap = new Map([
         [Node.ELEMENT_NODE, "ELEMENT_NODE"],
@@ -228,7 +228,7 @@ tryXpath.functions = {};
             return nodeTypeMap.get(nodeType);
         }
         return "Unknown";
-    }
+    };
 
     const xpathResultMaps = {
         "numToStr" : new Map([
@@ -264,7 +264,7 @@ tryXpath.functions = {};
             ["ANY_UNORDERED_NODE_TYPE", XPathResult.ANY_UNORDERED_NODE_TYPE],
             ["FIRST_ORDERED_NODE_TYPE", XPathResult.FIRST_ORDERED_NODE_TYPE]
         ])
-    }
+    };
 
     fu.getXpathResultStr = function (resultType) {
         if (xpathResultMaps.numToStr.has(resultType)) {
@@ -282,7 +282,7 @@ tryXpath.functions = {};
 
     fu.isAttrItem = function (item) {
         return Object.prototype.toString.call(item) === "[object Attr]";
-    }
+    };
 
     fu.isNodeItem = function (item) {
         if (fu.isAttrItem(item)) {
@@ -296,7 +296,7 @@ tryXpath.functions = {};
         default:
             return true;
         }
-    }
+    };
     
     fu.isElementItem = function (item) {
         if (fu.isNodeItem(item)
@@ -304,19 +304,19 @@ tryXpath.functions = {};
             return true;
         }
         return false;
-    }
+    };
 
     fu.addClassToItem = function (clas, item) {
         if (fu.isElementItem(item)) {
             item.classList.add(clas);
         }
-    }
+    };
 
     fu.addClassToItems = function (clas, items) {
         for (var item of items) {
             fu.addClassToItem(clas, item);
         }
-    }
+    };
 
     fu.saveItemClass = function (item) {
         if (!fu.isElementItem(item)) {
@@ -333,7 +333,7 @@ tryXpath.functions = {};
             "elem": item,
             "origClass": clas
         }
-    }
+    };
 
     fu.restoreItemClass = function (savedClass) {
         if (savedClass === null) {
@@ -345,7 +345,7 @@ tryXpath.functions = {};
         } else {
             savedClass.elem.setAttribute("class", savedClass.origClass);
         }
-    }
+    };
 
     fu.saveItemClasses = function (items) {
         var savedClasses = [];
@@ -353,13 +353,25 @@ tryXpath.functions = {};
             savedClasses.push(fu.saveItemClass(item));
         }
         return savedClasses;
-    }
+    };
 
     fu.restoreItemClasses = function (savedClasses) {
         for (var savedClass of savedClasses) {
             fu.restoreItemClass(savedClass);
         }
-    }
+    };
+
+    fu.setAttrToItem = function(name, value, item) {
+        if (fu.isElementItem(item)) {
+            item.setAttribute(name, value);
+        }
+    };
+
+    fu.setIndexToItems = function(name, items) {
+        for (var i = 0; i < items.length; i++) {
+            fu.setAttrToItem(name, i, items[i]);
+        }
+    };
 
     fu.getParentElement = function (item) {
         if (fu.isAttrItem(item)) {

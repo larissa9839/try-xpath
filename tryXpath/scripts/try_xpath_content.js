@@ -9,6 +9,13 @@
     var tx = tryXpath;
     var fu = tryXpath.functions;
 
+    var attributes = {
+        "element": "data-tryxpath-element",
+        "context": "data-tryxpath-context",
+        "focused": "data-tryxpath-focused",
+        "focusedAncestor": "data-tryxpath-focused-ancestor"
+    };
+
     var classes = {
         "element": "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
         "context": "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
@@ -152,8 +159,7 @@
             }
             contextItem = contRes.items[0];
 
-            savedContextClass = fu.saveItemClass(contextItem);
-            fu.addClassToItem(classes.context, contextItem);
+            fu.setAttrToItem(attributes.context, "true", contextItem);
 
             sendMsg.context.resultType = makeTypeStr(contRes.resultType);
             sendMsg.context.itemDetail = fu.getItemDetail(contextItem);
@@ -176,8 +182,7 @@
 
         currentItems = mainRes.items;
 
-        savedClasses = fu.saveItemClasses(currentItems);
-        fu.addClassToItems(classes.element, currentItems);
+        fu.setIndexToItems(attributes.element, currentItems);
 
         sendMsg.message = "Success.";
         sendMsg.main.resultType = makeTypeStr(mainRes.resultType);
