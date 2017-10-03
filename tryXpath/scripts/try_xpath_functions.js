@@ -367,6 +367,18 @@ tryXpath.functions = {};
         }
     };
 
+    fu.removeAttrFromItem = function(name, item) {
+        if (fu.isElementItem(item)) {
+            item.removeAttribute(name);
+        }
+    };
+
+    fu.removeAttrFromItems = function(name, items) {
+        items.forEach(item => {
+            fu.removeAttrFromItem(name, item);
+        });
+    };
+
     fu.setIndexToItems = function(name, items) {
         for (var i = 0; i < items.length; i++) {
             fu.setAttrToItem(name, i, items[i]);

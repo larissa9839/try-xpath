@@ -29,15 +29,16 @@
     var savedContextClass = null;
     var savedFocusedClass = null;
     var savedFocusedAncestorClasses = [];
-    var contextItem = null;
+    var contextItem = "";
     var currentItems = [];
+    var focusedItem = "";
+    var focusedAncestorItems = [];
     var cssInserted = false;
 
     function focusItem(item) {
-        fu.restoreItemClasses(savedFocusedAncestorClasses);
-        savedFocusedAncestorClasses = [];
-        fu.restoreItemClass(savedFocusedClass);
-        savedFocusedClass = null;
+        fu.removeAttrFromItem(attributes.focused, focusedItem);
+        fu.removeAttrFromItems(attributes.focusedAncestor,
+                               focusedAncestorItems);
         
         if (!item) {
             return;
@@ -52,10 +53,8 @@
 
         var ancestors = fu.getAncestorElements(elem);
 
-        savedFocusedClass = fu.saveItemClass(elem);
-        fu.addClassToItem(classes.focused, elem);
-        savedFocusedAncestorClasses = fu.saveItemClasses(ancestors);
-        fu.addClassToItems(classes.focusedAncestor, ancestors);
+        fu.setAttrToItem(attributes.focused, "true", elem);
+        fu.setIndexToItems(attributes.focusedAncestor, ancestors);
 
         elem.blur();
         elem.focus();

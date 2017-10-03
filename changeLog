@@ -1,7 +1,17 @@
 2017-10-03  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
+	Modify focusItem. This function use attribute instead of class.
+
+	* test/unit_test/jasmine/spec/spec.js:
+	Define removeAttrFromItem function.
+	Define removeAttrFromItems function.
+
+	* tryXpath/scripts/try_xpath_content.js:
 	Modify genericListener.listeners.execute function.
+	Define focusedItem variable.
+	Define focusedAncestorItems variable.
+	Set empty string to initial value of some variables.
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define setAttrToItem function.
