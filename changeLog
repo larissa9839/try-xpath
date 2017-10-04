@@ -1,6 +1,14 @@
 2017-10-04  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/background/try_xpath_background.js:
+	Modify this file. This file load attributes instead of classes.
+	Remove classes variable.
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Remove classes, savedClasses, savedContextClass, savedFocusedClass,
+	savedFocusedClass and savedFocusedAncestorClasses variables.
+
+	* tryXpath/background/try_xpath_background.js:
 	Modify storage.onChanged listener.
 
 	* tryXpath/pages/options.js:

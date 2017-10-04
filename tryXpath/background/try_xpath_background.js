@@ -15,13 +15,6 @@
         "focusedAncestor": "data-tryxpath-focused-ancestor"
     };
 
-    var classes = {
-        "element": "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
-        "context": "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
-        "focused": "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
-        "focusedAncestor": "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf"
-    };
-
     function loadDefaultCss(callback) {
         var req = new XMLHttpRequest();
         req.open("GET", chrome.runtime.getURL("/css/try_xpath_insert.css"));
@@ -101,8 +94,11 @@
     });
 
 
-    chrome.storage.sync.get({ "classes": classes, "css": null }, items => {
-        classes = items.classes;
+    chrome.storage.sync.get({
+        "attributes": attributes,
+        "css": null
+    }, items => {
+        attributes = items.attributes;
         if (items.css !== null) {
             css = items.css;
         } else {

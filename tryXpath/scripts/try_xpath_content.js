@@ -19,19 +19,8 @@
         "focusedAncestor": "data-tryxpath-focused-ancestor"
     };
 
-    var classes = {
-        "element": "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
-        "context": "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
-        "focused": "tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
-        "focusedAncestor": "tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf"
-    };
-
     var prevMsg = null;
     var executionCount = 0;
-    var savedClasses = [];
-    var savedContextClass = null;
-    var savedFocusedClass = null;
-    var savedFocusedAncestorClasses = [];
     var contextItem = dummyItem;
     var currentItems = dummyItems;
     var focusedItem = dummyItem;
