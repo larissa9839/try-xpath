@@ -100,6 +100,16 @@
     genericListener.listeners = Object.create(null);
     chrome.runtime.onMessage.addListener(genericListener);
 
+    genericListener.listeners.setContextInfo = function (message) {
+        if (!message) {
+            return;
+        }
+
+        if ("attributes" in message) {
+            attributes = message.attributes;
+        }
+    };
+
     genericListener.listeners.execute = function(message, sender) {
         resetPrev();
 
@@ -233,9 +243,6 @@
         cssInserted = true;
     };
 
-
-    chrome.runtime.sendMessage({ "event": "loadClasses" }, res => {
-        classes = res;
-    });
+    chrome.runtime.sendMessage({ "event": "requestSetContextInfo" });
 
 })(window);

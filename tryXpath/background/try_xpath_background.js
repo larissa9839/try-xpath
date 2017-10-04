@@ -8,6 +8,13 @@
     var popupState = null;
     var results = {};
     var css = "";
+    var attributes = {
+        "element": "data-tryxpath-element",
+        "context": "data-tryxpath-context",
+        "focused": "data-tryxpath-focused",
+        "focusedAncestor": "data-tryxpath-focused-ancestor"
+    };
+
     var classes = {
         "element": "tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
         "context": "tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf",
@@ -69,17 +76,20 @@
         });
     };
 
-    genericListener.listeners.loadClasses = function (message, sender,
-                                                      sendResponse) {
-        sendResponse(classes);
-        return true;
-    };
-
     genericListener.listeners.loadOptions = function (message, sender,
                                                       sendResponse) {
         sendResponse({ "classes": classes, "css": css });
         return true;
     };
+
+    genericListener.listeners.requestSetContextInfo = function (message,
+                                                                sender) {
+        chrome.tabs.sendMessage(sender.tab.id, {
+            "event": "setContextInfo",
+            "attributes": attributes
+        });
+    };
+
 
     chrome.storage.onChanged.addListener(changes => {
         if (changes.classes && changes.classes.newValue) {
