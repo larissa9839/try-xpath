@@ -92,8 +92,8 @@
 
 
     chrome.storage.onChanged.addListener(changes => {
-        if (changes.classes && changes.classes.newValue) {
-            classes = changes.classes.newValue;
+        if (changes.attributes && changes.attributes.newValue) {
+            attributes = changes.attributes.newValue;
         }
         if (changes.css && changes.css.newValue) {
             css = changes.css.newValue;

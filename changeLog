@@ -1,5 +1,8 @@
 2017-10-04  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/background/try_xpath_background.js:
+	Modify storage.onChanged listener.
+
 	* tryXpath/pages/options.js:
 	Remove isValidClass function.
 	Define isValidAttrName function.
