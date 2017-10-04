@@ -1,26 +1,41 @@
 
-.tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    outline: dashed thick rgb(0,0,255) !important;
+[data-tryxpath-context] {
+    outline: dashed thick rgb(0,255,0) !important;
 }
 
-.tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
+[data-tryxpath-element] {
     outline: dashed thick rgb(255,0,0) !important;
 }
 
-.tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath--context----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    outline: dashed thick rgb(128,0,255) !important;
-}
-
-.tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf,
-.tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath--focused----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
-    outline: solid thick rgb(0,255,0) !important;
-    display: block !important;
-    opacity: 1 !important;
-}
-
-.tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf,
-.tryxpath--element----f43c83f3-1920-4222-a721-0cc19c4ba9bf.tryxpath--focused-ancestor----f43c83f3-1920-4222-a721-0cc19c4ba9bf {
+[data-tryxpath-element][data-tryxpath-context] {
     outline: dashed thick rgb(255,255,0) !important;
+}
+
+[data-tryxpath-focused],
+[data-tryxpath-element][data-tryxpath-focused] {
+    outline: solid thick rgb(0,0,255) !important;
     display: block !important;
     opacity: 1 !important;
+}
+
+[data-tryxpath-focused-ancestor],
+[data-tryxpath-element][data-tryxpath-focused-ancestor] {
+    outline: dashed thick rgb(0,255,255) !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+[data-tryxpath-focused-ancestor="2"],
+[data-tryxpath-element][data-tryxpath-focused-ancestor="2"] {
+    outline: dashed thick rgb(0,192,255) !important;
+}
+
+[data-tryxpath-focused-ancestor="1"],
+[data-tryxpath-element][data-tryxpath-focused-ancestor="1"] {
+    outline: dashed thick rgb(0,128,255) !important;
+}
+
+[data-tryxpath-focused-ancestor="0"],
+[data-tryxpath-element][data-tryxpath-focused-ancestor="0"] {
+    outline: dashed thick rgb(0,64,255) !important;
 }
