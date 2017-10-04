@@ -1,6 +1,23 @@
 2017-10-04  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/background/try_xpath_background.js:
+	Modify genericListener.listeners.loadOptions function.
+
+	* tryXpath/pages/options.js:
+	Remove defaultClasses constans.
+	Remove elementClass, contextClass, focusedClass and ancestorClass
+	variables.
+	Define elementAttr, contextAttr, focusedAttr and ancestorAttr
+	variables.
+	Modify listener(window load).
+
+	* tryXpath/pages/options.html:
+	Change ids.
+
+	* tryXpath/pages/options.js:
+	Define defaultAttributes constans.
+
+	* tryXpath/background/try_xpath_background.js:
 	Remove genericListener.listeners.loadClasses function.
 	Remove attributes variable.
 

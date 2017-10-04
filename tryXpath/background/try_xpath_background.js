@@ -78,7 +78,7 @@
 
     genericListener.listeners.loadOptions = function (message, sender,
                                                       sendResponse) {
-        sendResponse({ "classes": classes, "css": css });
+        sendResponse({ "attributes": attributes, "css": css });
         return true;
     };
 
