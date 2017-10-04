@@ -1,5 +1,11 @@
 2017-10-04  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/options.js:
+	Remove isValidClass function.
+	Define isValidAttrName function.
+	Remove isValidClasses function.
+	Define isValidAttrNames function.
+
 	* tryXpath/background/try_xpath_background.js:
 	Modify genericListener.listeners.loadOptions function.
 

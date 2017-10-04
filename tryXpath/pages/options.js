@@ -17,19 +17,18 @@
     var elementAttr, contextAttr, focusedAttr, ancestorAttr, style,
         message, testElement;
 
-    function isValidClass(clas) {
+    function isValidAttrName(name) {
         try {
-            testElement.classList.add(clas);
+            testElement.setAttribute(name, "testValue");
         } catch (e) {
             return false;
         }
-        testElement.setAttribute("class", "");
         return true;
     };
 
-    function isValidClasses(classes) {
-        for (var p in classes) {
-            if (!isValidClass(classes[p])) {
+    function isValidAttrNames(names) {
+        for (var p in names) {
+            if (!isValidAttrName(names[p])) {
                 return false;
             }
         }
@@ -72,12 +71,10 @@
             attrs.focused = focusedAttr.value;
             attrs.focusedAncestor = ancestorAttr.value;
 
-            /* ToDo
-            if (!isValidClasses(classes)) {
-                message.textContent = "There is a invalid class.";
+            if (!isValidAttrNames(attrs)) {
+                message.textContent = "There is a invalid attribute.";
                 return;
             }
-            */
 
             chrome.storage.sync.set({
                 "attributes": attrs,
