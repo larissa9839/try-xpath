@@ -527,4 +527,57 @@ tryXpath.functions = {};
         }
     };
 
+    fu.saveAttrForItem = function(item, attr, storage, opts) {
+        opts = opts || {};
+        var overwrite = opts.overwrite ? opts.overwrite : false;
+        storage = storage || new Map();
+        
+        if (!fu.isElementItem(item)) {
+            return storage;
+        }
+
+        var elemStor;
+        if (storage.has(item)) {
+            elemStor = storage.get(item);
+        } else {
+            elemStor = new Map();
+            storage.set(item, elemStor);
+        }
+        
+        var val = item.hasAttribute(attr) ? item.getAttribute(attr)
+            : null;
+
+        if (overwrite || !elemStor.has(attr)) {
+            elemStor.set(attr, val);
+        }
+
+        return storage;
+    };
+
+    fu.saveAttrForItems = function(items, attr, storage, opts) {
+        var opts = opts || {};
+        var overwrite = opts.overwrite ? opts.overwrite : false;
+        storage = storage || new Map();
+
+        for (var item of items) {
+            fu.saveAttrForItem(item, attr, storage, {
+                "overwrite": overwrite
+            });
+        }
+
+        return storage;
+    };
+
+    fu.restoreItemAttrs = function (storage) {
+        for (var [elem, elemStor] of storage) {
+            for (var [attr, value] of elemStor) {
+                if (value === null) {
+                    elem.removeAttribute(attr);
+                } else {
+                    elem.setAttribute(attr, value);
+                }
+            }
+        }
+    };
+
 })(window);
