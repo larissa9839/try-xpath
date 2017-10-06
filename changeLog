@@ -1,5 +1,10 @@
 2017-10-06  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Define originalAttributes variable.
+	Define setAttr function.
+	Define setIndex function.
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Change saveAttrForItem function arguments.
 	Change saveAttrForItems function arguments.

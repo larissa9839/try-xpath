@@ -26,6 +26,17 @@
     var focusedItem = dummyItem;
     var focusedAncestorItems = dummyItems;
     var cssInserted = false;
+    var originalAttributes = new Map();
+
+    function setAttr(attr, value, item) {
+        fu.saveAttrForItem(item, attr, originalAttributes);
+        fu.setAttrToItem(attr, value, item);
+    };
+
+    function setIndex(attr, items) {
+        fu.saveAttrForItems(items, attr, originalAttributes);
+        fu.setIndexToItems(attr, items);
+    };
 
     function focusItem(item) {
         fu.removeAttrFromItem(attributes.focused, focusedItem);
@@ -44,8 +55,8 @@
 
         focusedAncestorItems = fu.getAncestorElements(focusedItem);
 
-        fu.setAttrToItem(attributes.focused, "true", focusedItem);
-        fu.setIndexToItems(attributes.focusedAncestor, focusedAncestorItems);
+        setAttr(attributes.focused, "true", focusedItem);
+        setIndex(attributes.focusedAncestor, focusedAncestorItems);
 
         focusedItem.blur();
         focusedItem.focus();
@@ -158,7 +169,7 @@
             }
             contextItem = contRes.items[0];
 
-            fu.setAttrToItem(attributes.context, "true", contextItem);
+            setAttr(attributes.context, "true", contextItem);
 
             sendMsg.context.resultType = makeTypeStr(contRes.resultType);
             sendMsg.context.itemDetail = fu.getItemDetail(contextItem);
@@ -181,7 +192,7 @@
 
         currentItems = mainRes.items;
 
-        fu.setIndexToItems(attributes.element, currentItems);
+        setIndex(attributes.element, currentItems);
 
         sendMsg.message = "Success.";
         sendMsg.main.resultType = makeTypeStr(mainRes.resultType);
@@ -224,8 +235,8 @@
     genericListener.listeners.setStyle = function () {
         removeAttrs();
 
-        fu.setAttrToItem(attributes.context, "true", contextItem);
-        fu.setIndexToItems(attributes.element, currentItems);
+        setAttr(attributes.context, "true", contextItem);
+        setIndex(attributes.element, currentItems);
     };
 
     genericListener.listeners.finishInsertCss = function () {
