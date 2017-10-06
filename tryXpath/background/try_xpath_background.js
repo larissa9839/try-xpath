@@ -60,11 +60,26 @@
         return true;
     };
 
-    genericListener.listeners.insertCss = function (message, sender) {
+    genericListener.listeners.updateCss = function (message, sender) {
         var id = sender.tab.id;
+
+        for (let removeCss in message.expiredCssSet) {
+            chrome.tabs.removeCSS(id, { "code": removeCss }, () => {
+                if (chrome.runtime.lastError === null) {
+                    chrome.tabs.sendMessage(id, {
+                        "event": "finishRemoveCss",
+                        "css": removeCss
+                    });
+                }
+            });
+        }
+
         chrome.tabs.insertCSS(id, {"code":css, "cssOrigin":"author"}, () => {
             if (chrome.runtime.lastError === null) {
-                chrome.tabs.sendMessage(id, { "event": "finishInsertCss" });
+                chrome.tabs.sendMessage(id, {
+                    "event": "finishInsertCss",
+                    "css": css
+                });
             };
         });
     };
@@ -85,10 +100,10 @@
 
 
     chrome.storage.onChanged.addListener(changes => {
-        if (changes.attributes && changes.attributes.newValue) {
+        if (changes.attributes && ("newValue" in changes.attributes)) {
             attributes = changes.attributes.newValue;
         }
-        if (changes.css && changes.css.newValue) {
+        if (changes.css && ("newValue" in changes.css)) {
             css = changes.css.newValue;
         }
     });

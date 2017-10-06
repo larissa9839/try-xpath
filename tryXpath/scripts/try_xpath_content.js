@@ -25,7 +25,8 @@
     var currentItems = dummyItems;
     var focusedItem = dummyItem;
     var focusedAncestorItems = dummyItems;
-    var cssInserted = false;
+    var currentCss = null;
+    var expiredCssSet = Object.create(null);
     var originalAttributes = new Map();
 
     function setAttr(attr, value, item) {
@@ -88,6 +89,33 @@
         return "";
     };
 
+    function updateCss() {
+        if ((currentCss === null) || (Object.keys(expiredCssSet).length > 0)){
+            chrome.runtime.sendMessage({
+                "event": "updateCss",
+                "expiredCssSet": expiredCssSet
+            });
+        }
+    };
+
+    function handleCssChange(newCss) {
+        if (currentCss === null) {
+            if (newCss in expiredCssSet) {
+                currentCss = newCss;
+                delete expiredCssSet[newCss];
+            }
+        } else if (newCss !== currentCss) {
+            if (newCss in expiredCssSet) {
+                currentCss = newCss;
+                delete expiredCssSet[newCss];
+            } else {
+                expiredCssSet[currentCss] = true;
+                currentCss = null;
+            }
+        }
+        // If newCss and currentCss are the same string do nothing.
+    };
+
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
@@ -110,11 +138,7 @@
     genericListener.listeners.execute = function(message, sender) {
         resetPrev();
 
-        if (!cssInserted) {
-            chrome.runtime.sendMessage({
-                "event": "insertCss"
-            });
-        }
+        updateCss();
 
         var sendMsg = Object.create(null);
         var main = message.main;
@@ -232,24 +256,34 @@
     genericListener.listeners.setStyle = function () {
         restoreAttrs();
 
+        updateCss();
+
         setAttr(attributes.context, "true", contextItem);
         setIndex(attributes.element, currentItems);
     };
 
-    genericListener.listeners.finishInsertCss = function () {
-        cssInserted = true;
+    genericListener.listeners.finishInsertCss = function (message) {
+        var css = message.css;
+        currentCss = css;
+        delete expiredCssSet[css];
+    };
+
+    genericListener.listeners.finishRemoveCss = function (message) {
+        var css = message.css;
+        if (css === currentCss) {
+            currentCss = null;
+        }
+        delete expiredCssSet[css];
     };
 
 
     chrome.storage.onChanged.addListener(changes => {
-        if (changes.attributes && changes.attributes.newValue) {
+        if (changes.attributes && ("newValue" in changes.attributes)) {
             attributes = changes.attributes.newValue;
         }
-        /* ToDo
-        if (changes.css && changes.css.newValue) {
-            css = changes.css.newValue;
+        if (changes.css && ("newValue" in changes.css)) {
+            handleCssChange(changes.css.newValue);
         }
-        */
     });
 
 

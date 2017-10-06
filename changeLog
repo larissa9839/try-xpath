@@ -1,6 +1,18 @@
 2017-10-06  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
+	Remove cssInserted variable.
+	Define currentCss and expiredCssSet.
+	Modify genericListener.listeners.finishInsertCss function.
+	Define updateCss function.
+	Define genericListener.listeners.finishRemoveCss function.
+	Define handleCssChange function.
+
+	* tryXpath/background/try_xpath_background.js:
+	Remove genericListener.listeners.insertCss function.
+	Define genericListener.listeners.updateCss function.
+
+	* tryXpath/scripts/try_xpath_content.js:
 	Define originalAttributes variable.
 	Define setAttr function.
 	Define setIndex function.
