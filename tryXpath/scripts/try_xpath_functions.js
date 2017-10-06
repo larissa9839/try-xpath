@@ -527,9 +527,7 @@ tryXpath.functions = {};
         }
     };
 
-    fu.saveAttrForItem = function(item, attr, storage, opts) {
-        opts = opts || {};
-        var overwrite = opts.overwrite ? opts.overwrite : false;
+    fu.saveAttrForItem = function(item, attr, storage, overwrite) {
         storage = storage || new Map();
         
         if (!fu.isElementItem(item)) {
@@ -554,15 +552,11 @@ tryXpath.functions = {};
         return storage;
     };
 
-    fu.saveAttrForItems = function(items, attr, storage, opts) {
-        var opts = opts || {};
-        var overwrite = opts.overwrite ? opts.overwrite : false;
+    fu.saveAttrForItems = function(items, attr, storage, overwrite) {
         storage = storage || new Map();
 
         for (var item of items) {
-            fu.saveAttrForItem(item, attr, storage, {
-                "overwrite": overwrite
-            });
+            fu.saveAttrForItem(item, attr, storage, overwrite);
         }
 
         return storage;
