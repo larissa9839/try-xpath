@@ -63,16 +63,13 @@
         focusedItem.scrollIntoView();
     };
 
-    function removeAttrs () {
-        fu.removeAttrFromItems(attributes.focusedAncestor,
-                               focusedAncestorItems);
-        fu.removeAttrFromItem(attributes.focused, focusedItem);
-        fu.removeAttrFromItems(attributes.element, currentItems);
-        fu.removeAttrFromItem(attributes.context, contextItem);
+    function restoreAttrs () {
+        fu.restoreItemAttrs(originalAttributes);
+        originalAttributes = new Map();
     };
 
     function resetPrev() {
-        removeAttrs();
+        restoreAttrs();
 
         contextItem = dummyItem;
         currentItems = dummyItems;
@@ -229,11 +226,11 @@
     }
 
     genericListener.listeners.resetStyle = function () {
-        removeAttrs();
+        restoreAttrs();
     };
 
     genericListener.listeners.setStyle = function () {
-        removeAttrs();
+        restoreAttrs();
 
         setAttr(attributes.context, "true", contextItem);
         setIndex(attributes.element, currentItems);

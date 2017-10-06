@@ -4,6 +4,8 @@
 	Define originalAttributes variable.
 	Define setAttr function.
 	Define setIndex function.
+	Remove removeAttrs function.
+	Define restoreAttrs function.
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Change saveAttrForItem function arguments.
