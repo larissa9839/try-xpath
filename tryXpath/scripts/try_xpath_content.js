@@ -240,6 +240,19 @@
         cssInserted = true;
     };
 
+
+    chrome.storage.onChanged.addListener(changes => {
+        if (changes.attributes && changes.attributes.newValue) {
+            attributes = changes.attributes.newValue;
+        }
+        /* ToDo
+        if (changes.css && changes.css.newValue) {
+            css = changes.css.newValue;
+        }
+        */
+    });
+
+
     chrome.runtime.sendMessage({ "event": "requestSetContextInfo" });
 
 })(window);

@@ -6,6 +6,7 @@
 	Define setIndex function.
 	Remove removeAttrs function.
 	Define restoreAttrs function.
+	Add storage.onChanged listener.
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Change saveAttrForItem function arguments.
