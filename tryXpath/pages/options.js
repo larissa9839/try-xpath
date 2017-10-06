@@ -84,7 +84,9 @@
                 if (err) {
                     message.textContent = "Failure. " + err.message;
                 } else {
-                    message.textContent = "Success.";
+                    message.textContent
+                        = "Success. Please click the \"set style\" button to "
+                        + "apply new options.";
                 }
             });
         });
