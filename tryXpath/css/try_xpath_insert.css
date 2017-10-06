@@ -27,15 +27,15 @@
 
 [data-tryxpath-focused-ancestor="2"],
 [data-tryxpath-element][data-tryxpath-focused-ancestor="2"] {
-    outline: dashed thick rgb(0,192,255) !important;
+    outline: dashed thick rgb(0,192,192) !important;
 }
 
 [data-tryxpath-focused-ancestor="1"],
 [data-tryxpath-element][data-tryxpath-focused-ancestor="1"] {
-    outline: dashed thick rgb(0,128,255) !important;
+    outline: dashed thick rgb(0,128,128) !important;
 }
 
 [data-tryxpath-focused-ancestor="0"],
 [data-tryxpath-element][data-tryxpath-focused-ancestor="0"] {
-    outline: dashed thick rgb(0,64,255) !important;
+    outline: dashed thick rgb(0,64,64) !important;
 }

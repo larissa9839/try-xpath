@@ -85,7 +85,7 @@
                     message.textContent = "Failure. " + err.message;
                 } else {
                     message.textContent
-                        = "Success. Please click the \"set style\" button to "
+                        = "Success. Please click the \"Set style\" button to "
                         + "apply new options.";
                 }
             });
