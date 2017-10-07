@@ -1,5 +1,9 @@
 2017-10-07  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Define getFrames function.
+	Define currentFrames variable.
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define getFrameAncestry function.
 	Define isNumberArray function.

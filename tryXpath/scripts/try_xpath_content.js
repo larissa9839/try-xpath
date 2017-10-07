@@ -21,6 +21,7 @@
 
     var prevMsg = null;
     var executionCount = 0;
+    var currentFrames = dummyItems;
     var contextItem = dummyItem;
     var currentItems = dummyItems;
     var focusedItem = dummyItem;
@@ -98,6 +99,14 @@
         }
     };
 
+    function getFrames(spec) {
+        var inds = JSON.parse(spec);
+        if (!fu.isNumberArray(inds)) {
+            throw new Error("Invalid specification. [" + spec + "]");
+        }
+        return fu.getFrameAncestry(inds).reverse();
+    };
+
     function handleCssChange(newCss) {
         if (currentCss === null) {
             if (newCss in expiredCssSet) {
@@ -157,6 +166,21 @@
         sendMsg.main.itemDetails = [];
 
         contextItem = document;
+
+        message.frameSpecification = "[0, 0]";    // ToDo
+        if (message.frameSpecification) {
+            try {
+                currentFrames = getFrames(message.frameSpecification);
+                setIndex("tryxpath-frame", currentFrames);    // ToDo
+                contextItem = currentFrames[0].contentDocument;
+            } catch (e) {
+                sendMsg.message = "An error occurred when getting a frame. "
+                    + e.message;
+                chrome.runtime.sendMessage(sendMsg);
+                prevMsg = sendMsg;
+                return;
+            }
+        }
 
         if (message.context) {
             let cont = message.context;
@@ -258,6 +282,7 @@
 
         updateCss();
 
+        setIndex("tryxpath-frame", currentFrames);    // ToDo
         setAttr(attributes.context, "true", contextItem);
         setIndex(attributes.element, currentItems);
     };
