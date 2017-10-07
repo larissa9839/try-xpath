@@ -81,6 +81,8 @@
             msg.context.resolver = resol;
         }
 
+        msg.frameDesignation = "[0, 0]";    // ToDo
+
         return msg;
     };
 

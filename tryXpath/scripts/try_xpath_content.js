@@ -155,6 +155,7 @@
         sendMsg.executionId = executionCount;
         sendMsg.href = window.location.href;
         sendMsg.title = window.document.title;
+        sendMsg.frameDesignation = "";
 
         var mainType = fu.getXpathResultNum(main.resultType);
         sendMsg.main = Object.create(null);
@@ -167,8 +168,8 @@
 
         contextItem = document;
 
-        message.frameDesignation = "[0, 0]";    // ToDo
         if (message.frameDesignation) {
+            sendMsg.frameDesignation = message.frameDesignation;
             try {
                 currentFrames = getFrames(message.frameDesignation);
                 setIndex("tryxpath-frame", currentFrames);    // ToDo
