@@ -64,7 +64,10 @@
         var id = sender.tab.id;
 
         for (let removeCss in message.expiredCssSet) {
-            chrome.tabs.removeCSS(id, { "code": removeCss }, () => {
+            chrome.tabs.removeCSS(id, {
+                "code": removeCss,
+                "allFrames": true
+            }, () => {
                 if (chrome.runtime.lastError === null) {
                     chrome.tabs.sendMessage(id, {
                         "event": "finishRemoveCss",
@@ -74,7 +77,11 @@
             });
         }
 
-        chrome.tabs.insertCSS(id, {"code":css, "cssOrigin":"author"}, () => {
+        chrome.tabs.insertCSS(id, {
+            "code":css,
+            "cssOrigin": "author",
+            "allFrames": true
+        }, () => {
             if (chrome.runtime.lastError === null) {
                 chrome.tabs.sendMessage(id, {
                     "event": "finishInsertCss",

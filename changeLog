@@ -1,5 +1,9 @@
 2017-10-07  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/background/try_xpath_background.js:
+	Modify this file. The add-on inserts css to all frames and removes
+	css from all frames.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Define getFrames function.
 	Define currentFrames variable.
