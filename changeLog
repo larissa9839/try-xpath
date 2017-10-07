@@ -2,6 +2,7 @@
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define getFrameAncestry function.
+	Define isNumberArray function.
 
 2017-10-06  larissa9839  <larissa9839@gmail.com>
 

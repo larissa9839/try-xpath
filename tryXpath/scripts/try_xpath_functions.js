@@ -590,4 +590,19 @@ tryXpath.functions = {};
         return frames;
     };
 
+    // If arr is empty this function returns true.
+    fu.isNumberArray = function (arr) {
+        if (!Array.isArray(arr)) {
+            return false;
+        }
+
+        for (var item of arr) {
+            if (typeof(item) !== "number") {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
 })(window);
