@@ -1,6 +1,6 @@
 {
     "name": "Try XPath",
-    "description": "This add-on shows the results of XPath expressions.",
+    "description": "This add-on displays the result of evaluating XPath expression or CSS selector.",
     "manifest_version": 2,
     "version": "1.0.0",
     "icons": {
