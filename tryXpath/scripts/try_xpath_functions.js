@@ -574,4 +574,20 @@ tryXpath.functions = {};
         }
     };
 
+    fu.getFrameAncestry = function (inds, win) {
+        win = win || window;
+
+        var frames = [];
+        var doc = win.document;
+        for (let i = 0; i < inds.length; i++) {
+            let frame = doc.getElementsByTagName("iframe")[inds[i]];
+            if (!frame) {
+                throw new Error("The specified frame does not exist.");
+            }
+            frames.push(frame);
+            doc = frame.contentDocument;
+        };
+        return frames;
+    };
+
 })(window);

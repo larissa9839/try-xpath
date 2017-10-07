@@ -1,3 +1,8 @@
+2017-10-07  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_functions.js:
+	Define getFrameAncestry function.
+
 2017-10-06  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
