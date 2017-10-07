@@ -167,10 +167,10 @@
 
         contextItem = document;
 
-        message.frameSpecification = "[0, 0]";    // ToDo
-        if (message.frameSpecification) {
+        message.frameDesignation = "[0, 0]";    // ToDo
+        if (message.frameDesignation) {
             try {
-                currentFrames = getFrames(message.frameSpecification);
+                currentFrames = getFrames(message.frameDesignation);
                 setIndex("tryxpath-frame", currentFrames);    // ToDo
                 contextItem = currentFrames[0].contentDocument;
             } catch (e) {

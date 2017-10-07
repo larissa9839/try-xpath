@@ -3,6 +3,7 @@
 	* tryXpath/background/try_xpath_background.js:
 	Modify this file. The add-on inserts css to all frames and removes
 	css from all frames.
+	Rename frameSpecification to frameDesignation.
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Define getFrames function.
