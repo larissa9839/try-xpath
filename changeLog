@@ -1,5 +1,13 @@
 2017-10-08  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Define changeFrameVisible function.
+	Define frameHeader, frameCheckbox, frameBody and frameExpression
+	variable.
+
+	* tryXpath/popup/popup.html:
+	Add frame input field.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Modify genericListener.listeners.execute function.
 

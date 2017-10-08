@@ -76,6 +76,16 @@
   </div>
 </div>
 <div>
+  <h1 id="frame-header"><input type="checkbox" id="frame-switch"><label for="frame-switch">Frame</label></h1>
+  <div id="frame-body">
+    <div>You can specify the frame where the expression is executed. If you want to specify window.frames[1].frames[0] enter [1, 0] in the frame input field.</div>
+    <dl>
+      <dt><label for="frame-expression">Frame</label></dt>
+      <dd><input type="text" id="frame-expression"></dd>
+    </dl>
+  </div>
+</div>
+<div>
   <h1>Results</h1>
   <div>Message: <span id="results-message"></span></div>
   <div>Count: <span id="results-count"></span></div>

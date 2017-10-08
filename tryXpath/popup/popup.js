@@ -15,7 +15,8 @@
 
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
-        resolverCheckbox, resolverExpression, resultsMessage, resultsTbody,
+        resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
+        frameBody, frameExpression, resultsMessage, resultsTbody,
         resultsCount;
 
     var relatedTabId, executionId;
@@ -51,6 +52,14 @@
             resolverBody.classList.remove(noneClass);
         } else {
             resolverBody.classList.add(noneClass);
+        }
+    };
+
+    function changeFrameVisible () {
+        if (frameCheckbox.checked) {
+            frameBody.classList.remove(noneClass);
+        } else {
+            frameBody.classList.add(noneClass);
         }
     };
 
@@ -122,6 +131,7 @@
 
         changeContextVisible();
         changeResolverVisible();
+        changeFrameVisible();
     };
 
     window.addEventListener("load", () => {
@@ -136,6 +146,10 @@
         resolverCheckbox = document.getElementById("resolver-switch");
         resolverBody = document.getElementById("resolver-body");
         resolverExpression = document.getElementById("resolver-expression");
+        frameHeader = document.getElementById("frame-header");
+        frameCheckbox = document.getElementById("frame-switch");
+        frameBody = document.getElementById("frame-body");
+        frameExpression = document.getElementById("frame-expression");
         resultsMessage = document.getElementById("results-message");
         resultsCount = document.getElementById("results-count");
         resultsTbody = document.getElementById("results-detals")
@@ -162,6 +176,14 @@
         resolverHeader.addEventListener("click", changeResolverVisible);
         resolverHeader.addEventListener("keypress", changeResolverVisible);
         resolverExpression.addEventListener("keypress", event => {
+            if (event.key === "Enter") {
+                sendToActiveTab(makeExecuteMessage());
+            }
+        });
+
+        frameHeader.addEventListener("click", changeFrameVisible);
+        frameHeader.addEventListener("keypress", changeFrameVisible);
+        frameExpression.addEventListener("keypress", event => {
             if (event.key === "Enter") {
                 sendToActiveTab(makeExecuteMessage());
             }
