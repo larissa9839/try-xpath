@@ -196,6 +196,7 @@
             let contRes;
             try {
                 contRes = fu.execExpr(cont.expression, cont.method, {
+                    "context": contextItem,
                     "resultType": contType,
                     "resolver": cont.resolver
                 });
