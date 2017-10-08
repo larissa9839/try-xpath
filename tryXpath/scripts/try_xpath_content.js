@@ -169,7 +169,7 @@
 
         contextItem = document;
 
-        if (message.frameDesignation) {
+        if ("frameDesignation" in message) {
             sendMsg.frameDesignation = message.frameDesignation;
             try {
                 currentFrames = getFrames(message.frameDesignation);

@@ -1,5 +1,8 @@
 2017-10-08  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Change the way to check the frameDesignation key.
+
 	* tryXpath/pages/options.js:
 	Add data-tryxpath-frame attribute to defaultAttributes.
 	Define frameAttr variable.
