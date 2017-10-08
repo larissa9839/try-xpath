@@ -6,6 +6,7 @@
 	variable.
 	Modify collectPopupState function.
 	Modify genericListener.listeners.restorePopupState function.
+	Modify makeExecuteMessage function.
 
 	* tryXpath/popup/popup.html:
 	Add frame input field.

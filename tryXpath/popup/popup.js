@@ -92,7 +92,9 @@
             msg.context.resolver = resol;
         }
 
-        msg.frameDesignation = "[0, 0]";    // ToDo
+        if (frameCheckbox.checked) {
+            msg.frameDesignation = frameExpression.value;
+        }
 
         return msg;
     };
