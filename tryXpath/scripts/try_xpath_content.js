@@ -102,10 +102,12 @@
 
     function getFrames(spec) {
         var inds = JSON.parse(spec);
-        if (!fu.isNumberArray(inds)) {
+        
+        if (fu.isNumberArray(inds) && (inds.length > 0)) {
+            return fu.getFrameAncestry(inds).reverse();
+        } else {
             throw new Error("Invalid specification. [" + spec + "]");
         }
-        return fu.getFrameAncestry(inds).reverse();
     };
 
     function handleCssChange(newCss) {
