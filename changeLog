@@ -1,5 +1,13 @@
 2017-10-08  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/options.js:
+	Add data-tryxpath-frame attribute to defaultAttributes.
+	Define frameAttr variable.
+	Modify this file. This file handle the attribute related frames.
+
+	* tryXpath/pages/options.html:
+	Add frame-attribute input field.
+
 	* tryXpath/background/try_xpath_background.js:
 	Modify attributes variable.
 

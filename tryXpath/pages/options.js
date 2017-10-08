@@ -11,10 +11,11 @@
         "element": "data-tryxpath-element",
         "context": "data-tryxpath-context",
         "focused": "data-tryxpath-focused",
-        "focusedAncestor": "data-tryxpath-focused-ancestor"
+        "focusedAncestor": "data-tryxpath-focused-ancestor",
+        "frame": "data-tryxpath-frame"
     };
 
-    var elementAttr, contextAttr, focusedAttr, ancestorAttr, style,
+    var elementAttr, contextAttr, focusedAttr, ancestorAttr, frameAttr, style,
         message, testElement;
 
     function isValidAttrName(name) {
@@ -52,6 +53,7 @@
         contextAttr = document.getElementById("context-attribute");
         focusedAttr = document.getElementById("focused-attribute");
         ancestorAttr = document.getElementById("ancestor-attribute");
+        frameAttr = document.getElementById("frame-attribute");
         style = document.getElementById("style");
         message = document.getElementById("message");
 
@@ -60,6 +62,8 @@
             contextAttr.value = res.attributes.context;
             focusedAttr.value = res.attributes.focused;
             ancestorAttr.value = res.attributes.focusedAncestor;
+            frameAttr.value = res.attributes.frame;
+            
             style.value = res.css;
         });
 
@@ -70,6 +74,7 @@
             attrs.context = contextAttr.value;
             attrs.focused = focusedAttr.value;
             attrs.focusedAncestor = ancestorAttr.value;
+            attrs.frame = frameAttr.value;
 
             if (!isValidAttrNames(attrs)) {
                 message.textContent = "There is a invalid attribute.";
@@ -97,6 +102,7 @@
                 contextAttr.value = defaultAttributes.context;
                 focusedAttr.value = defaultAttributes.focused;
                 ancestorAttr.value = defaultAttributes.focusedAncestor;
+                frameAttr.value = defaultAttributes.frame;
                 
                 loadDefaultCss(css => {
                     style.value = css;
