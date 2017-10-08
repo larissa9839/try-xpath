@@ -36,6 +36,8 @@
         state.contextExpressionValue = contextExpression.value;
         state.resolverCheckboxChecked = resolverCheckbox.checked;
         state.resolverExpressionValue = resolverExpression.value;
+        state.frameCheckboxChecked = frameCheckbox.checked;
+        state.frameExpressionValue = frameExpression.value;
         return state;
     };
 
@@ -127,6 +129,8 @@
             contextExpression.value = state.contextExpressionValue;
             resolverCheckbox.checked = state.resolverCheckboxChecked;
             resolverExpression.value = state.resolverExpressionValue;
+            frameCheckbox.checked = state.frameCheckboxChecked;
+            frameExpression.value = state.frameExpressionValue;
         }
 
         changeContextVisible();

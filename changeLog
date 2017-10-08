@@ -4,6 +4,8 @@
 	Define changeFrameVisible function.
 	Define frameHeader, frameCheckbox, frameBody and frameExpression
 	variable.
+	Modify collectPopupState function.
+	Modify genericListener.listeners.restorePopupState function.
 
 	* tryXpath/popup/popup.html:
 	Add frame input field.
