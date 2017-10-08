@@ -12,7 +12,8 @@
         "element": "data-tryxpath-element",
         "context": "data-tryxpath-context",
         "focused": "data-tryxpath-focused",
-        "focusedAncestor": "data-tryxpath-focused-ancestor"
+        "focusedAncestor": "data-tryxpath-focused-ancestor",
+        "frame": "data-tryxpath-frame"
     };
 
     function loadDefaultCss(callback) {

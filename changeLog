@@ -1,5 +1,11 @@
 2017-10-08  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/background/try_xpath_background.js:
+	Modify attributes variable.
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Modify attributes variable.
+
 	* tryXpath/popup/popup.js:
 	Define changeFrameVisible function.
 	Define frameHeader, frameCheckbox, frameBody and frameExpression

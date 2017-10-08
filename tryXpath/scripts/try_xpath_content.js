@@ -16,7 +16,8 @@
         "element": "data-tryxpath-element",
         "context": "data-tryxpath-context",
         "focused": "data-tryxpath-focused",
-        "focusedAncestor": "data-tryxpath-focused-ancestor"
+        "focusedAncestor": "data-tryxpath-focused-ancestor",
+        "frame": "data-tryxpath-frame"
     };
 
     var prevMsg = null;
@@ -172,7 +173,7 @@
             sendMsg.frameDesignation = message.frameDesignation;
             try {
                 currentFrames = getFrames(message.frameDesignation);
-                setIndex("tryxpath-frame", currentFrames);    // ToDo
+                setIndex(attributes.frame, currentFrames);
                 contextItem = currentFrames[0].contentDocument;
             } catch (e) {
                 sendMsg.message = "An error occurred when getting a frame. "
@@ -284,7 +285,7 @@
 
         updateCss();
 
-        setIndex("tryxpath-frame", currentFrames);    // ToDo
+        setIndex(attributes.frame, currentFrames);
         setAttr(attributes.context, "true", contextItem);
         setIndex(attributes.element, currentItems);
     };
