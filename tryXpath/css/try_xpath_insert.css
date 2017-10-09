@@ -1,4 +1,8 @@
 
+[data-tryxpath-frame] {
+    outline: dashed thick rgb(255,0,255) !important;
+}
+
 [data-tryxpath-context] {
     outline: dashed thick rgb(0,255,0) !important;
 }

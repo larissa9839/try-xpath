@@ -578,14 +578,18 @@ tryXpath.functions = {};
         win = win || window;
 
         var frames = [];
-        var doc = win.document;
         for (let i = 0; i < inds.length; i++) {
-            let frame = doc.getElementsByTagName("iframe")[inds[i]];
-            if (!frame) {
+            win = win.frames[inds[i]];
+            if (!win) {
                 throw new Error("The specified frame does not exist.");
             }
+            let frame;
+            try {
+                frame = win.frameElement;
+            } catch (e) {
+                throw new Error("Access denied.");
+            }
             frames.push(frame);
-            doc = frame.contentDocument;
         };
         return frames;
     };
