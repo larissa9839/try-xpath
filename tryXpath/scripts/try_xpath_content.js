@@ -69,7 +69,9 @@
 
     function setMainAttrs() {
         setIndex(attributes.frame, currentFrames);
-        setAttr(attributes.context, "true", contextItem);
+        if (contextItem !== null) {
+            setAttr(attributes.context, "true", contextItem);
+        }
         setIndex(attributes.element, currentItems);
     };
 
@@ -182,7 +184,6 @@
             sendMsg.frameDesignation = message.frameDesignation;
             try {
                 currentFrames = getFrames(message.frameDesignation);
-                setIndex(attributes.frame, currentFrames);
                 contextItem = currentFrames[0].contentDocument;
             } catch (e) {
                 sendMsg.message = "An error occurred when getting a frame. "
@@ -226,8 +227,6 @@
             }
             contextItem = contRes.items[0];
 
-            setAttr(attributes.context, "true", contextItem);
-
             sendMsg.context.resultType = makeTypeStr(contRes.resultType);
             sendMsg.context.itemDetail = fu.getItemDetail(contextItem);
         }
@@ -246,16 +245,15 @@
             prevMsg = sendMsg;
             return;
         }
-
         currentItems = mainRes.items;
-
-        setIndex(attributes.element, currentItems);
 
         sendMsg.message = "Success.";
         sendMsg.main.resultType = makeTypeStr(mainRes.resultType);
         sendMsg.main.itemDetails = fu.getItemDetails(currentItems);
         chrome.runtime.sendMessage(sendMsg);
         prevMsg = sendMsg;
+
+        setMainAttrs();
         return;
     }
 
