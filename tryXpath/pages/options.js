@@ -12,11 +12,12 @@
         "context": "data-tryxpath-context",
         "focused": "data-tryxpath-focused",
         "focusedAncestor": "data-tryxpath-focused-ancestor",
-        "frame": "data-tryxpath-frame"
+        "frame": "data-tryxpath-frame",
+        "frameAncestor": "data-tryxpath-frame-ancestor"
     };
 
-    var elementAttr, contextAttr, focusedAttr, ancestorAttr, frameAttr, style,
-        message, testElement;
+    var elementAttr, contextAttr, focusedAttr, ancestorAttr, frameAttr,
+        frameAncestorAttr, style, message, testElement;
 
     function isValidAttrName(name) {
         try {
@@ -54,6 +55,8 @@
         focusedAttr = document.getElementById("focused-attribute");
         ancestorAttr = document.getElementById("ancestor-attribute");
         frameAttr = document.getElementById("frame-attribute");
+        frameAncestorAttr = document.getElementById(
+            "frame-ancestor-attribute");
         style = document.getElementById("style");
         message = document.getElementById("message");
 
@@ -63,6 +66,7 @@
             focusedAttr.value = res.attributes.focused;
             ancestorAttr.value = res.attributes.focusedAncestor;
             frameAttr.value = res.attributes.frame;
+            frameAncestorAttr.value = res.attributes.frameAncestor;
             
             style.value = res.css;
         });
@@ -75,6 +79,7 @@
             attrs.focused = focusedAttr.value;
             attrs.focusedAncestor = ancestorAttr.value;
             attrs.frame = frameAttr.value;
+            attrs.frameAncestor = frameAncestorAttr.value;
 
             if (!isValidAttrNames(attrs)) {
                 message.textContent = "There is a invalid attribute.";
@@ -103,6 +108,7 @@
                 focusedAttr.value = defaultAttributes.focused;
                 ancestorAttr.value = defaultAttributes.focusedAncestor;
                 frameAttr.value = defaultAttributes.frame;
+                frameAncestorAttr.value = defaultAttributes.frameAncestor;
                 
                 loadDefaultCss(css => {
                     style.value = css;
