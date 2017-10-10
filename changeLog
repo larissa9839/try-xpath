@@ -2,6 +2,7 @@
 
 	* tryXpath/scripts/try_xpath_content.js: 
 	Add frameAncestor property to attributes.
+	Define setMainAttrs function.
 
 	* tryXpath/background/try_xpath_background.js: 
 	Add frameAncestor property to attributes.

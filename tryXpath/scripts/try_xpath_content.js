@@ -67,7 +67,13 @@
         focusedItem.scrollIntoView();
     };
 
-    function restoreAttrs () {
+    function setMainAttrs() {
+        setIndex(attributes.frame, currentFrames);
+        setAttr(attributes.context, "true", contextItem);
+        setIndex(attributes.element, currentItems);
+    };
+
+    function restoreAttrs() {
         fu.restoreItemAttrs(originalAttributes);
         originalAttributes = new Map();
     };
@@ -285,12 +291,8 @@
 
     genericListener.listeners.setStyle = function () {
         restoreAttrs();
-
         updateCss();
-
-        setIndex(attributes.frame, currentFrames);
-        setAttr(attributes.context, "true", contextItem);
-        setIndex(attributes.element, currentItems);
+        setMainAttrs();
     };
 
     genericListener.listeners.finishInsertCss = function (message) {
