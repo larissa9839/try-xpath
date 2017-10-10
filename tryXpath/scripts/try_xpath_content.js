@@ -17,7 +17,8 @@
         "context": "data-tryxpath-context",
         "focused": "data-tryxpath-focused",
         "focusedAncestor": "data-tryxpath-focused-ancestor",
-        "frame": "data-tryxpath-frame"
+        "frame": "data-tryxpath-frame",
+        "frameAncestor": "data-tryxpath-frame-ancestor"        
     };
 
     var prevMsg = null;
