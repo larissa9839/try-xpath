@@ -69,6 +69,9 @@
 
     function setMainAttrs() {
         setIndex(attributes.frame, currentFrames);
+        for (let frame of currentFrames) {
+            setIndex(attributes.frameAncestor, fu.getAncestorElements(frame));
+        }
         if (contextItem !== null) {
             setAttr(attributes.context, "true", contextItem);
         }
