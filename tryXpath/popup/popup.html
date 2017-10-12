@@ -38,7 +38,7 @@
 <div>
   <h1 id="context-header"><input type="checkbox" id="context-switch"><label for="context-switch">Context</label></h1>
   <div id="context-body">
-    <div>The first node of the results is used as the CONTEXT. (document.evaluate(expr, CONTEXT, ...), CONTEXT.querySelector(...), CONTEXT.querySelectorAll(...))</div>
+    <div>You can specify a context. The first node of the results is used as the CONTEXT. (document.evaluate(expr, CONTEXT, ...), CONTEXT.querySelector(...), CONTEXT.querySelectorAll(...))</div>
     <dl>
       <dt><label for="context-way">Way</label></dt>
       <dd>
@@ -78,7 +78,7 @@
 <div>
   <h1 id="frame-header"><input type="checkbox" id="frame-switch"><label for="frame-switch">Frame</label></h1>
   <div id="frame-body">
-    <div>You can specify the frame where the expression is executed. If you want to specify window.frames[1].frames[0] enter [1, 0] in the frame input field.</div>
+    <div>You can specify the frame where the expression is executed. If you want to specify window.frames[1].frames[0] enter [1, 0] in the frame input field. However, this feature is limited by the same origin policy.</div>
     <dl>
       <dt><label for="frame-expression">Frame</label></dt>
       <dd><input type="text" id="frame-expression"></dd>
