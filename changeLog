@@ -1,3 +1,9 @@
+2017-10-12  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/css/try_xpath_insert.css:
+	Modify some css.
+	Add the css which related [data-tryxpath-frame-ancestor] selector.
+
 2017-10-11  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
