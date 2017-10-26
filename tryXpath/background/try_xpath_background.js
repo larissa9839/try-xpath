@@ -99,10 +99,10 @@
         return true;
     };
 
-    genericListener.listeners.requestSetContextInfo = function (message,
+    genericListener.listeners.requestSetContentInfo = function (message,
                                                                 sender) {
         chrome.tabs.sendMessage(sender.tab.id, {
-            "event": "setContextInfo",
+            "event": "setContentInfo",
             "attributes": attributes
         });
     };

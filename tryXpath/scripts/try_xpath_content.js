@@ -149,7 +149,7 @@
     genericListener.listeners = Object.create(null);
     chrome.runtime.onMessage.addListener(genericListener);
 
-    genericListener.listeners.setContextInfo = function (message) {
+    genericListener.listeners.setContentInfo = function (message) {
         if (!message) {
             return;
         }
@@ -321,6 +321,6 @@
     });
 
 
-    chrome.runtime.sendMessage({ "event": "requestSetContextInfo" });
+    chrome.runtime.sendMessage({ "event": "requestSetContentInfo" });
 
 })(window);

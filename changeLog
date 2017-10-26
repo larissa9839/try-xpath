@@ -1,3 +1,13 @@
+2017-10-26  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js: 
+	Rename setContextInfo -> setContentInfo.
+	Rename requestSetContextInfo -> requestSetContentInfo.
+
+	* tryXpath/background/try_xpath_background.js:
+	Rename requestSetContextInfo -> requestSetContentInfo.
+	Rename setContextInfo -> setContentInfo.
+
 2017-10-14  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/manifest.json:
