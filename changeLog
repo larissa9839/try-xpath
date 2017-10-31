@@ -2,6 +2,8 @@
 
 	* tryXpath/popup/popup.js: 
 	Fix the id value. results-detals -> results-details
+	Define pageSize constans.
+	Define pageIndex variable.
 
 	* tryXpath/popup/popup.html (Results):
 	Fix the id value. results-detals -> results-details

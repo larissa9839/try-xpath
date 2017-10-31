@@ -473,14 +473,16 @@ tryXpath.functions = {};
         opts = opts || {};
         var doc = opts.document || document;
         var chunkSize = opts.chunkSize || 1000;
-        var callback = opts.callback ? opts.callback : null;
+        var callback = opts.callback || null;
+        var index = opts.begin || 0;
+        var end = opts.end || details.length;
 
-        var index = 0;
+        end = Math.min(end, details.length);
 
         function processChunk() {
             var frag = doc.createDocumentFragment();
             for (var i = 0
-                 ; (i < chunkSize) && (index < details.length)
+                 ; (i < chunkSize) && (index < end)
                  ; i++, index++) {
                 var detail = details[index];
                 var tr = doc.createElement("tr");
@@ -511,7 +513,7 @@ tryXpath.functions = {};
                 frag.appendChild(tr);
             }
             parent.appendChild(frag);
-            if (index < details.length) {
+            if (index < end) {
                 window.setTimeout(processChunk, 0);
             } else {
                 if (callback) { callback(); }

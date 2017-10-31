@@ -13,6 +13,9 @@
 
     const noneClass = "none";
 
+    const pageSize = 50;
+    var pageIndex = 0;
+
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
@@ -134,8 +137,10 @@
 
         fu.emptyChildNodes(resultsTbody);
         resultsTbody.appendChild(fu.createDetailTableHeader());
-        fu.appendDetailRows(resultsTbody,
-                            message.main.itemDetails.slice(0, 10));
+        fu.appendDetailRows(resultsTbody, message.main.itemDetails, {
+            "begin": pageIndex * pageSize,
+            "end": (pageIndex * pageSize) + pageSize
+        });
     };
 
     genericListener.listeners.restorePopupState = function (message) {
