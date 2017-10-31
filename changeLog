@@ -1,5 +1,9 @@
 2017-10-31  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Define sendExecute function.
+	Define handleExprEnter.
+
 	* tryXpath/popup/popup.css (textarea):
 	Add "textarea" style.
 
