@@ -1,3 +1,12 @@
+2017-10-31  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.css (textarea):
+	Add "textarea" style.
+
+	* tryXpath/popup/popup.html:
+	Chenge some input elements to textarea.
+
+
 2017-10-26  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js: 
