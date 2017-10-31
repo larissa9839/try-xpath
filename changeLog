@@ -1,5 +1,11 @@
 2017-10-31  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js: 
+	Fix the id value. results-detals -> results-details
+
+	* tryXpath/popup/popup.html (Results):
+	Fix the id value. results-detals -> results-details
+
 	* tryXpath/popup/popup.js:
 	Define contextTbody variable.
 

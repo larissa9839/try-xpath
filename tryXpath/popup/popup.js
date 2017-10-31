@@ -176,7 +176,7 @@
         frameExpression = document.getElementById("frame-expression");
         resultsMessage = document.getElementById("results-message");
         resultsCount = document.getElementById("results-count");
-        resultsTbody = document.getElementById("results-detals")
+        resultsTbody = document.getElementById("results-details")
             .getElementsByTagName("tbody")[0];
         contextTbody = document.getElementById("context-detail")
             .getElementsByTagName("tbody")[0];
