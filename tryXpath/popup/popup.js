@@ -17,7 +17,7 @@
         contextWay, contextExpression, resolverHeader, resolverBody,
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
         frameBody, frameExpression, resultsMessage, resultsTbody,
-        resultsCount;
+        contextTbody, resultsCount;
 
     var relatedTabId, executionId;
 
@@ -125,6 +125,13 @@
 
         resultsMessage.textContent = message.message;
         resultsCount.textContent = message.main.itemDetails.length;
+
+        fu.emptyChildNodes(contextTbody);
+        contextTbody.appendChild(fu.createDetailTableHeader());
+        if (message.context) {
+            fu.appendDetailRows(contextTbody, [message.context.itemDetail]);
+        }
+
         fu.emptyChildNodes(resultsTbody);
         resultsTbody.appendChild(fu.createDetailTableHeader());
         fu.appendDetailRows(resultsTbody,
@@ -171,6 +178,8 @@
         resultsCount = document.getElementById("results-count");
         resultsTbody = document.getElementById("results-detals")
             .getElementsByTagName("tbody")[0];
+        contextTbody = document.getElementById("context-detail")
+            .getElementsByTagName("tbody")[0];
 
         document.getElementById("execute").addEventListener("click",
                                                             sendExecute);
@@ -207,6 +216,15 @@
             sendToActiveTab({ "event": "resetStyle" });
         });
 
+        contextTbody.addEventListener("click", event => {
+            if (event.target.tagName.toLowerCase() === "button") {
+                chrome.tabs.sendMessage(relatedTabId, {
+                    "event": "focusContextItem",
+                    "executionId": executionId,
+                });
+            }
+        });
+
         resultsTbody.addEventListener("click", event => {
             var target = event.target;
             if (target.tagName.toLowerCase() === "button") {
@@ -228,6 +246,7 @@
         });
 
         resultsTbody.appendChild(fu.createDetailTableHeader());
+        contextTbody.appendChild(fu.createDetailTableHeader());
 
         sendToActiveTab({ "event": "requestShowResultsInPopup" });
         chrome.runtime.sendMessage({ "event": "requestRestorePopupState" });
