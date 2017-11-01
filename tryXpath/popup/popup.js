@@ -25,8 +25,8 @@
     var detailsPageIndex = 0;
 
     function sendToActiveTab(msg) {
-        chrome.tabs.query({ "active": true, "currentWindow": true }, tabs => {
-            chrome.tabs.sendMessage(tabs[0].id, msg);
+        browser.tabs.query({ "active": true, "currentWindow": true }, tabs => {
+            browser.tabs.sendMessage(tabs[0].id, msg);
         });
     };
 
@@ -143,7 +143,7 @@
         }
     };
     genericListener.listeners = Object.create(null);;
-    chrome.runtime.onMessage.addListener(genericListener);
+    browser.runtime.onMessage.addListener(genericListener);
 
     genericListener.listeners.showResultsInPopup = function (message, sender){
         relatedTabId = sender.tab.id;
@@ -230,7 +230,7 @@
 
         document.getElementById("open-options").addEventListener(
             "click", () => {
-                chrome.runtime.openOptionsPage();
+                browser.runtime.openOptionsPage();
             });
 
         document.getElementById("set-style").addEventListener("click", () => {
@@ -243,7 +243,7 @@
 
         contextTbody.addEventListener("click", event => {
             if (event.target.tagName.toLowerCase() === "button") {
-                chrome.tabs.sendMessage(relatedTabId, {
+                browser.tabs.sendMessage(relatedTabId, {
                     "event": "focusContextItem",
                     "executionId": executionId,
                 });
@@ -268,7 +268,7 @@
             var target = event.target;
             if (target.tagName.toLowerCase() === "button") {
                 let ind = parseInt(target.getAttribute("data-index"), 10);
-                chrome.tabs.sendMessage(relatedTabId, {
+                browser.tabs.sendMessage(relatedTabId, {
                     "event": "focusItem",
                     "executionId": executionId,
                     "index": ind
@@ -278,7 +278,7 @@
 
         window.addEventListener("unload", () => {
             var state = collectPopupState();
-            chrome.runtime.sendMessage({
+            browser.runtime.sendMessage({
                 "event": "storePopupState",
                 "state": state
             });
@@ -288,7 +288,7 @@
         contextTbody.appendChild(fu.createDetailTableHeader());
 
         sendToActiveTab({ "event": "requestShowResultsInPopup" });
-        chrome.runtime.sendMessage({ "event": "requestRestorePopupState" });
+        browser.runtime.sendMessage({ "event": "requestRestorePopupState" });
     });
 
 

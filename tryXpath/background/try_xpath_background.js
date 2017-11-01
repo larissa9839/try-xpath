@@ -19,7 +19,7 @@
 
     function loadDefaultCss(callback) {
         var req = new XMLHttpRequest();
-        req.open("GET", chrome.runtime.getURL("/css/try_xpath_insert.css"));
+        req.open("GET", browser.runtime.getURL("/css/try_xpath_insert.css"));
         req.responseType = "text";
         req.onreadystatechange = function () {
             if (req.readyState === XMLHttpRequest.DONE) {
@@ -36,14 +36,14 @@
         }
     };
     genericListener.listeners = Object.create(null);
-    chrome.runtime.onMessage.addListener(genericListener);
+    browser.runtime.onMessage.addListener(genericListener);
 
     genericListener.listeners.storePopupState = function (message) {
         popupState = message.state;
     }
 
     genericListener.listeners.requestRestorePopupState = function (message) {
-        chrome.runtime.sendMessage({
+        browser.runtime.sendMessage({
             "event": "restorePopupState",
             "state": popupState
         });
@@ -53,7 +53,7 @@
         delete message.event;
         results = message;
         results.tabId = sender.tab.id;
-        chrome.tabs.create({ "url": "/pages/show_all_results.html" });
+        browser.tabs.create({ "url": "/pages/show_all_results.html" });
     };
 
     genericListener.listeners.loadResults = function (message, sender,
@@ -66,12 +66,12 @@
         var id = sender.tab.id;
 
         for (let removeCss in message.expiredCssSet) {
-            chrome.tabs.removeCSS(id, {
+            browser.tabs.removeCSS(id, {
                 "code": removeCss,
                 "allFrames": true
             }, () => {
-                if (chrome.runtime.lastError === null) {
-                    chrome.tabs.sendMessage(id, {
+                if (browser.runtime.lastError === null) {
+                    browser.tabs.sendMessage(id, {
                         "event": "finishRemoveCss",
                         "css": removeCss
                     });
@@ -79,13 +79,13 @@
             });
         }
 
-        chrome.tabs.insertCSS(id, {
+        browser.tabs.insertCSS(id, {
             "code":css,
             "cssOrigin": "author",
             "allFrames": true
         }, () => {
-            if (chrome.runtime.lastError === null) {
-                chrome.tabs.sendMessage(id, {
+            if (browser.runtime.lastError === null) {
+                browser.tabs.sendMessage(id, {
                     "event": "finishInsertCss",
                     "css": css
                 });
@@ -101,14 +101,14 @@
 
     genericListener.listeners.requestSetContentInfo = function (message,
                                                                 sender) {
-        chrome.tabs.sendMessage(sender.tab.id, {
+        browser.tabs.sendMessage(sender.tab.id, {
             "event": "setContentInfo",
             "attributes": attributes
         });
     };
 
 
-    chrome.storage.onChanged.addListener(changes => {
+    browser.storage.onChanged.addListener(changes => {
         if (changes.attributes && ("newValue" in changes.attributes)) {
             attributes = changes.attributes.newValue;
         }
@@ -118,7 +118,7 @@
     });
 
 
-    chrome.storage.sync.get({
+    browser.storage.sync.get({
         "attributes": attributes,
         "css": null
     }, items => {

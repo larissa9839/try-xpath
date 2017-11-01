@@ -61,7 +61,7 @@
     };
 
     window.addEventListener("load", function() {
-        chrome.runtime.sendMessage({ "event": "loadResults" },
+        browser.runtime.sendMessage({ "event": "loadResults" },
                                    function (results) {
             if (results) {
                 relatedTabId = results.tabId;
@@ -74,7 +74,7 @@
         contDetail.addEventListener("click", function(event) {
             var target = event.target;
             if (target.tagName.toLowerCase() === "button") {
-                chrome.tabs.sendMessage(relatedTabId, {
+                browser.tabs.sendMessage(relatedTabId, {
                     "event": "focusContextItem",
                     "executionId": executionId
                 });
@@ -86,7 +86,7 @@
             var target = event.target;
             if (target.tagName.toLowerCase() === "button") {
                 let ind = parseInt(target.getAttribute("data-index"), 10);
-                chrome.tabs.sendMessage(relatedTabId, {
+                browser.tabs.sendMessage(relatedTabId, {
                     "event": "focusItem",
                     "executionId": executionId,
                     "index": ind

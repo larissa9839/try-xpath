@@ -105,7 +105,7 @@
 
     function updateCss() {
         if ((currentCss === null) || (Object.keys(expiredCssSet).length > 0)){
-            chrome.runtime.sendMessage({
+            browser.runtime.sendMessage({
                 "event": "updateCss",
                 "expiredCssSet": expiredCssSet
             });
@@ -147,7 +147,7 @@
         }
     };
     genericListener.listeners = Object.create(null);
-    chrome.runtime.onMessage.addListener(genericListener);
+    browser.runtime.onMessage.addListener(genericListener);
 
     genericListener.listeners.setContentInfo = function (message) {
         if (!message) {
@@ -191,7 +191,7 @@
             } catch (e) {
                 sendMsg.message = "An error occurred when getting a frame. "
                     + e.message;
-                chrome.runtime.sendMessage(sendMsg);
+                browser.runtime.sendMessage(sendMsg);
                 prevMsg = sendMsg;
                 return;
             }
@@ -217,14 +217,14 @@
             } catch (e) {
                 sendMsg.message = "An error occurred when getting a context. "
                     + e.message;
-                chrome.runtime.sendMessage(sendMsg);
+                browser.runtime.sendMessage(sendMsg);
                 prevMsg = sendMsg;
                 return;
             }
 
             if (contRes.items.length === 0) {
                 sendMsg.message = "A context is not found.";
-                chrome.runtime.sendMessage(sendMsg);
+                browser.runtime.sendMessage(sendMsg);
                 prevMsg = sendMsg;
                 return;
             }
@@ -244,7 +244,7 @@
         } catch (e) {
             sendMsg.message = "An error occurred when getting nodes. "
                 + e.message;
-            chrome.runtime.sendMessage(sendMsg);
+            browser.runtime.sendMessage(sendMsg);
             prevMsg = sendMsg;
             return;
         }
@@ -253,7 +253,7 @@
         sendMsg.message = "Success.";
         sendMsg.main.resultType = makeTypeStr(mainRes.resultType);
         sendMsg.main.itemDetails = fu.getItemDetails(currentItems);
-        chrome.runtime.sendMessage(sendMsg);
+        browser.runtime.sendMessage(sendMsg);
         prevMsg = sendMsg;
 
         setMainAttrs();
@@ -275,14 +275,14 @@
     genericListener.listeners.requestShowResultsInPopup = function () {
         if (prevMsg) {
             prevMsg.event = "showResultsInPopup";
-            chrome.runtime.sendMessage(prevMsg);
+            browser.runtime.sendMessage(prevMsg);
         }
     };
 
     genericListener.listeners.requestShowAllResults = function () {
         if (prevMsg) {
             prevMsg.event = "showAllResults";
-            chrome.runtime.sendMessage(prevMsg);
+            browser.runtime.sendMessage(prevMsg);
         }
     }
 
@@ -311,7 +311,7 @@
     };
 
 
-    chrome.storage.onChanged.addListener(changes => {
+    browser.storage.onChanged.addListener(changes => {
         if (changes.attributes && ("newValue" in changes.attributes)) {
             attributes = changes.attributes.newValue;
         }
@@ -321,6 +321,6 @@
     });
 
 
-    chrome.runtime.sendMessage({ "event": "requestSetContentInfo" });
+    browser.runtime.sendMessage({ "event": "requestSetContentInfo" });
 
 })(window);

@@ -39,7 +39,7 @@
 
     function loadDefaultCss(callback) {
         var req = new XMLHttpRequest();
-        req.open("GET", chrome.runtime.getURL("/css/try_xpath_insert.css"));
+        req.open("GET", browser.runtime.getURL("/css/try_xpath_insert.css"));
         req.responseType = "text";
         req.onreadystatechange = function () {
             if (req.readyState === XMLHttpRequest.DONE) {
@@ -60,7 +60,7 @@
         style = document.getElementById("style");
         message = document.getElementById("message");
 
-        chrome.runtime.sendMessage({ "event": "loadOptions" }, res => {
+        browser.runtime.sendMessage({ "event": "loadOptions" }, res => {
             elementAttr.value = res.attributes.element;
             contextAttr.value = res.attributes.context;
             focusedAttr.value = res.attributes.focused;
@@ -86,11 +86,11 @@
                 return;
             }
 
-            chrome.storage.sync.set({
+            browser.storage.sync.set({
                 "attributes": attrs,
                 "css": styleValue
             }, () => {
-                var err = chrome.runtime.lastError;
+                var err = browser.runtime.lastError;
                 if (err) {
                     message.textContent = "Failure. " + err.message;
                 } else {
