@@ -25,9 +25,12 @@
     var detailsPageIndex = 0;
 
     function sendToActiveTab(msg) {
-        browser.tabs.query({ "active": true, "currentWindow": true }, tabs => {
+        browser.tabs.query({
+            "active": true,
+            "currentWindow": true
+        }).then(tabs => {
             browser.tabs.sendMessage(tabs[0].id, msg);
-        });
+        }).catch(fu.onError);
     };
 
     function collectPopupState() {

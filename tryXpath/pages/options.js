@@ -60,7 +60,7 @@
         style = document.getElementById("style");
         message = document.getElementById("message");
 
-        browser.runtime.sendMessage({ "event": "loadOptions" }, res => {
+        browser.runtime.sendMessage({ "event": "loadOptions" }).then(res => {
             elementAttr.value = res.attributes.element;
             contextAttr.value = res.attributes.context;
             focusedAttr.value = res.attributes.focused;
@@ -69,7 +69,7 @@
             frameAncestorAttr.value = res.attributes.frameAncestor;
             
             style.value = res.css;
-        });
+        }).catch(fu.onError);
 
         document.getElementById("save").addEventListener("click", () => {
             var styleValue = style.value;
@@ -89,15 +89,12 @@
             browser.storage.sync.set({
                 "attributes": attrs,
                 "css": styleValue
-            }, () => {
-                var err = browser.runtime.lastError;
-                if (err) {
-                    message.textContent = "Failure. " + err.message;
-                } else {
-                    message.textContent
-                        = "Success. Please click the \"Set style\" button in "
-                        + " the popup to apply new options.";
-                }
+            }).then(() => {
+                message.textContent
+                    = "Success. Please click the \"Set style\" button in "
+                    + " the popup to apply new options.";
+            }).catch(err => {
+                message.textContent = "Failure. " + err.message;
             });
         });
 

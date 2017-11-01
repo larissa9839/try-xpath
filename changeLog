@@ -1,5 +1,8 @@
 2017-11-01  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_functions.js:
+	Define onError function.
+
 	* tryXpath/popup/popup.html (Details):
 	Remove caption elements.
 	Add h2 elements.

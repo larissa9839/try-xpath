@@ -61,14 +61,13 @@
     };
 
     window.addEventListener("load", function() {
-        browser.runtime.sendMessage({ "event": "loadResults" },
-                                   function (results) {
+        browser.runtime.sendMessage({"event":"loadResults"}).then(results => {
             if (results) {
                 relatedTabId = results.tabId;
                 executionId = results.executionId;
                 showAllResults(results);
             }
-        });
+        }).catch(fu.onError);
 
         var contDetail = document.getElementById("context-detail");
         contDetail.addEventListener("click", function(event) {

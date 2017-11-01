@@ -5,6 +5,10 @@
 (function (window, undefined) {
     "use strict";
 
+    // alias
+    var tx = tryXpath;
+    var fu = tryXpath.functions;
+
     var popupState = null;
     var results = {};
     var css = "";
@@ -69,28 +73,24 @@
             browser.tabs.removeCSS(id, {
                 "code": removeCss,
                 "allFrames": true
-            }, () => {
-                if (browser.runtime.lastError === null) {
-                    browser.tabs.sendMessage(id, {
-                        "event": "finishRemoveCss",
-                        "css": removeCss
-                    });
-                }
-            });
+            }).then(() => {
+                browser.tabs.sendMessage(id, {
+                    "event": "finishRemoveCss",
+                    "css": removeCss
+                });
+            }).catch(fu.onError);
         }
 
         browser.tabs.insertCSS(id, {
             "code":css,
             "cssOrigin": "author",
             "allFrames": true
-        }, () => {
-            if (browser.runtime.lastError === null) {
-                browser.tabs.sendMessage(id, {
-                    "event": "finishInsertCss",
-                    "css": css
-                });
-            };
-        });
+        }).then(() => {
+            browser.tabs.sendMessage(id, {
+                "event": "finishInsertCss",
+                "css": css
+            });
+        }).catch(fu.onError);
     };
 
     genericListener.listeners.loadOptions = function (message, sender,
@@ -107,7 +107,6 @@
         });
     };
 
-
     browser.storage.onChanged.addListener(changes => {
         if (changes.attributes && ("newValue" in changes.attributes)) {
             attributes = changes.attributes.newValue;
@@ -121,7 +120,7 @@
     browser.storage.sync.get({
         "attributes": attributes,
         "css": null
-    }, items => {
+    }).then(items => {
         attributes = items.attributes;
         if (items.css !== null) {
             css = items.css;
@@ -130,6 +129,6 @@
                 css = text;
             });
         }
-    });
+    }).catch(fu.onError);
 
 })(window);

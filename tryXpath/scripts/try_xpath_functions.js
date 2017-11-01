@@ -632,4 +632,8 @@ tryXpath.functions = {};
         return true;
     };
 
+    fu.onError = function (err) {
+        // console.log(err);
+    };
+
 })(window);
