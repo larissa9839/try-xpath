@@ -17,11 +17,9 @@
         contextWay, contextExpression, resolverHeader, resolverBody,
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
         frameBody, frameExpression, resultsMessage, resultsTbody,
-        contextTbody, resultsCount, prevDetailsPage, moveDetailsPage,
-        detailsPageCount, nextDetailsPage;
+        contextTbody, resultsCount, detailsPageCount;
 
     var relatedTabId, executionId;
-
     var resultedDetails = [];
     const detailsPageSize = 50;
     var detailsPageIndex = 0;
@@ -124,12 +122,16 @@
         index = Math.max(0, index);
         index = Math.min(index, max);
 
+        var scrollY = window.scrollY;
+        var scrollX = window.scrollX;
+
         fu.updateDetailsTable(resultsTbody, resultedDetails, {
             "begin": index * detailsPageSize,
             "end": (index * detailsPageSize) + detailsPageSize,
             "callback": () => {
                 detailsPageCount.value = (index + 1);
                 detailsPageIndex = index;
+                window.scrollTo(scrollX, scrollY);
             }
         });
     };
@@ -202,10 +204,7 @@
             .getElementsByTagName("tbody")[0];
         contextTbody = document.getElementById("context-detail")
             .getElementsByTagName("tbody")[0];
-        prevDetailsPage = document.getElementById("previous-details-page");
-        moveDetailsPage = document.getElementById("move-details-page");
         detailsPageCount = document.getElementById("details-page-count");
-        nextDetailsPage = document.getElementById("next-details-page");
 
         document.getElementById("execute").addEventListener("click",
                                                             sendExecute);
@@ -250,6 +249,20 @@
                 });
             }
         });
+
+        document.getElementById("previous-details-page").addEventListener(
+            "click", () => {
+                showDetailsPage(detailsPageIndex - 1);
+            });
+        document.getElementById("move-details-page").addEventListener(
+            "click", () => {
+                var count = parseInt(detailsPageCount.value, 10);
+                showDetailsPage(count - 1);
+            });
+        document.getElementById("next-details-page").addEventListener(
+            "click", () => {
+                showDetailsPage(detailsPageIndex + 1);
+            });
 
         resultsTbody.addEventListener("click", event => {
             var target = event.target;

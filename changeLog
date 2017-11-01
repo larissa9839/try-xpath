@@ -2,6 +2,8 @@
 
 	* tryXpath/popup/popup.js:
 	Define showDetailsPage function.
+	Remove variables. prevDetailsPage, moveDetailsPage, nextDetailsPage.
+	Set handlers which manage the details page.
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define updateDetailsTable function.
