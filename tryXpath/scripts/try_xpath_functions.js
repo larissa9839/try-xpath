@@ -523,6 +523,27 @@ tryXpath.functions = {};
         window.setTimeout(processChunk, 0);
     };
 
+    fu.updateDetailsTable = function (parent, details, opts) {
+        opts = opts || {};
+        var doc = opts.document || document;
+        var chunkSize = opts.chunkSize || 1000;
+        var callback = opts.callback || null;
+        var begin = opts.begin || 0;
+        var end = opts.end || details.length;
+
+        fu.emptyChildNodes(parent);
+        parent.appendChild(fu.createDetailTableHeader({
+            "document": doc
+        }));
+        fu.appendDetailRows(parent, details, {
+            "document": doc,
+            "chunkSize": chunkSize,
+            "callback": callback,
+            "begin": begin,
+            "end": end
+        });
+    };
+
     fu.emptyChildNodes = function (elem) {
         while (elem.firstChild) {
             elem.removeChild(elem.firstChild);

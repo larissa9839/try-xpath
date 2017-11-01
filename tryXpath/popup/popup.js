@@ -13,16 +13,18 @@
 
     const noneClass = "none";
 
-    const pageSize = 50;
-    var pageIndex = 0;
-
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
         frameBody, frameExpression, resultsMessage, resultsTbody,
-        contextTbody, resultsCount;
+        contextTbody, resultsCount, prevDetailsPage, moveDetailsPage,
+        detailsPageCount, nextDetailsPage;
 
     var relatedTabId, executionId;
+
+    var resultedDetails = [];
+    const detailsPageSize = 50;
+    var detailsPageIndex = 0;
 
     function sendToActiveTab(msg) {
         chrome.tabs.query({ "active": true, "currentWindow": true }, tabs => {
@@ -113,6 +115,25 @@
         }
     };
 
+    function showDetailsPage(index) {
+        var max = Math.floor(resultedDetails.length / detailsPageSize);
+
+        if (!Number.isFinite(index)) {
+            index = 0;
+        }
+        index = Math.max(0, index);
+        index = Math.min(index, max);
+
+        fu.updateDetailsTable(resultsTbody, resultedDetails, {
+            "begin": index * detailsPageSize,
+            "end": (index * detailsPageSize) + detailsPageSize,
+            "callback": () => {
+                detailsPageCount.value = (index + 1);
+                detailsPageIndex = index;
+            }
+        });
+    };
+
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
@@ -127,7 +148,8 @@
         executionId = message.executionId;
 
         resultsMessage.textContent = message.message;
-        resultsCount.textContent = message.main.itemDetails.length;
+        resultedDetails = message.main.itemDetails;
+        resultsCount.textContent = resultedDetails.length;
 
         fu.emptyChildNodes(contextTbody);
         contextTbody.appendChild(fu.createDetailTableHeader());
@@ -135,12 +157,7 @@
             fu.appendDetailRows(contextTbody, [message.context.itemDetail]);
         }
 
-        fu.emptyChildNodes(resultsTbody);
-        resultsTbody.appendChild(fu.createDetailTableHeader());
-        fu.appendDetailRows(resultsTbody, message.main.itemDetails, {
-            "begin": pageIndex * pageSize,
-            "end": (pageIndex * pageSize) + pageSize
-        });
+        showDetailsPage(0);
     };
 
     genericListener.listeners.restorePopupState = function (message) {
@@ -185,6 +202,10 @@
             .getElementsByTagName("tbody")[0];
         contextTbody = document.getElementById("context-detail")
             .getElementsByTagName("tbody")[0];
+        prevDetailsPage = document.getElementById("previous-details-page");
+        moveDetailsPage = document.getElementById("move-details-page");
+        detailsPageCount = document.getElementById("details-page-count");
+        nextDetailsPage = document.getElementById("next-details-page");
 
         document.getElementById("execute").addEventListener("click",
                                                             sendExecute);
