@@ -80,6 +80,14 @@ th {
     width: 50%;
 }
 
+#previous-details-page,
+#move-details-page,
+#details-page-count,
+#next-details-page {
+    box-sizing: border-box;
+    width: 25%;
+}
+
 .none {
     display: none;
 }
