@@ -1,5 +1,8 @@
 2017-11-02  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_functions.js:
+	Define createDetailRow function.
+
 	* tryXpath/background/try_xpath_background.js:
 	Modify loadDefaultCss function.
 

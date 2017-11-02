@@ -469,76 +469,83 @@ tryXpath.functions = {};
         return tr;
     };
 
-    fu.appendDetailRows = function (parent, details, opts) {
+    fu.createDetailRow = function (index, detail, opts) {
         opts = opts || {};
         var doc = opts.document || document;
-        var chunkSize = opts.chunkSize || 1000;
-        var callback = opts.callback || null;
-        var index = opts.begin || 0;
-        var end = opts.end || details.length;
 
-        end = Math.min(end, details.length);
+        var tr = doc.createElement("tr");
 
-        function processChunk() {
+        var td = doc.createElement("td");
+        td.textContent = index;
+        tr.appendChild(td);
+
+        td = doc.createElement("td");
+        td.textContent = detail.type;
+        tr.appendChild(td);
+
+        td = doc.createElement("td");
+        td.textContent = detail.name;
+        tr.appendChild(td);
+
+        td = doc.createElement("td");
+        td.textContent = detail.value;
+        tr.appendChild(td);
+
+        td = doc.createElement("td");
+        var button = doc.createElement("button");
+        button.textContent = "Focus";
+        button.setAttribute("data-index", index);
+        td.appendChild(button);
+        tr.appendChild(td);
+
+        return tr;
+    };
+
+    fu.appendDetailRows = function (parent, details, opts) {
+        return Promise.resolve().then(() => {
+            opts = opts || {};
+            var chunkSize = opts.chunkSize || 1000;
+            var index = opts.begin || 0;
+            var end = opts.end || details.length;
+
+            var doc = parent.ownerDocument;
             var frag = doc.createDocumentFragment();
-            for (var i = 0
-                 ; (i < chunkSize) && (index < end)
-                 ; i++, index++) {
-                var detail = details[index];
-                var tr = doc.createElement("tr");
+            var chunkEnd = Math.min(index + chunkSize, details.length, end);
 
-                var td = doc.createElement("td");
-                td.textContent = index;
-                tr.appendChild(td);
-
-                td = doc.createElement("td");
-                td.textContent = detail.type;
-                tr.appendChild(td);
-
-                td = doc.createElement("td");
-                td.textContent = detail.name;
-                tr.appendChild(td);
-
-                td = doc.createElement("td");
-                td.textContent = detail.value;
-                tr.appendChild(td);
-
-                td = doc.createElement("td");
-                var button = doc.createElement("button");
-                button.textContent = "Focus";
-                button.setAttribute("data-index", index);
-                td.appendChild(button);
-                tr.appendChild(td);
-
-                frag.appendChild(tr);
+            for ( ; index < chunkEnd; index++) {
+                frag.appendChild(fu.createDetailRow(index, details[index], {
+                    "document": doc
+                }));
             }
             parent.appendChild(frag);
-            if (index < end) {
-                window.setTimeout(processChunk, 0);
-            } else {
-                if (callback) { callback(); }
-            }
-        };
 
-        window.setTimeout(processChunk, 0);
+            if (index < end) {
+                return fu.appendDetailRows(parent, details, {
+                    "chunkSize": chunkSize,
+                    "begin": index,
+                    "end": end
+                });
+            } else {
+                return ;
+            }
+        });
     };
 
     fu.updateDetailsTable = function (parent, details, opts) {
         opts = opts || {};
-        var doc = opts.document || document;
         var chunkSize = opts.chunkSize || 1000;
-        var callback = opts.callback || null;
         var begin = opts.begin || 0;
         var end = opts.end || details.length;
+
+        var doc = parent.ownerDocument;
 
         fu.emptyChildNodes(parent);
         parent.appendChild(fu.createDetailTableHeader({
             "document": doc
         }));
-        fu.appendDetailRows(parent, details, {
-            "document": doc,
+
+        return fu.appendDetailRows(parent, details, {
             "chunkSize": chunkSize,
-            "callback": callback,
             "begin": begin,
             "end": end
         });

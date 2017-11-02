@@ -131,11 +131,10 @@
         fu.updateDetailsTable(resultsTbody, resultedDetails, {
             "begin": index * detailsPageSize,
             "end": (index * detailsPageSize) + detailsPageSize,
-            "callback": () => {
-                detailsPageCount.value = (index + 1);
-                detailsPageIndex = index;
-                window.scrollTo(scrollX, scrollY);
-            }
+        }).then(() => {
+            detailsPageCount.value = (index + 1);
+            detailsPageIndex = index;
+            window.scrollTo(scrollX, scrollY);
         });
     };
 
@@ -156,11 +155,7 @@
         resultedDetails = message.main.itemDetails;
         resultsCount.textContent = resultedDetails.length;
 
-        fu.emptyChildNodes(contextTbody);
-        contextTbody.appendChild(fu.createDetailTableHeader());
-        if (message.context) {
-            fu.appendDetailRows(contextTbody, [message.context.itemDetail]);
-        }
+        fu.updateDetailsTable(contextTbody, [message.context.itemDetail]);
 
         showDetailsPage(0);
     };

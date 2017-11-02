@@ -34,9 +34,8 @@
                 = cont.resolver;
             let contTbody = document.getElementById("context-detail")
                 .getElementsByTagName("tbody")[0];
-            contTbody.appendChild(fu.createDetailTableHeader());
             if (cont.itemDetail) {
-                fu.appendDetailRows(contTbody, [cont.itemDetail]);
+                fu.updateDetailsTable(contTbody, [cont.itemDetail]);
             }
         } else {
             let area = document.getElementById("context-area");
@@ -56,8 +55,7 @@
             = main.itemDetails.length;
         var mainTbody = document.getElementById("main-details")
             .getElementsByTagName("tbody")[0];
-        mainTbody.appendChild(fu.createDetailTableHeader());
-        fu.appendDetailRows(mainTbody, main.itemDetails);
+        fu.updateDetailsTable(mainTbody, main.itemDetails);
     };
 
     window.addEventListener("load", function() {
