@@ -505,11 +505,12 @@ tryXpath.functions = {};
         return Promise.resolve().then(() => {
             opts = opts || {};
             var chunkSize = opts.chunkSize || 1000;
-            var index = opts.begin || 0;
+            var begin = opts.begin || 0;
             var end = opts.end || details.length;
 
             var doc = parent.ownerDocument;
             var frag = doc.createDocumentFragment();
+            var index = Math.max(begin, 0);
             var chunkEnd = Math.min(index + chunkSize, details.length, end);
 
             for ( ; index < chunkEnd; index++) {
@@ -519,7 +520,7 @@ tryXpath.functions = {};
             }
             parent.appendChild(frag);
 
-            if (index < end) {
+            if ((index < end) && (index < details.length)) {
                 return fu.appendDetailRows(parent, details, {
                     "chunkSize": chunkSize,
                     "begin": index,
