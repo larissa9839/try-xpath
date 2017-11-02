@@ -5,6 +5,10 @@
 (function (window, undefined) {
     "use strict";
 
+    // alias
+    var tx = tryXpath;
+    var fu = tryXpath.functions;
+
     var document = window.document;
 
     const defaultAttributes = {
@@ -37,16 +41,19 @@
         return true;
     };
 
-    function loadDefaultCss(callback) {
-        var req = new XMLHttpRequest();
-        req.open("GET", browser.runtime.getURL("/css/try_xpath_insert.css"));
-        req.responseType = "text";
-        req.onreadystatechange = function () {
-            if (req.readyState === XMLHttpRequest.DONE) {
-                callback(req.responseText);
-            }
-        };
-        req.send();
+    function loadDefaultCss() {
+        return new Promise((resolve, reject) => {
+            var req = new XMLHttpRequest();
+            req.open("GET",
+                     browser.runtime.getURL("/css/try_xpath_insert.css"));
+            req.responseType = "text";
+            req.onreadystatechange = function () {
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    resolve(req.responseText);
+                }
+            };
+            req.send();
+        });
     };
 
     window.addEventListener("load", () => {
@@ -107,7 +114,7 @@
                 frameAttr.value = defaultAttributes.frame;
                 frameAncestorAttr.value = defaultAttributes.frameAncestor;
                 
-                loadDefaultCss(css => {
+                loadDefaultCss().then(css => {
                     style.value = css;
                 });
             });

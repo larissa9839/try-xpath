@@ -1,3 +1,14 @@
+2017-11-02  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/background/try_xpath_background.js:
+	Modify loadDefaultCss function.
+
+	* tryXpath/pages/options.js:
+	Modify loadDefaultCss function.
+
+	* tryXpath/pages/options.html:
+	Add a script element.
+
 2017-11-01  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_functions.js:
