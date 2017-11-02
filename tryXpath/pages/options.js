@@ -116,7 +116,7 @@
                 
                 loadDefaultCss().then(css => {
                     style.value = css;
-                });
+                }).catch(fu.onError);
             });
     });
 

@@ -35,7 +35,8 @@
             let contTbody = document.getElementById("context-detail")
                 .getElementsByTagName("tbody")[0];
             if (cont.itemDetail) {
-                fu.updateDetailsTable(contTbody, [cont.itemDetail]);
+                fu.updateDetailsTable(contTbody, [cont.itemDetail])
+                    .catch(fu.onError);
             }
         } else {
             let area = document.getElementById("context-area");
@@ -55,7 +56,7 @@
             = main.itemDetails.length;
         var mainTbody = document.getElementById("main-details")
             .getElementsByTagName("tbody")[0];
-        fu.updateDetailsTable(mainTbody, main.itemDetails);
+        fu.updateDetailsTable(mainTbody, main.itemDetails).catch(fu.onError);
     };
 
     window.addEventListener("load", function() {

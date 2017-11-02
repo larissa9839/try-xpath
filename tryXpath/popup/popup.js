@@ -135,7 +135,7 @@
             detailsPageCount.value = (index + 1);
             detailsPageIndex = index;
             window.scrollTo(scrollX, scrollY);
-        });
+        }).catch(fu.onError);
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -155,7 +155,10 @@
         resultedDetails = message.main.itemDetails;
         resultsCount.textContent = resultedDetails.length;
 
-        fu.updateDetailsTable(contextTbody, [message.context.itemDetail]);
+        if (message.context) {
+            fu.updateDetailsTable(contextTbody, [message.context.itemDetail])
+                .catch(fu.onError);
+        }
 
         showDetailsPage(0);
     };
