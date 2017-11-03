@@ -24,12 +24,13 @@
     const detailsPageSize = 50;
     var detailsPageIndex = 0;
 
-    function sendToActiveTab(msg) {
-        browser.tabs.query({
+    function sendToActiveTab(msg, opts) {
+        var opts = opts || {};
+        return browser.tabs.query({
             "active": true,
             "currentWindow": true
         }).then(tabs => {
-            browser.tabs.sendMessage(tabs[0].id, msg);
+            return browser.tabs.sendMessage(tabs[0].id, msg, opts);
         }).catch(fu.onError);
     };
 
@@ -105,8 +106,37 @@
         return msg;
     };
 
+    function execScript() {
+        return sendToActiveTab({
+            "event": "loadContentState"
+        }).then(state => {
+            if (state.isScriptExecuted) {
+                return ;
+            } else {
+                return browser.tabs.executeScript({
+                    "file": "/scripts/try_xpath_functions.js",
+                    "allFrames": true
+                }).then(() => {
+                    return browser.tabs.executeScript({
+                        "file": "/scripts/try_xpath_content.js",
+                        "allFrames": true
+                    });
+                }).then(() => {
+                    return sendToActiveTab({
+                        "event": "finishScriptExecuteAll"
+                    });
+                });
+            }
+        }).catch(fu.onError);
+    };
+
     function sendExecute() {
-        sendToActiveTab(makeExecuteMessage());        
+        var opts = {
+            "frameId": 0
+        };
+        execScript().then(() => {
+            sendToActiveTab(makeExecuteMessage(), opts);
+        }).catch(fu.onError);
     };
 
     function handleExprEnter (event) {

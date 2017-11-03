@@ -36,8 +36,7 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["scripts/try_xpath_functions.js",
-                   "scripts/try_xpath_content.js"]
+            "js": ["scripts/try_xpath_manage_content.js"]
         }
     ],
 

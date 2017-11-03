@@ -1,3 +1,19 @@
+2017-11-03  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.js:
+	Define execScript function.
+	Modify sendToActiveTab function.
+
+
+	* tryXpath/manifest.json: 
+	Change "content_scripts".
+
+	* tryXpath/scripts/try_xpath_manage_content.js:
+	Create this file.
+	Define state variable.
+	Define genericListener.listeners.loadContentState function.
+	Define genericListener.listeners.finishScriptExecuteAll function.
+
 2017-11-02  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_functions.js:
