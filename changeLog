@@ -1,5 +1,15 @@
 2017-11-04  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Remove execScript function.
+	Define execContentScript function.
+
+	* tryXpath/scripts/try_xpath_functions.js:
+	Modify codes about namespaces.
+
+	* tryXpath/scripts/try_xpath_check_frame.js:
+	Create this file.
+
 	* tryXpath/manifest.json:
 	Empty content_scripts.
 

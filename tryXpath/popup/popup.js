@@ -106,37 +106,33 @@
         return msg;
     };
 
-    function execScript() {
-        return sendToActiveTab({
-            "event": "loadContentState"
-        }).then(state => {
-            if (state.isScriptExecuted) {
-                return ;
-            } else {
-                return browser.tabs.executeScript({
-                    "file": "/scripts/try_xpath_functions.js",
-                    "allFrames": true
-                }).then(() => {
-                    return browser.tabs.executeScript({
-                        "file": "/scripts/try_xpath_content.js",
-                        "allFrames": true
-                    });
-                }).then(() => {
-                    return sendToActiveTab({
-                        "event": "finishScriptExecuteAll"
-                    });
-                });
-            }
-        }).catch(fu.onError);
+    function execContentScript() {
+        return browser.tabs.executeScript({
+            "file": "/scripts/try_xpath_functions.js",
+            "allFrames": true
+        }).then(() => {
+            return browser.tabs.executeScript({
+                "file": "/scripts/try_xpath_content.js",
+                "allFrames": true
+            });
+        });
     };
 
     function sendExecute() {
-        var opts = {
-            "frameId": 0
-        };
-        execScript().then(() => {
-            sendToActiveTab(makeExecuteMessage(), opts);
-        }).catch(fu.onError);
+        var execMsg = makeExecuteMessage();
+        var frameId = 0;    // ToDo
+        var opts = { "frameId": frameId };
+        browser.tabs.executeScript({
+            "file": "/scripts/try_xpath_check_frame.js",
+            "frameId": frameId
+        }).then(ress => {
+            if (ress[0]) {
+                return;
+            }
+            return execContentScript();
+        }).then(() => {
+            sendToActiveTab(execMsg, opts);
+        }).catch(console.log.bind(console));    // ToDo
     };
 
     function handleExprEnter (event) {

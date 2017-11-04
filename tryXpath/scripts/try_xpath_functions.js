@@ -6,7 +6,9 @@
 if (!tryXpath) {
     var tryXpath = {};
 }
-tryXpath.functions = {};
+if (!tryXpath.functions) {
+    tryXpath.functions = {};
+}
 
 (function (window, undefined) {
     "use strict";
