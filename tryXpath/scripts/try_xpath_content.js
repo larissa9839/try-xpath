@@ -9,6 +9,12 @@
     var tx = tryXpath;
     var fu = tryXpath.functions;
 
+    // prevent multiple execution
+    if (tx.isContentLoaded) {
+        return;
+    }
+    tx.isContentLoaded = true;
+
     const dummyItem = "";
     const dummyItems = [];
 

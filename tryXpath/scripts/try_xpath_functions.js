@@ -15,6 +15,12 @@ tryXpath.functions = {};
     var tx = tryXpath;
     var fu = tryXpath.functions;
 
+    // prevent multiple execution
+    if (fu.done) {
+        return;
+    }
+    fu.done = true;
+
     fu.execExpr = function(expr, method, opts) {
         opts = opts || {};
         var context = opts.context || document;
