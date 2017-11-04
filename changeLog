@@ -1,5 +1,8 @@
 2017-11-04  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/manifest.json:
+	Empty content_scripts.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Prevent multiple execution.
 
