@@ -1,8 +1,12 @@
 2017-11-06  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.html (Results):
+	Add some buttons.
+
 	* tryXpath/popup/popup.js:
 	Modify sendToSpecifiedFrame function.
 	Modify sendExecute function.
+	Add some handlers.
 
 2017-11-05  larissa9839  <larissa9839@gmail.com>
 

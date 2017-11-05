@@ -329,6 +329,17 @@
             sendToSpecifiedFrame({ "event": "resetStyle" });
         });
 
+        document.getElementById("set-all-style").addEventListener(
+            "click", () => {
+                sendToActiveTab({ "event": "setStyle" });
+            });
+
+        document.getElementById("reset-all-style").addEventListener(
+            "click",()=> {
+                sendToActiveTab({ "event": "resetStyle" });
+            });
+
+
         contextTbody.addEventListener("click", event => {
             if (event.target.tagName.toLowerCase() === "button") {
                 browser.tabs.sendMessage(relatedTabId, {
