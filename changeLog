@@ -3,6 +3,8 @@
 	* tryXpath/popup/popup.js:
 	Define genericListener.listeners.addFrameId function.
 	Modify getSpecifiedFrameId funciton.
+	Modify collectPopupState function.
+	Modify genericListener.listeners.restorePopupState function.
 
 	* tryXpath/popup/popup.html (Main): 
 	Rename id. "frameid-expression" -> "frame-id-expression"
