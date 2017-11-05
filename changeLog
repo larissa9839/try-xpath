@@ -1,4 +1,15 @@
+2017-11-05  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.js:
+	Define getSpecifiedFrameId function.
+	Define invalidTabId, invalidExecutionId constans.
+	Define showError function.
+
 2017-11-04  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.html (Main):
+	Remove some elements related frame-expression.
+	Add some elements related frameid-expression.
 
 	* tryXpath/popup/popup.js:
 	Remove execScript function.

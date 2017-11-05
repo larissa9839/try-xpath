@@ -12,14 +12,17 @@
     var document = window.document;
 
     const noneClass = "none";
+    const invalidTabId = browser.tabs.TAB_ID_NONE;
+    const invalidExecutionId = NaN;
 
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
-        frameBody, frameExpression, resultsMessage, resultsTbody,
+        frameBody, frameidExpression, resultsMessage, resultsTbody,
         contextTbody, resultsCount, detailsPageCount;
 
-    var relatedTabId, executionId;
+    var relatedTabId = invalidTabId;
+    var executionId = invalidExecutionId;
     var resultedDetails = [];
     const detailsPageSize = 50;
     var detailsPageIndex = 0;
@@ -44,7 +47,6 @@
         state.resolverCheckboxChecked = resolverCheckbox.checked;
         state.resolverExpressionValue = resolverExpression.value;
         state.frameCheckboxChecked = frameCheckbox.checked;
-        state.frameExpressionValue = frameExpression.value;
         return state;
     };
 
@@ -99,11 +101,14 @@
             msg.context.resolver = resol;
         }
 
-        if (frameCheckbox.checked) {
-            msg.frameDesignation = frameExpression.value;
-        }
-
         return msg;
+    };
+
+    function getSpecifiedFrameId () { 
+        if (frameCheckbox.checked) {
+            return parseInt(frameidExpression.value, 10);
+        }
+        return 0;
     };
 
     function execContentScript() {
@@ -120,11 +125,13 @@
 
     function sendExecute() {
         var execMsg = makeExecuteMessage();
-        var frameId = 0;    // ToDo
+        var frameId = getSpecifiedFrameId();
         var opts = { "frameId": frameId };
-        browser.tabs.executeScript({
-            "file": "/scripts/try_xpath_check_frame.js",
-            "frameId": frameId
+        Promise.resolve().then(() => {
+            return browser.tabs.executeScript({
+                "file": "/scripts/try_xpath_check_frame.js",
+                "frameId": frameId
+            });
         }).then(ress => {
             if (ress[0]) {
                 return;
@@ -132,7 +139,10 @@
             return execContentScript();
         }).then(() => {
             sendToActiveTab(execMsg, opts);
-        }).catch(console.log.bind(console));    // ToDo
+        }).catch(e => {
+            showError("An error occurred. The frameId[" + frameId
+                      + "] may be incorrect.");
+        });
     };
 
     function handleExprEnter (event) {
@@ -162,6 +172,19 @@
             detailsPageIndex = index;
             window.scrollTo(scrollX, scrollY);
         }).catch(fu.onError);
+    };
+
+    function showError(message) {
+        relatedTabId = invalidTabId;
+        executionId = invalidExecutionId;
+
+        resultsMessage.textContent = message;
+        resultedDetails = [];
+        resultsCount.textContent = resultedDetails.length;
+        
+        fu.updateDetailsTable(contextTbody, [])
+            .catch(fu.onError);
+        showDetailsPage(0);
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -201,7 +224,6 @@
             resolverCheckbox.checked = state.resolverCheckboxChecked;
             resolverExpression.value = state.resolverExpressionValue;
             frameCheckbox.checked = state.frameCheckboxChecked;
-            frameExpression.value = state.frameExpressionValue;
         }
 
         changeContextVisible();
@@ -224,7 +246,7 @@
         frameHeader = document.getElementById("frame-header");
         frameCheckbox = document.getElementById("frame-switch");
         frameBody = document.getElementById("frame-body");
-        frameExpression = document.getElementById("frame-expression");
+        frameidExpression = document.getElementById("frameid-expression");
         resultsMessage = document.getElementById("results-message");
         resultsCount = document.getElementById("results-count");
         resultsTbody = document.getElementById("results-details")
@@ -248,7 +270,7 @@
 
         frameHeader.addEventListener("click", changeFrameVisible);
         frameHeader.addEventListener("keypress", changeFrameVisible);
-        frameExpression.addEventListener("keypress", handleExprEnter);
+        frameidExpression.addEventListener("keypress", handleExprEnter);
 
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
