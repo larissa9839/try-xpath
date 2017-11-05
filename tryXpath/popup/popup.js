@@ -311,6 +311,11 @@
                 }).catch(fu.onError);
             });
 
+        document.getElementById("show-previous-results").addEventListener(
+            "click", () => {
+                sendToSpecifiedFrame({ "event": "requestShowResultsInPopup"});
+            });
+
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
                 sendToSpecifiedFrame({ "event": "requestShowAllResults" });

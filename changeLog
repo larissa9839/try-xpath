@@ -2,6 +2,7 @@
 
 	* tryXpath/popup/popup.html (Results):
 	Add some buttons.
+	Add show-previous-results button.
 
 	* tryXpath/popup/popup.js:
 	Modify sendToSpecifiedFrame function.
