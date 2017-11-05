@@ -19,7 +19,8 @@
         contextWay, contextExpression, resolverHeader, resolverBody,
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
         frameBody, frameIdList, frameIdExpression, resultsMessage,
-        resultsTbody, contextTbody, resultsCount, detailsPageCount;
+        resultsTbody, contextTbody, resultsCount, resultsFrameId,
+        detailsPageCount;
 
     var relatedTabId = invalidTabId;
     var executionId = invalidExecutionId;
@@ -145,8 +146,8 @@
         }).then(() => {
             sendToActiveTab(execMsg, opts);
         }).catch(e => {
-            showError("An error occurred. The frameId[" + frameId
-                      + "] may be incorrect.");
+            showError("An error occurred. The frameId may be incorrect.",
+                      frameId);
         });
     };
 
@@ -179,13 +180,14 @@
         }).catch(fu.onError);
     };
 
-    function showError(message) {
+    function showError(message, frameId) {
         relatedTabId = invalidTabId;
         executionId = invalidExecutionId;
 
         resultsMessage.textContent = message;
         resultedDetails = [];
         resultsCount.textContent = resultedDetails.length;
+        resultsFrameId.textContent = frameId;
         
         fu.updateDetailsTable(contextTbody, [])
             .catch(fu.onError);
@@ -208,6 +210,7 @@
         resultsMessage.textContent = message.message;
         resultedDetails = message.main.itemDetails;
         resultsCount.textContent = resultedDetails.length;
+        resultsFrameId.textContent = sender.frameId;
 
         if (message.context) {
             fu.updateDetailsTable(contextTbody, [message.context.itemDetail])
@@ -263,6 +266,7 @@
         frameIdExpression = document.getElementById("frame-id-expression");
         resultsMessage = document.getElementById("results-message");
         resultsCount = document.getElementById("results-count");
+        resultsFrameId = document.getElementById("results-frame-id");
         resultsTbody = document.getElementById("results-details")
             .getElementsByTagName("tbody")[0];
         contextTbody = document.getElementById("context-detail")

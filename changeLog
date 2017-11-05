@@ -1,10 +1,17 @@
 2017-11-05  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/popup/popup.js:
+	Define resultsFrameId variable.
+
+	* tryXpath/popup/popup.html (Results):
+	Add a div element.
+
+	* tryXpath/popup/popup.js:
 	Define genericListener.listeners.addFrameId function.
 	Modify getSpecifiedFrameId funciton.
 	Modify collectPopupState function.
 	Modify genericListener.listeners.restorePopupState function.
+	Modify sendExecute function.
 
 	* tryXpath/popup/popup.html (Main): 
 	Rename id. "frameid-expression" -> "frame-id-expression"
