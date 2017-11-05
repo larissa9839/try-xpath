@@ -1,8 +1,19 @@
 2017-11-05  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/show_all_results.html :
+	Add some elements related to "frame-id" id.
+
+	* tryXpath/pages/show_all_results.js:
+	Define relatedFrameId variable;
+
+	* tryXpath/background/try_xpath_background.js:
+	Modify genericListener.listeners.showAllResults function.
+
 	* tryXpath/popup/popup.js:
 	Define resultsFrameId variable.
 	Modify the handler related to set-style element.
+	Define invalidFrameId constants.
+	Define relatedFrameId variable.
 
 	* tryXpath/popup/popup.html (Results):
 	Add a div element.

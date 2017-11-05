@@ -12,12 +12,14 @@
     var document = window.document;
 
     var relatedTabId;
+    var relatedFrameId;
     var executionId;
 
     function showAllResults(results) {
         document.getElementById("message").textContent = results.message;
         document.getElementById("title").textContent = results.title;
         document.getElementById("url").textContent = results.href;
+        document.getElementById("frame-id").textContent = results.frameId;
 
         if (results.context) {
             let cont = results.context;
@@ -63,6 +65,7 @@
         browser.runtime.sendMessage({"event":"loadResults"}).then(results => {
             if (results) {
                 relatedTabId = results.tabId;
+                relatedFrameId = results.frameId;
                 executionId = results.executionId;
                 showAllResults(results);
             }
@@ -75,6 +78,8 @@
                 browser.tabs.sendMessage(relatedTabId, {
                     "event": "focusContextItem",
                     "executionId": executionId
+                }, {
+                    "frameId": relatedTabId
                 });
             }
         });
@@ -88,6 +93,8 @@
                     "event": "focusItem",
                     "executionId": executionId,
                     "index": ind
+                }, {
+                    "frameId": relatedFrameId
                 });
             }
         });

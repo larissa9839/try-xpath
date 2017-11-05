@@ -60,6 +60,7 @@
         delete message.event;
         results = message;
         results.tabId = sender.tab.id;
+        results.frameId = sender.frameId;
         browser.tabs.create({ "url": "/pages/show_all_results.html" });
     };
 

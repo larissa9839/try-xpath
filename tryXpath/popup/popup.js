@@ -14,6 +14,7 @@
     const noneClass = "none";
     const invalidTabId = browser.tabs.TAB_ID_NONE;
     const invalidExecutionId = NaN;
+    const invalidFrameId = -1;
 
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
@@ -23,6 +24,7 @@
         detailsPageCount;
 
     var relatedTabId = invalidTabId;
+    var relatedFrameId = invalidFrameId;
     var executionId = invalidExecutionId;
     var resultedDetails = [];
     const detailsPageSize = 50;
@@ -193,6 +195,7 @@
 
     function showError(message, frameId) {
         relatedTabId = invalidTabId;
+        relatedFrameId = invalidFrameId;
         executionId = invalidExecutionId;
 
         resultsMessage.textContent = message;
@@ -216,6 +219,7 @@
 
     genericListener.listeners.showResultsInPopup = function (message, sender){
         relatedTabId = sender.tab.id;
+        relatedFrameId = sender.frameId;
         executionId = message.executionId;
 
         resultsMessage.textContent = message.message;
@@ -339,6 +343,8 @@
                 browser.tabs.sendMessage(relatedTabId, {
                     "event": "focusContextItem",
                     "executionId": executionId,
+                }, {
+                    "frameId": relatedFrameId
                 });
             }
         });
@@ -365,6 +371,8 @@
                     "event": "focusItem",
                     "executionId": executionId,
                     "index": ind
+                }, {
+                    "frameId": relatedFrameId
                 });
             }
         });
