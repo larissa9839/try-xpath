@@ -105,10 +105,14 @@
     };
 
     function getSpecifiedFrameId () { 
-        if (frameCheckbox.checked) {
+        if (!frameCheckbox.checked) {
+            return 0;
+        }
+        var id = frameIdList.selectedOptions[0].getAttribute("data-frame-id");
+        if (id === "manual") {
             return parseInt(frameIdExpression.value, 10);
         }
-        return 0;
+        return parseInt(id, 10);
     };
 
     function execContentScript() {
