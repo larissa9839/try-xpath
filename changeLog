@@ -1,6 +1,19 @@
 2017-11-05  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/popup/popup.js:
+	Define genericListener.listeners.addFrameId function.
+	
+	* tryXpath/popup/popup.html (Main): 
+	Rename id. "frameid-expression" -> "frame-id-expression"
+
+	* tryXpath/popup/popup.js:
+	Rename frameidExpression -> frameIdExpression
+	Rename id. "frameid-expression" -> "frame-id-expression"
+
+	* tryXpath/popup/popup.html (Main):
+	Add a select element.
+
+	* tryXpath/popup/popup.js:
 	Define getSpecifiedFrameId function.
 	Define invalidTabId, invalidExecutionId constans.
 	Define showError function.

@@ -18,8 +18,8 @@
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
-        frameBody, frameidExpression, resultsMessage, resultsTbody,
-        contextTbody, resultsCount, detailsPageCount;
+        frameBody, frameIdList, frameIdExpression, resultsMessage,
+        resultsTbody, contextTbody, resultsCount, detailsPageCount;
 
     var relatedTabId = invalidTabId;
     var executionId = invalidExecutionId;
@@ -106,7 +106,7 @@
 
     function getSpecifiedFrameId () { 
         if (frameCheckbox.checked) {
-            return parseInt(frameidExpression.value, 10);
+            return parseInt(frameIdExpression.value, 10);
         }
         return 0;
     };
@@ -231,6 +231,13 @@
         changeFrameVisible();
     };
 
+    genericListener.listeners.addFrameId = function (message, sender) {
+        var opt = document.createElement("option");
+        opt.setAttribute("data-frame-id", sender.frameId);
+        opt.textContent = sender.frameId;
+        frameIdList.appendChild(opt);
+    };
+
     window.addEventListener("load", () => {
         mainWay = document.getElementById("main-way");
         mainExpression = document.getElementById("main-expression");
@@ -246,7 +253,8 @@
         frameHeader = document.getElementById("frame-header");
         frameCheckbox = document.getElementById("frame-switch");
         frameBody = document.getElementById("frame-body");
-        frameidExpression = document.getElementById("frameid-expression");
+        frameIdList = document.getElementById("frame-id-list");
+        frameIdExpression = document.getElementById("frame-id-expression");
         resultsMessage = document.getElementById("results-message");
         resultsCount = document.getElementById("results-count");
         resultsTbody = document.getElementById("results-details")
@@ -270,7 +278,22 @@
 
         frameHeader.addEventListener("click", changeFrameVisible);
         frameHeader.addEventListener("keypress", changeFrameVisible);
-        frameidExpression.addEventListener("keypress", handleExprEnter);
+        frameIdExpression.addEventListener("keypress", handleExprEnter);
+        document.getElementById("get-all-frame-id").addEventListener(
+            "click", () => {
+                fu.emptyChildNodes(frameIdList);
+                
+                var opt = document.createElement("option");
+                opt.setAttribute("data-frame-id", "manual");
+                opt.textContent = "Manual";
+                frameIdList.appendChild(opt);
+
+                browser.tabs.executeScript({
+                    "code": "browser.runtime.sendMessage"
+                        + "({\"event\":\"addFrameId\"});",
+                    "allFrames": true
+                }).catch(fu.onError);
+            });
 
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
