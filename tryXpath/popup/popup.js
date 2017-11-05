@@ -42,12 +42,21 @@
 
     function sendToSpecifiedFrame(msg) {
         var frameId = getSpecifiedFrameId();
-        return sendToActiveTab(
-            msg,  { "frameId": frameId }
-        ).catch(() => {
-            showError(
-                "An error occurred. The frameId may be incorrect.",
-                frameId);
+        return Promise.resolve().then(() => {
+            return browser.tabs.executeScript({
+                "file": "/scripts/try_xpath_check_frame.js",
+                "frameId": frameId
+            });
+        }).then(ress => {
+            if (ress[0]) {
+                return;
+            }
+            return execContentScript();
+        }).then(() => {
+            sendToActiveTab(msg, { "frameId": frameId });
+        }).catch(e => {
+            showError("An error occurred. The frameId may be incorrect.",
+                      frameId);
         });
     };
 
@@ -143,25 +152,7 @@
     };
 
     function sendExecute() {
-        var execMsg = makeExecuteMessage();
-        var frameId = getSpecifiedFrameId();
-        var opts = { "frameId": frameId };
-        Promise.resolve().then(() => {
-            return browser.tabs.executeScript({
-                "file": "/scripts/try_xpath_check_frame.js",
-                "frameId": frameId
-            });
-        }).then(ress => {
-            if (ress[0]) {
-                return;
-            }
-            return execContentScript();
-        }).then(() => {
-            sendToActiveTab(execMsg, opts);
-        }).catch(e => {
-            showError("An error occurred. The frameId may be incorrect.",
-                      frameId);
-        });
+        sendToSpecifiedFrame(makeExecuteMessage());
     };
 
     function handleExprEnter (event) {
