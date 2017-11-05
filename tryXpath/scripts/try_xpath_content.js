@@ -27,7 +27,19 @@
         "frameAncestor": "data-tryxpath-frame-ancestor"        
     };
 
-    var prevMsg = null;
+    var prevMsg = {
+        "executionId": -1,
+        "href": "",
+        "title": "",
+        "message": "There is no results.",
+        "main": {
+            "method": "evaluate",
+            "expression": "",
+            "specifiedResultType": "ANY_TYPE(0)",
+            "resolver": "",
+            "itemDetails": []
+        }
+    };
     var executionCount = 0;
     var currentFrames = dummyItems;
     var contextItem = dummyItem;

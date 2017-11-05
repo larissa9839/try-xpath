@@ -1,5 +1,8 @@
 2017-11-06  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Set initial value of prevMsg.
+
 	* tryXpath/popup/popup.html (Results):
 	Add some buttons.
 	Add show-previous-results button.
