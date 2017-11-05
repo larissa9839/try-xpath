@@ -35,7 +35,7 @@
             "currentWindow": true
         }).then(tabs => {
             return browser.tabs.sendMessage(tabs[0].id, msg, opts);
-        }).catch(fu.onError);
+        });
     };
 
     function collectPopupState() {
@@ -307,8 +307,16 @@
 
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
-                sendToActiveTab({ "event": "requestShowAllResults" },
-                                { "frameId": getSpecifiedFrameId() });
+                var frameId = getSpecifiedFrameId();
+                sendToActiveTab({
+                    "event": "requestShowAllResults"
+                }, {
+                    "frameId": frameId
+                }).catch(() => {
+                    showError(
+                        "An error occurred. The frameId may be incorrect.",
+                        frameId);
+                });
             });
 
         document.getElementById("open-options").addEventListener(
