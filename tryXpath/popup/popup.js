@@ -303,7 +303,8 @@
 
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
-                sendToActiveTab({ "event": "requestShowAllResults" });
+                sendToActiveTab({ "event": "requestShowAllResults" },
+                                { "frameId": getSpecifiedFrameId() });
             });
 
         document.getElementById("open-options").addEventListener(
