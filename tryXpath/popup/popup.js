@@ -38,6 +38,17 @@
         });
     };
 
+    function sendToSpecifiedFrame(msg) {
+        var frameId = getSpecifiedFrameId();
+        return sendToActiveTab(
+            msg,  { "frameId": frameId }
+        ).catch(() => {
+            showError(
+                "An error occurred. The frameId may be incorrect.",
+                frameId);
+        });
+    };
+
     function collectPopupState() {
         var state = Object.create(null);
         state.mainWayIndex = mainWay.selectedIndex;
@@ -307,15 +318,7 @@
 
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
-                var frameId = getSpecifiedFrameId();
-                sendToActiveTab(
-                    { "event": "requestShowAllResults" },
-                    { "frameId": frameId }
-                ).catch(() => {
-                    showError(
-                        "An error occurred. The frameId may be incorrect.",
-                        frameId);
-                });
+                sendToSpecifiedFrame({ "event": "requestShowAllResults" });
             });
 
         document.getElementById("open-options").addEventListener(
@@ -324,19 +327,11 @@
             });
 
         document.getElementById("set-style").addEventListener("click", () => {
-            var frameId = getSpecifiedFrameId();
-            sendToActiveTab(
-                { "event": "setStyle" },
-                { "frameId": frameId }
-            ).catch(() => {
-                showError(
-                    "An error occurred. The frameId may be incorrect.",
-                    frameId);
-            });
+            sendToSpecifiedFrame({ "event": "setStyle" });
         });
 
         document.getElementById("reset-style").addEventListener("click",()=> {
-            sendToActiveTab({ "event": "resetStyle" });
+            sendToSpecifiedFrame({ "event": "resetStyle" });
         });
 
         contextTbody.addEventListener("click", event => {
@@ -385,7 +380,7 @@
         resultsTbody.appendChild(fu.createDetailTableHeader());
         contextTbody.appendChild(fu.createDetailTableHeader());
 
-        sendToActiveTab({ "event": "requestShowResultsInPopup" });
+        sendToSpecifiedFrame({ "event": "requestShowResultsInPopup" });
         browser.runtime.sendMessage({ "event": "requestRestorePopupState" });
     });
 
