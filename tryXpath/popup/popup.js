@@ -308,11 +308,10 @@
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
                 var frameId = getSpecifiedFrameId();
-                sendToActiveTab({
-                    "event": "requestShowAllResults"
-                }, {
-                    "frameId": frameId
-                }).catch(() => {
+                sendToActiveTab(
+                    { "event": "requestShowAllResults" },
+                    { "frameId": frameId }
+                ).catch(() => {
                     showError(
                         "An error occurred. The frameId may be incorrect.",
                         frameId);
@@ -325,7 +324,15 @@
             });
 
         document.getElementById("set-style").addEventListener("click", () => {
-            sendToActiveTab({ "event": "setStyle" });
+            var frameId = getSpecifiedFrameId();
+            sendToActiveTab(
+                { "event": "setStyle" },
+                { "frameId": frameId }
+            ).catch(() => {
+                showError(
+                    "An error occurred. The frameId may be incorrect.",
+                    frameId);
+            });
         });
 
         document.getElementById("reset-style").addEventListener("click",()=> {

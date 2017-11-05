@@ -2,6 +2,7 @@
 
 	* tryXpath/popup/popup.js:
 	Define resultsFrameId variable.
+	Modify the handler related to set-style element.
 
 	* tryXpath/popup/popup.html (Results):
 	Add a div element.
