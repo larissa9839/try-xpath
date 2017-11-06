@@ -2,6 +2,7 @@
 
 	* tryXpath/background/try_xpath_background.js:
 	Modify genericListener.listeners.updateCss function.
+	Modify genericListener.listeners.requestSetContentInfo function.
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Set initial value of prevMsg.

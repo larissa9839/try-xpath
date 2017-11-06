@@ -79,7 +79,7 @@
                 "code": removeCss,
                 "frameId": frameId
             }).then(() => {
-                browser.tabs.sendMessage(id, {
+                return browser.tabs.sendMessage(id, {
                     "event": "finishRemoveCss",
                     "css": removeCss
                 }, {
@@ -93,7 +93,7 @@
             "cssOrigin": "author",
             "frameId": frameId
         }).then(() => {
-            browser.tabs.sendMessage(id, {
+            return browser.tabs.sendMessage(id, {
                 "event": "finishInsertCss",
                 "css": css
             }, {
@@ -113,6 +113,8 @@
         browser.tabs.sendMessage(sender.tab.id, {
             "event": "setContentInfo",
             "attributes": attributes
+        }, {
+            "frameId": sender.frameId
         });
     };
 
