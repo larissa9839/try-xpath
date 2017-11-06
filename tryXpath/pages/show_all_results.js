@@ -79,7 +79,7 @@
                     "event": "focusContextItem",
                     "executionId": executionId
                 }, {
-                    "frameId": relatedTabId
+                    "frameId": relatedFrameId
                 });
             }
         });
