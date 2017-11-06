@@ -1,5 +1,8 @@
 2017-11-06  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/background/try_xpath_background.js:
+	Modify genericListener.listeners.updateCss function.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Set initial value of prevMsg.
 

@@ -72,15 +72,18 @@
 
     genericListener.listeners.updateCss = function (message, sender) {
         var id = sender.tab.id;
+        var frameId = sender.frameId;
 
         for (let removeCss in message.expiredCssSet) {
             browser.tabs.removeCSS(id, {
                 "code": removeCss,
-                "allFrames": true
+                "frameId": frameId
             }).then(() => {
                 browser.tabs.sendMessage(id, {
                     "event": "finishRemoveCss",
                     "css": removeCss
+                }, {
+                    "frameId": frameId
                 });
             }).catch(fu.onError);
         }
@@ -88,11 +91,13 @@
         browser.tabs.insertCSS(id, {
             "code":css,
             "cssOrigin": "author",
-            "allFrames": true
+            "frameId": frameId
         }).then(() => {
             browser.tabs.sendMessage(id, {
                 "event": "finishInsertCss",
                 "css": css
+            }, {
+                "frameId": frameId
             });
         }).catch(fu.onError);
     };
