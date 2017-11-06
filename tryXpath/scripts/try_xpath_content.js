@@ -158,6 +158,19 @@
         // If newCss and currentCss are the same string do nothing.
     };
 
+    function findFrameElement(win) {
+        try {
+            var frames = document.getElementsByTagName("iframe");
+            for (let i = 0; i < frames.length; i++) {
+                if (win === frames[i].contentWindow) {
+                    return frames[i];
+                }
+            }
+        } catch (e) {
+        }
+        return null;
+    };
+
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
@@ -290,6 +303,15 @@
         }
     };
 
+    genericListener.listeners.focusFrame = function(message) {
+        if (window !== window.top) {
+            window.parent.postMessage({
+                "message": "tryxpath-focus-frame",
+                "index": 0
+            }, "*");
+        }
+    };
+
     genericListener.listeners.requestShowResultsInPopup = function () {
         if (prevMsg) {
             prevMsg.event = "showResultsInPopup";
@@ -338,6 +360,30 @@
         }
     });
 
+    window.addEventListener("message", (event) => {
+        var data = event.data;
+        var frame = findFrameElement(event.source);
+        if (frame
+            && event.data
+            && event.data.message === "tryxpath-focus-frame"
+            && Number.isInteger(event.data.index)) {
+
+            let index = event.data.index;
+            updateCss();
+            setAttr(attributes.frame, index, frame);
+            setIndex(attributes.frameAncestor, fu.getAncestorElements(frame));
+            if (window === window.top) {
+                frame.blur();
+                frame.focus();
+                frame.scrollIntoView();
+            } else {
+                window.parent.postMessage({
+                    "message": "tryxpath-focus-frame",
+                    "index": ++index
+                }, "*");
+            }
+        }
+    });
 
     browser.runtime.sendMessage({ "event": "requestSetContentInfo" });
 

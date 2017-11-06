@@ -316,6 +316,11 @@
                 sendToSpecifiedFrame({ "event": "requestShowResultsInPopup"});
             });
 
+        document.getElementById("focus-frame").addEventListener(
+            "click", () => {
+                sendToSpecifiedFrame({ "event": "focusFrame"});
+            });
+
         document.getElementById("show-all-results").addEventListener(
             "click", () => {
                 sendToSpecifiedFrame({ "event": "requestShowAllResults" });
