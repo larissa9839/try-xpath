@@ -244,6 +244,8 @@
         changeContextVisible();
         changeResolverVisible();
         changeFrameVisible();
+
+        sendToSpecifiedFrame({ "event": "requestShowResultsInPopup" });
     };
 
     genericListener.listeners.addFrameId = function (message, sender) {
@@ -400,7 +402,6 @@
         resultsTbody.appendChild(fu.createDetailTableHeader());
         contextTbody.appendChild(fu.createDetailTableHeader());
 
-        sendToSpecifiedFrame({ "event": "requestShowResultsInPopup" });
         browser.runtime.sendMessage({ "event": "requestRestorePopupState" });
     });
 

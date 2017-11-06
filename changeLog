@@ -1,5 +1,8 @@
 2017-11-07  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Change time to send requestRestorePopupState message.
+
 	* tryXpath/scripts/try_xpath_content.js: 
 	Define findFrameElement function.
 	Set "message" handler to window.
