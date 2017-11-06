@@ -80,7 +80,13 @@ th {
 #show-all-results,
 #open-options,
 #set-style,
-#reset-style {
+#reset-style,
+#get-all-frame-id,
+#frame-id-list,
+#focus-frame,
+#show-previous-results,
+#set-all-style,
+#reset-all-style {
     box-sizing: border-box;
     width: 50%;
 }
