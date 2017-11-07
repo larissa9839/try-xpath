@@ -33,6 +33,7 @@
       <dt><label for="main-expression">Expression</label></dt>
       <dd><textarea id="main-expression"></textarea></dd>
     </dl>
+    <div>If you want to enter a new line, please enter the Shift-Enter.</div>
   </div>
 </div>
 <div>
@@ -66,7 +67,7 @@
       <ol>
         <li>Enter {"x":"http://www.w3.org/1999/xhtml"} in the resolver input field.</li>
         <li>Enter //x:p in the expression input field.</li>
-        <li>Click execute button.</li>
+        <li>Click the Execute button.</li>
       </ol>
     </div>
     <dl>
@@ -78,7 +79,13 @@
 <div>
   <h1 id="frame-header"><input type="checkbox" id="frame-switch"><label for="frame-switch">Frame</label></h1>
   <div id="frame-body">
-    <div>You can specify the frame where the expression is executed. If you want to specify window.frames[1].frames[0] enter [1, 0] in the frame input field. However, this feature is limited by the same origin policy.</div>
+    <div>You can specify the frame where the expression is executed. If you want to specify a frame, please do as follows.
+      <ol>
+        <li>Click the Get-all-frameId button.</li>
+        <li>Select a frameId.</li>
+        <li>Click the Focus-frame button.</li>
+        <li>Execute a expression.</li>
+      </ol>
     <div>
       <button id="get-all-frame-id">Get all frameId</button><select id="frame-id-list"><option data-frame-id="manual">Manual</option></select>
     </div>
