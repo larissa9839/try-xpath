@@ -12,6 +12,7 @@
     var document = window.document;
 
     const noneClass = "none";
+    const helpClass = "help";
     const invalidTabId = browser.tabs.TAB_ID_NONE;
     const invalidExecutionId = NaN;
     const invalidFrameId = -1;
@@ -21,7 +22,7 @@
         resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
         frameBody, frameIdList, frameIdExpression, resultsMessage,
         resultsTbody, contextTbody, resultsCount, resultsFrameId,
-        detailsPageCount;
+        detailsPageCount, helpBody, helpCheckbox;
 
     var relatedTabId = invalidTabId;
     var relatedFrameId = invalidFrameId;
@@ -62,6 +63,7 @@
 
     function collectPopupState() {
         var state = Object.create(null);
+        state.helpCheckboxChecked = helpCheckbox.checked;
         state.mainWayIndex = mainWay.selectedIndex;
         state.mainExpressionValue = mainExpression.value;
         state.contextCheckboxChecked = contextCheckbox.checked;
@@ -95,6 +97,19 @@
             frameBody.classList.remove(noneClass);
         } else {
             frameBody.classList.add(noneClass);
+        }
+    };
+
+    function changeHelpVisible() {
+        var helps = document.getElementsByClassName(helpClass);
+        if (helpCheckbox.checked) {
+            for (var i = 0; i < helps.length; i++) {
+                helps[i].classList.remove(noneClass);
+            }
+        } else {
+            for (var i = 0; i < helps.length; i++) {
+                helps[i].classList.add(noneClass);
+            }
         }
     };
 
@@ -230,6 +245,7 @@
         var state = message.state;
 
         if (state !== null) {
+            helpCheckbox.checked = state.helpCheckboxChecked;
             mainWay.selectedIndex = state.mainWayIndex;
             mainExpression.value = state.mainExpressionValue;
             contextCheckbox.checked = state.contextCheckboxChecked;
@@ -241,6 +257,7 @@
             frameIdExpression.value = state.specifiedFrameId;
         }
 
+        changeHelpVisible();
         changeContextVisible();
         changeResolverVisible();
         changeFrameVisible();
@@ -256,6 +273,8 @@
     };
 
     window.addEventListener("load", () => {
+        helpBody = document.getElementById("help-body");
+        helpCheckbox = document.getElementById("help-switch");
         mainWay = document.getElementById("main-way");
         mainExpression = document.getElementById("main-expression");
         contextHeader = document.getElementById("context-header");
@@ -281,9 +300,11 @@
             .getElementsByTagName("tbody")[0];
         detailsPageCount = document.getElementById("details-page-count");
 
+        helpBody.addEventListener("click", changeHelpVisible);
+        helpBody.addEventListener("keypress", changeHelpVisible);
+
         document.getElementById("execute").addEventListener("click",
                                                             sendExecute);
-
         mainExpression.addEventListener("keypress", handleExprEnter);
 
         contextHeader.addEventListener("click", changeContextVisible);
