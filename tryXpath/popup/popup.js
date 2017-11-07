@@ -54,7 +54,7 @@
             }
             return execContentScript();
         }).then(() => {
-            sendToActiveTab(msg, { "frameId": frameId });
+            return sendToActiveTab(msg, { "frameId": frameId });
         }).catch(e => {
             showError("An error occurred. The frameId may be incorrect.",
                       frameId);

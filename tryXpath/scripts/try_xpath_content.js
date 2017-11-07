@@ -68,6 +68,9 @@
         if (!item) {
             return;
         }
+        if (!fu.isNodeItem(item)) {
+            return;
+        }
 
         if (fu.isElementItem(item)) {
             focusedItem = item;
