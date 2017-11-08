@@ -2,6 +2,8 @@
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Fix focusItem function.
+	Define isFocusable function.
+	Modify focusItem function.
 
 2017-11-07  larissa9839  <larissa9839@gmail.com>
 

@@ -60,15 +60,23 @@
         fu.setIndexToItems(attr, items);
     };
 
+    function isFocusable(item) {
+        if (!item) {
+            return false;
+        }
+        if (fu.isNodeItem(item) || fu.isAttrItem(item)) {
+            return true;
+        }
+        return false;
+    };
+
     function focusItem(item) {
         fu.removeAttrFromItem(attributes.focused, focusedItem);
         fu.removeAttrFromItems(attributes.focusedAncestor,
                                focusedAncestorItems);
         
-        if (!item) {
-            return;
-        }
-        if (!fu.isNodeItem(item)) {
+
+        if (!isFocusable(item)) {
             return;
         }
 
