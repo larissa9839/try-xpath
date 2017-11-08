@@ -72,7 +72,9 @@
         state.resolverCheckboxChecked = resolverCheckbox.checked;
         state.resolverExpressionValue = resolverExpression.value;
         state.frameCheckboxChecked = frameCheckbox.checked;
+
         state.specifiedFrameId = getSpecifiedFrameId();
+        state.detailsPageIndex = detailsPageIndex;
         return state;
     };
 
@@ -180,7 +182,7 @@
     function showDetailsPage(index) {
         var max = Math.floor(resultedDetails.length / detailsPageSize);
 
-        if (!Number.isFinite(index)) {
+        if (!Number.isInteger(index)) {
             index = 0;
         }
         index = Math.max(0, index);
@@ -193,7 +195,7 @@
             "begin": index * detailsPageSize,
             "end": (index * detailsPageSize) + detailsPageSize,
         }).then(() => {
-            detailsPageCount.value = (index + 1);
+            detailsPageCount.value = index + 1;
             detailsPageIndex = index;
             window.scrollTo(scrollX, scrollY);
         }).catch(fu.onError);
@@ -238,7 +240,7 @@
                 .catch(fu.onError);
         }
 
-        showDetailsPage(0);
+        showDetailsPage(detailsPageIndex);
     };
 
     genericListener.listeners.restorePopupState = function (message) {
@@ -255,6 +257,8 @@
             resolverExpression.value = state.resolverExpressionValue;
             frameCheckbox.checked = state.frameCheckboxChecked;
             frameIdExpression.value = state.specifiedFrameId;
+
+            detailsPageIndex = state.detailsPageIndex;
         }
 
         changeHelpVisible();
