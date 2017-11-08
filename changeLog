@@ -1,5 +1,8 @@
 2017-11-08  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/manifest.json:
+	Change version. 1.0.0 -> 1.1.0
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Fix focusItem function.
 	Define isFocusable function.
