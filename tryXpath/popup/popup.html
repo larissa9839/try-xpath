@@ -78,7 +78,17 @@
   </div>
 </div>
 <div>
-  <h1 id="frame-id-header"><input type="checkbox" id="frame-id-switch"><label for="frame-id-switch">Frame</label></h1>
+  <h1 id="frame-designation-header"><input type="checkbox" id="frame-designation-switch"><label for="frame-designation-switch">Frame without id</label></h1>
+  <div id="frame-designation-body">
+    <div class="help">You can specify the frame which does not have id. If you want to specify window.frames[1].frames[0] enter [1, 0] in the frame input field.</div>
+    <dl>
+      <dt><label for="frame-designation-expression">Frame</label></dt>
+      <dd><input type="text" id="frame-designation-expression"></dd>
+    </dl>
+  </div>
+</div>
+<div>
+  <h1 id="frame-id-header"><input type="checkbox" id="frame-id-switch"><label for="frame-id-switch">frameId</label></h1>
   <div id="frame-id-body">
     <div class="help">You can specify the frame where the expression is executed. If you want to specify a frame, please do as follows.
       <ol>
