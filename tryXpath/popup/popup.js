@@ -73,6 +73,10 @@
         state.contextExpressionValue = contextExpression.value;
         state.resolverCheckboxChecked = resolverCheckbox.checked;
         state.resolverExpressionValue = resolverExpression.value;
+        state.frameDesignationCheckboxChecked
+            = frameDesignationCheckbox.checked;
+        state.frameDesignationExpressionValue
+            = frameDesignationExpression.value;
         state.frameIdCheckboxChecked = frameIdCheckbox.checked;
 
         state.specifiedFrameId = getSpecifiedFrameId();
@@ -265,6 +269,10 @@
             contextExpression.value = state.contextExpressionValue;
             resolverCheckbox.checked = state.resolverCheckboxChecked;
             resolverExpression.value = state.resolverExpressionValue;
+            frameDesignationCheckbox.checked
+                = state.frameDesignationCheckboxChecked;
+            frameDesignationExpression.value
+                = state.frameDesignationExpressionValue;
             frameIdCheckbox.checked = state.frameIdCheckboxChecked;
             frameIdExpression.value = state.specifiedFrameId;
 
