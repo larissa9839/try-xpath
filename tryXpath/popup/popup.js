@@ -19,8 +19,8 @@
 
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
-        resolverCheckbox, resolverExpression, frameHeader, frameCheckbox,
-        frameBody, frameIdList, frameIdExpression, resultsMessage,
+        resolverCheckbox, resolverExpression, frameIdHeader, frameIdCheckbox,
+        frameIdBody, frameIdList, frameIdExpression, resultsMessage,
         resultsTbody, contextTbody, resultsCount, resultsFrameId,
         detailsPageCount, helpBody, helpCheckbox;
 
@@ -71,7 +71,7 @@
         state.contextExpressionValue = contextExpression.value;
         state.resolverCheckboxChecked = resolverCheckbox.checked;
         state.resolverExpressionValue = resolverExpression.value;
-        state.frameCheckboxChecked = frameCheckbox.checked;
+        state.frameIdCheckboxChecked = frameIdCheckbox.checked;
 
         state.specifiedFrameId = getSpecifiedFrameId();
         state.detailsPageIndex = detailsPageIndex;
@@ -95,10 +95,10 @@
     };
 
     function changeFrameVisible () {
-        if (frameCheckbox.checked) {
-            frameBody.classList.remove(noneClass);
+        if (frameIdCheckbox.checked) {
+            frameIdBody.classList.remove(noneClass);
         } else {
-            frameBody.classList.add(noneClass);
+            frameIdBody.classList.add(noneClass);
         }
     };
 
@@ -146,7 +146,7 @@
     };
 
     function getSpecifiedFrameId () { 
-        if (!frameCheckbox.checked) {
+        if (!frameIdCheckbox.checked) {
             return 0;
         }
         var id = frameIdList.selectedOptions[0].getAttribute("data-frame-id");
@@ -255,7 +255,7 @@
             contextExpression.value = state.contextExpressionValue;
             resolverCheckbox.checked = state.resolverCheckboxChecked;
             resolverExpression.value = state.resolverExpressionValue;
-            frameCheckbox.checked = state.frameCheckboxChecked;
+            frameIdCheckbox.checked = state.frameIdCheckboxChecked;
             frameIdExpression.value = state.specifiedFrameId;
 
             detailsPageIndex = state.detailsPageIndex;
@@ -290,9 +290,9 @@
         resolverCheckbox = document.getElementById("resolver-switch");
         resolverBody = document.getElementById("resolver-body");
         resolverExpression = document.getElementById("resolver-expression");
-        frameHeader = document.getElementById("frame-header");
-        frameCheckbox = document.getElementById("frame-switch");
-        frameBody = document.getElementById("frame-body");
+        frameIdHeader = document.getElementById("frame-id-header");
+        frameIdCheckbox = document.getElementById("frame-id-switch");
+        frameIdBody = document.getElementById("frame-id-body");
         frameIdList = document.getElementById("frame-id-list");
         frameIdExpression = document.getElementById("frame-id-expression");
         resultsMessage = document.getElementById("results-message");
@@ -319,8 +319,8 @@
         resolverHeader.addEventListener("keypress", changeResolverVisible);
         resolverExpression.addEventListener("keypress", handleExprEnter);
 
-        frameHeader.addEventListener("click", changeFrameVisible);
-        frameHeader.addEventListener("keypress", changeFrameVisible);
+        frameIdHeader.addEventListener("click", changeFrameVisible);
+        frameIdHeader.addEventListener("keypress", changeFrameVisible);
         frameIdExpression.addEventListener("keypress", handleExprEnter);
         document.getElementById("get-all-frame-id").addEventListener(
             "click", () => {

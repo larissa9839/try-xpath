@@ -1,3 +1,12 @@
+2017-11-16  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.js:
+	Rename variables. frameHeader -> frameIdHeader, frameBody ->
+	frameIdBody, frameCheckbox -> frameIdCheckbox.
+
+	* tryXpath/popup/popup.html (Main):
+	Rename ids.
+
 2017-11-08  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/manifest.json:
