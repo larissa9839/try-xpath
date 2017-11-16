@@ -156,6 +156,10 @@
             msg.context.resolver = resol;
         }
 
+        if (frameDesignationCheckbox.checked) {
+            msg.frameDesignation = frameDesignationExpression.value;
+        }
+
         return msg;
     };
 

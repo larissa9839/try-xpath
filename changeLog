@@ -6,6 +6,7 @@
 	frameDesignationBody, frameDesignationExpression variables.
 	Define changeFrameDesignationVisible function.
 	Save and restore some states related to frameDesignation.
+	Modify makeExecuteMessage fucntion.
 
 	* tryXpath/popup/popup.html (Main):
 	Add some elements related frameDesignation.
