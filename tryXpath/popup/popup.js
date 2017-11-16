@@ -94,7 +94,7 @@
         }
     };
 
-    function changeFrameVisible () {
+    function changeFrameIdVisible () {
         if (frameIdCheckbox.checked) {
             frameIdBody.classList.remove(noneClass);
         } else {
@@ -264,7 +264,7 @@
         changeHelpVisible();
         changeContextVisible();
         changeResolverVisible();
-        changeFrameVisible();
+        changeFrameIdVisible();
 
         sendToSpecifiedFrame({ "event": "requestShowResultsInPopup" });
     };
@@ -319,8 +319,8 @@
         resolverHeader.addEventListener("keypress", changeResolverVisible);
         resolverExpression.addEventListener("keypress", handleExprEnter);
 
-        frameIdHeader.addEventListener("click", changeFrameVisible);
-        frameIdHeader.addEventListener("keypress", changeFrameVisible);
+        frameIdHeader.addEventListener("click", changeFrameIdVisible);
+        frameIdHeader.addEventListener("keypress", changeFrameIdVisible);
         frameIdExpression.addEventListener("keypress", handleExprEnter);
         document.getElementById("get-all-frame-id").addEventListener(
             "click", () => {
