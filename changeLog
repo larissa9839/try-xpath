@@ -2,6 +2,9 @@
 
 	* tryXpath/popup/popup.js:
 	Rename function name. changeFrameVisible -> changeFrameIdVisible.
+	Define frameDesignationHeader, frameDesignationCheckbox,
+	frameDesignationBody, frameDesignationExpression variables.
+	Define changeFrameDesignationVisible function.
 
 	* tryXpath/popup/popup.html (Main):
 	Add some elements related frameDesignation.

@@ -19,7 +19,9 @@
 
     var mainWay, mainExpression, contextCheckbox, contextHeader, contextBody,
         contextWay, contextExpression, resolverHeader, resolverBody,
-        resolverCheckbox, resolverExpression, frameIdHeader, frameIdCheckbox,
+        resolverCheckbox, resolverExpression, frameDesignationHeader,
+        frameDesignationCheckbox, frameDesignationBody,
+        frameDesignationExpression, frameIdHeader, frameIdCheckbox,
         frameIdBody, frameIdList, frameIdExpression, resultsMessage,
         resultsTbody, contextTbody, resultsCount, resultsFrameId,
         detailsPageCount, helpBody, helpCheckbox;
@@ -99,6 +101,14 @@
             frameIdBody.classList.remove(noneClass);
         } else {
             frameIdBody.classList.add(noneClass);
+        }
+    };
+
+    function changeFrameDesignationVisible() {
+        if (frameDesignationCheckbox.checked) {
+            frameDesignationBody.classList.remove(noneClass);
+        } else {
+            frameDesignationBody.classList.add(noneClass);
         }
     };
 
@@ -264,6 +274,7 @@
         changeHelpVisible();
         changeContextVisible();
         changeResolverVisible();
+        changeFrameDesignationVisible();
         changeFrameIdVisible();
 
         sendToSpecifiedFrame({ "event": "requestShowResultsInPopup" });
@@ -290,6 +301,14 @@
         resolverCheckbox = document.getElementById("resolver-switch");
         resolverBody = document.getElementById("resolver-body");
         resolverExpression = document.getElementById("resolver-expression");
+        frameDesignationHeader = document.getElementById(
+            "frame-designation-header");
+        frameDesignationCheckbox = document.getElementById(
+            "frame-designation-switch");
+        frameDesignationBody = document.getElementById(
+            "frame-designation-body");
+        frameDesignationExpression = document.getElementById(
+            "frame-designation-expression");
         frameIdHeader = document.getElementById("frame-id-header");
         frameIdCheckbox = document.getElementById("frame-id-switch");
         frameIdBody = document.getElementById("frame-id-body");
@@ -318,6 +337,13 @@
         resolverHeader.addEventListener("click", changeResolverVisible);
         resolverHeader.addEventListener("keypress", changeResolverVisible);
         resolverExpression.addEventListener("keypress", handleExprEnter);
+
+        frameDesignationHeader.addEventListener(
+            "click", changeFrameDesignationVisible);
+        frameDesignationHeader.addEventListener(
+            "keypress", changeFrameDesignationVisible);
+        frameDesignationExpression.addEventListener(
+            "keypress", handleExprEnter);
 
         frameIdHeader.addEventListener("click", changeFrameIdVisible);
         frameIdHeader.addEventListener("keypress", changeFrameIdVisible);
