@@ -652,4 +652,25 @@ if (!tryXpath.functions) {
         // console.log(err);
     };
 
+    fu.isBlankWindow = function (win) {
+        try {
+            return (win.location.href === "about:blank");
+        } catch (e) {
+        }
+        return false;
+    };
+
+    fu.collectBlankWindows = function (top) {
+        var wins = [];
+        var frames = top.frames;
+        for (let i = 0; i < frames.length; i++) {
+            let win = frames[i];
+            if (fu.isBlankWindow(win)) {
+                wins.push(win);
+                wins = wins.concat(fu.collectBlankWindows(win));
+            }
+        }
+        return wins;
+    };
+
 })(window);
