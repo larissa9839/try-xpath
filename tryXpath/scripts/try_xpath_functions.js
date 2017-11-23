@@ -686,5 +686,18 @@ if (!tryXpath.functions) {
         return null;
     };
 
+    fu.findFrameIndex = function (win, parent) {
+        try {
+            var wins = parent.frames;
+            for (let i = 0; i < wins.length; i++) {
+                if (win === wins[i]) {
+                    return i;
+                }
+            }
+        } catch (e) {
+        }
+        return -1;
+    };
+
 
 })(window);
