@@ -169,6 +169,56 @@
         // If newCss and currentCss are the same string do nothing.
     };
 
+    function findFrameByMessage(event, win) {
+        var ind = event.data.frameIndex;
+        var subWin;
+        if (ind >= 0) {
+            subWin = win.frames[ind];
+        } else {
+            subWin = event.source;
+        }
+        return fu.findFrameElement(subWin, win);
+    };
+
+    function setFocusFrameListener(win, isBlankWindow) {
+        var localUpdateCss;
+        if (isBlankWindow) {
+        } else {
+            localUpdateCss = updateCss;
+        }
+
+        win.addEventListener("message", (event) => {
+            if (event.data
+                && event.data.message === "tryxpath-focus-frame"
+                && Number.isInteger(event.data.index)
+                && Number.isInteger(event.data.frameIndex)) {
+
+                let frame = findFrameByMessage(event, win);
+                if (!frame) {
+                    return;
+                }
+
+                let index = event.data.index;
+                localUpdateCss();
+                setAttr(attributes.frame, index, frame);
+                setIndex(attributes.frameAncestor,
+                         fu.getAncestorElements(frame));
+                if (window === window.top) {
+                    frame.blur();
+                    frame.focus();
+                    frame.scrollIntoView();
+                } else {
+                    window.parent.postMessage({
+                        "message": "tryxpath-focus-frame",
+                        "index": ++index,
+                        "frameIndex": fu.findFrameIndex(win, win.parent)
+                    }, "*");
+                }
+            }
+        });
+    };
+
+
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
@@ -305,7 +355,8 @@
         if (window !== window.top) {
             window.parent.postMessage({
                 "message": "tryxpath-focus-frame",
-                "index": 0
+                "index": 0,
+                "frameIndex": fu.findFrameIndex(window, window.parent)
             }, "*");
         }
     };
@@ -357,30 +408,7 @@
         }
     });
 
-    window.addEventListener("message", (event) => {
-        var data = event.data;
-        var frame = fu.findFrameElement(event.source, window);
-        if (frame
-            && event.data
-            && event.data.message === "tryxpath-focus-frame"
-            && Number.isInteger(event.data.index)) {
-
-            let index = event.data.index;
-            updateCss();
-            setAttr(attributes.frame, index, frame);
-            setIndex(attributes.frameAncestor, fu.getAncestorElements(frame));
-            if (window === window.top) {
-                frame.blur();
-                frame.focus();
-                frame.scrollIntoView();
-            } else {
-                window.parent.postMessage({
-                    "message": "tryxpath-focus-frame",
-                    "index": ++index
-                }, "*");
-            }
-        }
-    });
+    setFocusFrameListener(window, false);
 
     browser.runtime.sendMessage({ "event": "requestSetContentInfo" });
 

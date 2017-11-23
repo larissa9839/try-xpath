@@ -1,5 +1,8 @@
 2017-11-23  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Define findFrameByMessage function.
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define findFrameElement function.
 	Define findFrameIndex function.
