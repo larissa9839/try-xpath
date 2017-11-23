@@ -169,19 +169,6 @@
         // If newCss and currentCss are the same string do nothing.
     };
 
-    function findFrameElement(win) {
-        try {
-            var frames = document.getElementsByTagName("iframe");
-            for (let i = 0; i < frames.length; i++) {
-                if (win === frames[i].contentWindow) {
-                    return frames[i];
-                }
-            }
-        } catch (e) {
-        }
-        return null;
-    };
-
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
@@ -361,7 +348,6 @@
         delete expiredCssSet[css];
     };
 
-
     browser.storage.onChanged.addListener(changes => {
         if (changes.attributes && ("newValue" in changes.attributes)) {
             attributes = changes.attributes.newValue;
@@ -373,7 +359,7 @@
 
     window.addEventListener("message", (event) => {
         var data = event.data;
-        var frame = findFrameElement(event.source);
+        var frame = fu.findFrameElement(event.source, window);
         if (frame
             && event.data
             && event.data.message === "tryxpath-focus-frame"

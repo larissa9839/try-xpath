@@ -1,3 +1,16 @@
+2017-11-23  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_functions.js:
+	Define findFrameElement function.
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Remove findFrameElement function.
+
+2017-11-22  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Define genericListener.listeners.initializeBlankWindows function.
+
 2017-11-18  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_functions.js:

@@ -673,4 +673,18 @@ if (!tryXpath.functions) {
         return wins;
     };
 
+    fu.findFrameElement = function (win, parent) {
+        try {
+            var frames = parent.document.getElementsByTagName("iframe");
+            for (let i = 0; i < frames.length; i++) {
+                if (win === frames[i].contentWindow) {
+                    return frames[i];
+                }
+            }
+        } catch (e) {
+        }
+        return null;
+    };
+
+
 })(window);
