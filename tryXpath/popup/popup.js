@@ -56,6 +56,8 @@
             }
             return execContentScript();
         }).then(() => {
+            return sendToActiveTab({ "event": "initializeBlankWindows" });
+        }).then(() => {
             return sendToActiveTab(msg, { "frameId": frameId });
         }).catch(e => {
             showError("An error occurred. The frameId may be incorrect.",

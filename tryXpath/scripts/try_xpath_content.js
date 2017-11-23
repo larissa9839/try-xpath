@@ -183,6 +183,7 @@
     function setFocusFrameListener(win, isBlankWindow) {
         var localUpdateCss;
         if (isBlankWindow) {
+            localUpdateCss = () => {};
         } else {
             localUpdateCss = updateCss;
         }
@@ -203,12 +204,12 @@
                 setAttr(attributes.frame, index, frame);
                 setIndex(attributes.frameAncestor,
                          fu.getAncestorElements(frame));
-                if (window === window.top) {
+                if (win === win.top) {
                     frame.blur();
                     frame.focus();
                     frame.scrollIntoView();
                 } else {
-                    window.parent.postMessage({
+                    win.parent.postMessage({
                         "message": "tryxpath-focus-frame",
                         "index": ++index,
                         "frameIndex": fu.findFrameIndex(win, win.parent)
@@ -218,6 +219,18 @@
         });
     };
 
+    function initBlankWindow(win) {
+        if (!win.tryXpath) {
+            win.tryXpath = Object.create(null);
+        }
+
+        if (win.tryXpath.isInitialized) {
+            return;
+        }
+        win.tryXpath.isInitialized = true;
+
+        setFocusFrameListener(win, true);
+    };
 
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
@@ -397,6 +410,10 @@
             currentCss = null;
         }
         delete expiredCssSet[css];
+    };
+
+    genericListener.listeners.initializeBlankWindows = function () {
+        fu.collectBlankWindows(window).forEach(initBlankWindow);
     };
 
     browser.storage.onChanged.addListener(changes => {

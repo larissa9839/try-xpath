@@ -2,6 +2,8 @@
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Define findFrameByMessage function.
+	Define genericListener.listeners.initializeBlankWindows function.
+	Define initBlankWindow function.
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define findFrameElement function.
