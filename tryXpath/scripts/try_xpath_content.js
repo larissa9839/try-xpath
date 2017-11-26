@@ -47,6 +47,7 @@
     var focusedItem = dummyItem;
     var focusedAncestorItems = dummyItems;
     var currentCss = null;
+    var insertedStyleElements = new Map();
     var expiredCssSet = Object.create(null);
     var originalAttributes = new Map();
 
@@ -183,7 +184,7 @@
     function setFocusFrameListener(win, isBlankWindow) {
         var localUpdateCss;
         if (isBlankWindow) {
-            localUpdateCss = () => {};
+            localUpdateCss = updateStyleElement.bind(null, win.document);
         } else {
             localUpdateCss = updateCss;
         }
@@ -230,6 +231,28 @@
         win.tryXpath.isInitialized = true;
 
         setFocusFrameListener(win, true);
+    };
+
+    function findStyleParent(doc) {
+        return (doc.head || doc.body || null);
+    };
+
+    function updateStyleElement(doc) {
+        var css = currentCss || "";
+
+        var style = insertedStyleElements.get(doc);
+        if (style) {
+            style.textContent = css;
+            return;
+        }
+
+        var parent = findStyleParent(doc);
+        if (parent) {
+            let newStyle = doc.createElement("style");
+            newStyle.textContent = css;
+            parent.appendChild(newStyle);
+            insertedStyleElements.set(doc, newStyle);
+        }
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -402,6 +425,9 @@
         var css = message.css;
         currentCss = css;
         delete expiredCssSet[css];
+        for (let [doc, elem] of insertedStyleElements) {
+            elem.textContent = currentCss;
+        }
     };
 
     genericListener.listeners.finishRemoveCss = function (message) {

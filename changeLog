@@ -1,3 +1,14 @@
+2017-11-26  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Define updateStyleElement function.
+
+2017-11-25  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Define insertedStyleElements variable;
+	Define findStyleParent function.
+
 2017-11-23  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
