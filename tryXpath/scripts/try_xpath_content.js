@@ -17,6 +17,10 @@
 
     const dummyItem = "";
     const dummyItems = [];
+    const styleElementHeader
+          = "/* This style element was inserted by browser add-on, Try XPath."
+          + " If you want to remove this element, please click the reset"
+          + " style button in the popup. */\n";
 
     var attributes = {
         "element": "data-tryxpath-element",
@@ -239,6 +243,7 @@
 
     function updateStyleElement(doc) {
         var css = currentCss || "";
+        css = styleElementHeader + css;
 
         var style = insertedStyleElements.get(doc);
         if (style) {
@@ -252,6 +257,14 @@
             newStyle.textContent = css;
             parent.appendChild(newStyle);
             insertedStyleElements.set(doc, newStyle);
+        }
+    };
+
+    function updateAllStyleElements() {
+        var css = currentCss || "";
+        css = styleElementHeader + css;
+        for (let [doc, elem] of insertedStyleElements) {
+            elem.textContent = css;
         }
     };
 
@@ -425,9 +438,8 @@
         var css = message.css;
         currentCss = css;
         delete expiredCssSet[css];
-        for (let [doc, elem] of insertedStyleElements) {
-            elem.textContent = currentCss;
-        }
+
+        updateAllStyleElements();
     };
 
     genericListener.listeners.finishRemoveCss = function (message) {

@@ -2,6 +2,8 @@
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Define updateStyleElement function.
+	Define styleElementHeader constants.
+	Define updateAllStyleElements function.
 
 2017-11-25  larissa9839  <larissa9839@gmail.com>
 
