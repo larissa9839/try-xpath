@@ -268,20 +268,6 @@
         }
     };
 
-    function removeStyleElement(doc) {
-        var elem = insertedStyleElements.get(doc);
-        
-        if (!elem) {
-            return;
-        }
-
-        var parent = elem.parentNode;
-        if (parent) {
-            parent.removeChild(elem);
-        }
-        insertedStyleElements.delete(doc);
-    };
-
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
