@@ -45,6 +45,8 @@
         }
     };
     var executionCount = 0;
+    var inBlankWindow = false;
+    var currentDocument = null;
     var currentFrames = dummyItems;
     var contextItem = dummyItem;
     var currentItems = dummyItems;
@@ -54,6 +56,7 @@
     var insertedStyleElements = new Map();
     var expiredCssSet = Object.create(null);
     var originalAttributes = new Map();
+    
 
     function setAttr(attr, value, item) {
         fu.saveAttrForItem(item, attr, originalAttributes);
@@ -312,9 +315,6 @@
     };
 
     genericListener.listeners.execute = function(message, sender) {
-        var inBlankWin = false;
-        var targetDoc;
-
         resetPrev();
 
         updateCss();
@@ -337,6 +337,7 @@
         sendMsg.main.itemDetails = [];
 
         contextItem = document;
+        currentDocument = document;
 
         if ("frameDesignation" in message) {
             sendMsg.frameDesignation = message.frameDesignation;
@@ -350,12 +351,12 @@
                 prevMsg = sendMsg;
                 return;
             }
-            inBlankWin = true;
-            targetDoc = contextItem;
+            inBlankWindow = true;
+            currentDocument = contextItem;
         }
 
-        if (inBlankWin) {
-            removeStyleElement(targetDoc);
+        if (inBlankWindow) {
+            removeStyleElement(currentDocument);
         }
 
         if (message.context) {
@@ -418,12 +419,17 @@
         prevMsg = sendMsg;
 
         setMainAttrs();
-        updateStyleElement(targetDoc);
+        if (inBlankWindow) {
+            updateStyleElement(currentDocument);
+        }
         return;
     }
 
     genericListener.listeners.focusItem = function(message) {
         if (message.executionId === executionCount) {
+            if (inBlankWindow) {
+                updateStyleElement(currentDocument);
+            }
             focusItem(currentItems[message.index]);
         }
     };
