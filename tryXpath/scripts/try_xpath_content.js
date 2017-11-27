@@ -312,6 +312,9 @@
     };
 
     genericListener.listeners.execute = function(message, sender) {
+        var inBlankWin = false;
+        var targetDoc;
+
         resetPrev();
 
         updateCss();
@@ -347,6 +350,12 @@
                 prevMsg = sendMsg;
                 return;
             }
+            inBlankWin = true;
+            targetDoc = contextItem;
+        }
+
+        if (inBlankWin) {
+            removeStyleElement(targetDoc);
         }
 
         if (message.context) {
@@ -409,6 +418,7 @@
         prevMsg = sendMsg;
 
         setMainAttrs();
+        updateStyleElement(targetDoc);
         return;
     }
 
