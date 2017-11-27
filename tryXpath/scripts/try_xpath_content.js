@@ -282,6 +282,16 @@
         insertedStyleElements.delete(doc);
     };
 
+    function removeAllStyleElements() {
+        for (let [doc, elem] of insertedStyleElements) {
+            let parent = elem.parentNode;
+            if (parent) {
+                parent.removeChild(elem);
+            }
+        }
+        insertedStyleElements.clear();
+    };
+
     function genericListener(message, sender, sendResponse) {
         var listener = genericListener.listeners[message.event];
         if (listener) {
