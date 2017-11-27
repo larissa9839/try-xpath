@@ -258,6 +258,7 @@
         if (parent) {
             let newStyle = doc.createElement("style");
             newStyle.textContent = css;
+            newStyle.setAttribute("type", "text/css");
             parent.appendChild(newStyle);
             insertedStyleElements.set(doc, newStyle);
         }

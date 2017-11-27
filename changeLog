@@ -3,6 +3,7 @@
 	* tryXpath/scripts/try_xpath_content.js:
 	Define removeStyleElement function.
 	Define inBlankWindow variable.
+	Modify updateStyleElement function.
 
 2017-11-26  larissa9839  <larissa9839@gmail.com>
 
