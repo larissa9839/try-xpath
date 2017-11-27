@@ -450,6 +450,7 @@
 
     genericListener.listeners.resetStyle = function () {
         restoreAttrs();
+        removeAllStyleElements();
     };
 
     genericListener.listeners.setStyle = function () {
