@@ -436,6 +436,9 @@
 
     genericListener.listeners.focusContextItem = function(message) {
         if (message.executionId === executionCount) {
+            if (inBlankWindow) {
+                updateStyleElement(currentDocument);
+            }
             focusItem(contextItem);
         }
     };
@@ -472,6 +475,9 @@
     genericListener.listeners.setStyle = function () {
         restoreAttrs();
         updateCss();
+        if (inBlankWindow) {
+            updateStyleElement(currentDocument);
+        }
         setMainAttrs();
     };
 
