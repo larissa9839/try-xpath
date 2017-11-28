@@ -160,7 +160,7 @@
         if (fu.isNumberArray(inds) && (inds.length > 0)) {
             return inds;
         } else {
-            throw new Error("Invalid specification. [" + degi + "]");
+            throw new Error("Invalid specification. [" + frameDegi + "]");
         }
     };
 
