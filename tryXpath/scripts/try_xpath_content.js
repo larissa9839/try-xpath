@@ -177,20 +177,6 @@
         return result;
     };
 
-    function getDesignatedWindow(frameDesi, win) {
-        win = win || window;
-        var desi = parseFrameDesignation(frameDesi);
-        var res = traceBlankWindows(desi, win);
-        if (!res.success) {
-            if (res.failedWindow === null) {
-                throw new Error("The specified frame does not exist.");
-            } else {
-                throw new Error("There is a frame having frameId.");
-            }
-        }
-        return res.windows.pop();
-    };
-
     function handleCssChange(newCss) {
         if (currentCss === null) {
             if (newCss in expiredCssSet) {
