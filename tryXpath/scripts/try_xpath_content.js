@@ -152,13 +152,13 @@
         }
     };
 
-    function traceBlankWindows(degi, win) {
+    function traceBlankWindows(desi, win) {
         win = win || window;
         var result = Object.create(null);
 
         result.windows = [];
-        for (let i = 0; i < degi.length; i++) {
-            let frameInd = degi[i];
+        for (let i = 0; i < desi.length; i++) {
+            let frameInd = desi[i];
             if ((frameInd <= -1) || (frameInd >= win.frames.length)) {
                 result.failedWindow = null;
                 result.success = false;
@@ -378,8 +378,8 @@
             sendMsg.frameDesignation = message.frameDesignation;
 
             try {
-                let degi = parseFrameDesignation(message.frameDesignation);
-                let res = traceBlankWindows(degi, window);
+                let desi = parseFrameDesignation(message.frameDesignation);
+                let res = traceBlankWindows(desi, window);
                 if (!res.success) {
                     let msg;
                     if (res.failedWindow === null) {
@@ -495,8 +495,8 @@
 
         if ("frameDesignation" in message) {
             try {
-                let degi = parseFrameDesignation(message.frameDesignation);
-                let res = traceBlankWindows(degi, window);
+                let desi = parseFrameDesignation(message.frameDesignation);
+                let res = traceBlankWindows(desi, window);
                 if (!res.success) {
                     let msg;
                     if (res.failedWindow === null) {
