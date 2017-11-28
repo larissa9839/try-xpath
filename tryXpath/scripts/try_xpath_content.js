@@ -111,7 +111,7 @@
         focusedItem = dummyItem;
         focusedAncestorItems = dummyItems;
 
-        prevMsg = null;
+        prevMsg = createResultMessage();
         executionCount++;
     };
 
@@ -175,6 +175,20 @@
 
         result.success = true;
         return result;
+    };
+
+    function getDesignatedWindow(frameDesi, win) {
+        win = win || window;
+        var desi = parseFrameDesignation(frameDesi);
+        var res = traceBlankWindows(desi, win);
+        if (!res.success) {
+            if (res.failedWindow === null) {
+                throw new Error("The specified frame does not exist.");
+            } else {
+                throw new Error("There is a frame having frameId.");
+            }
+        }
+        return res.windows.pop();
     };
 
     function handleCssChange(newCss) {
@@ -491,11 +505,36 @@
     };
 
     genericListener.listeners.focusFrame = function(message) {
-        if (window !== window.top) {
-            window.parent.postMessage({
+        var win = window;
+
+        if ("frameDesignation" in message) {
+            try {
+                let degi = parseFrameDesignation(message.frameDesignation);
+                let res = traceBlankWindows(degi, window);
+                if (!res.success) {
+                    let msg;
+                    if (res.failedWindow === null) {
+                        msg = "The specified frame does not exist.";
+                    } else {
+                        msg = "There is a frame having frameId.";
+                    }
+                    throw new Error(msg);
+                }
+                win = res.windows.pop();
+            } catch (e) {
+                let sendMsg = createResultMessage();
+                sendMsg.message = "An error occurred when focusing a frame. "
+                    + e.message;
+                browser.runtime.sendMessage(sendMsg);
+                return;
+            }
+        }
+
+        if (win !== win.top) {
+            win.parent.postMessage({
                 "message": "tryxpath-focus-frame",
                 "index": 0,
-                "frameIndex": fu.findFrameIndex(window, window.parent)
+                "frameIndex": fu.findFrameIndex(win, win.parent)
             }, "*");
         }
     };

@@ -2,7 +2,8 @@
 
 	* tryXpath/scripts/try_xpath_content.js: 
 	Define createResultMessage function.
-	
+	Define getDesignatedWindow function.
+
 2017-11-28  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
