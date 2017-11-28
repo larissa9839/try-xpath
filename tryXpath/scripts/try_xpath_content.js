@@ -142,13 +142,13 @@
         }
     };
 
-    function parseFrameDesignation(frameDegi) {
-        var inds = JSON.parse(frameDegi);
+    function parseFrameDesignation(frameDesi) {
+        var inds = JSON.parse(frameDesi);
         
         if (fu.isNumberArray(inds) && (inds.length > 0)) {
             return inds;
         } else {
-            throw new Error("Invalid specification. [" + frameDegi + "]");
+            throw new Error("Invalid specification. [" + frameDesi + "]");
         }
     };
 
