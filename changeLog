@@ -2,6 +2,7 @@
 
 	* tryXpath/scripts/try_xpath_content.js:
 	Define parseFrameDesignation function.
+	Fix parseFrameDesignation function.
 
 2017-11-27  larissa9839  <larissa9839@gmail.com>
 
