@@ -31,19 +31,7 @@
         "frameAncestor": "data-tryxpath-frame-ancestor"        
     };
 
-    var prevMsg = {
-        "executionId": -1,
-        "href": "",
-        "title": "",
-        "message": "There is no results.",
-        "main": {
-            "method": "evaluate",
-            "expression": "",
-            "specifiedResultType": "ANY_TYPE(0)",
-            "resolver": "",
-            "itemDetails": []
-        }
-    };
+    var prevMsg;
     var executionCount = 0;
     var inBlankWindow = false;
     var currentDocument = null;
@@ -164,7 +152,7 @@
         }
     };
 
-    function traceBlankWindows (degi, win) {
+    function traceBlankWindows(degi, win) {
         win = win || window;
         var result = Object.create(null);
 
@@ -324,6 +312,22 @@
             }
         }
         insertedStyleElements.clear();
+    };
+
+    function createResultMessage() {
+        return {
+            "executionId": -1,
+            "href": "",
+            "title": "",
+            "message": "There is no results.",
+            "main": {
+                "method": "evaluate",
+                "expression": "",
+                "specifiedResultType": "ANY_TYPE(0)",
+                "resolver": "",
+                "itemDetails": []
+            }
+        };        
     };
 
     function genericListener(message, sender, sendResponse) {
@@ -553,6 +557,7 @@
         }
     });
 
+    prevMsg = createResultMessage();
     setFocusFrameListener(window, false);
 
     browser.runtime.sendMessage({ "event": "requestSetContentInfo" });
