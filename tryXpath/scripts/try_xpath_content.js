@@ -159,6 +159,41 @@
         }
     };
 
+    function parseFrameDesignation(frameDegi) {
+        var inds = JSON.parse(frameDegi);
+        
+        if (fu.isNumberArray(inds) && (inds.length > 0)) {
+            return inds;
+        } else {
+            throw new Error("Invalid specification. [" + spec + "]");
+        }
+    };
+
+    function traceBlankWindows (degi, win) {
+        win = win || window;
+        var result = Object.create(null);
+
+        result.windows = [];
+        for (let i = 0; i < degi.length; i++) {
+            let frameInd = degi[i];
+            if ((frameInd <= -1) || (frameInd >= win.frames.length)) {
+                result.failedWindow = null;
+                result.success = false;
+                return result;
+            }
+            win = win.frames[frameInd];
+            if (!fu.isBlankWindow(win)) {
+                result.failedWindow = win;
+                result.success = false;
+                return result;
+            }
+            result.windows.push(win);
+        }
+
+        result.success = true;
+        return result;
+    };
+
     function handleCssChange(newCss) {
         if (currentCss === null) {
             if (newCss in expiredCssSet) {
@@ -342,9 +377,20 @@
 
         if ("frameDesignation" in message) {
             sendMsg.frameDesignation = message.frameDesignation;
+
             try {
-                currentFrames = getFrames(message.frameDesignation);
-                contextItem = currentFrames[0].contentDocument;
+                let degi = parseFrameDesignation(message.frameDesignation);
+                let res = traceBlankWindows(degi, window);
+                if (!res.success) {
+                    let msg;
+                    if (res.failedWindow === null) {
+                        msg = "The specified frame does not exist.";
+                    } else {
+                        msg = "There is a frame having frameId.";
+                    }
+                    throw new Error(msg);
+                }
+                contextItem = res.windows.pop().document;
             } catch (e) {
                 sendMsg.message = "An error occurred when getting a frame. "
                     + e.message;
@@ -352,6 +398,7 @@
                 prevMsg = sendMsg;
                 return;
             }
+
             inBlankWindow = true;
             currentDocument = contextItem;
         }
