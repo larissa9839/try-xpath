@@ -1,5 +1,8 @@
 2017-11-29  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.html (Main):
+	Add focus-designated-frame button.
+
 	* tryXpath/scripts/try_xpath_content.js: 
 	Define createResultMessage function.
 	Define getDesignatedWindow function.

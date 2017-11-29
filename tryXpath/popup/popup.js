@@ -359,6 +359,14 @@
         frameDesignationExpression.addEventListener(
             "keypress", handleExprEnter);
 
+        document.getElementById("focus-designated-frame").addEventListener(
+            "click", () => {
+                sendToSpecifiedFrame({
+                    "event": "focusFrame",
+                    "frameDesignation": frameDesignationExpression.value
+                });
+            });
+
         frameIdHeader.addEventListener("click", changeFrameIdVisible);
         frameIdHeader.addEventListener("keypress", changeFrameIdVisible);
         frameIdExpression.addEventListener("keypress", handleExprEnter);
