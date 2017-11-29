@@ -1,5 +1,9 @@
 2017-11-29  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/scripts/try_xpath_content.js:
+	Define invalidExecutionId constants.
+	Fix createResultMessage function.
+
 	* tryXpath/popup/popup.html (Main):
 	Add focus-designated-frame button.
 

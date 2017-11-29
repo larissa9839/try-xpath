@@ -17,6 +17,7 @@
 
     const dummyItem = "";
     const dummyItems = [];
+    const invalidExecutionId = NaN;
     const styleElementHeader
           = "/* This style element was inserted by browser add-on, Try XPath."
           + " If you want to remove this element, please click the reset"
@@ -316,7 +317,8 @@
 
     function createResultMessage() {
         return {
-            "executionId": -1,
+            "event": "showResultsInPopup",
+            "executionId": invalidExecutionId,
             "href": "",
             "title": "",
             "message": "There is no results.",
