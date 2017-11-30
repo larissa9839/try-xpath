@@ -383,13 +383,16 @@
                 let desi = parseFrameDesignation(message.frameDesignation);
                 let res = traceBlankWindows(desi, window);
                 if (!res.success) {
-                    let msg;
                     if (res.failedWindow === null) {
-                        msg = "The specified frame does not exist.";
+                        throw new Error(
+                            "The specified frame does not exist.");
                     } else {
-                        msg = "There is a frame having frameId.";
+                        res.failedWindow.postMessage({
+                            "message": "tryxpath-request-message-to-popup",
+                            "messageId": 1
+                        }, "*");
+                        return;
                     }
-                    throw new Error(msg);
                 }
                 contextItem = res.windows.pop().document;
             } catch (e) {
@@ -502,11 +505,15 @@
                 if (!res.success) {
                     let msg;
                     if (res.failedWindow === null) {
-                        msg = "The specified frame does not exist.";
+                        throw new Error(
+                            "The specified frame does not exist.");
                     } else {
-                        msg = "There is a frame having frameId.";
+                        res.failedWindow.postMessage({
+                            "message": "tryxpath-request-message-to-popup",
+                            "messageId": 1
+                        }, "*");
+                        return;
                     }
-                    throw new Error(msg);
                 }
                 win = res.windows.pop();
             } catch (e) {
@@ -581,6 +588,30 @@
         }
         if (changes.css && ("newValue" in changes.css)) {
             handleCssChange(changes.css.newValue);
+        }
+    });
+
+    window.addEventListener("message", event => {
+        if (event.data
+            && (event.data.message === "tryxpath-request-message-to-popup")) {
+
+            let sendMsg;
+            switch (event.data.messageId) {
+            case 0:
+                sendMsg = createResultMessage();
+                sendMsg.message = "An error occurred when getting a frame. "
+                    + "There is a frame having frameId.";
+                browser.runtime.sendMessage(sendMsg);
+                break;
+            case 1:
+                sendMsg = createResultMessage();
+                sendMsg.message = "An error occurred when focusing a frame. "
+                    + "There is a frame having frameId.";
+                browser.runtime.sendMessage(sendMsg);
+                break;
+            default:
+                break;
+            }
         }
     });
 
