@@ -321,7 +321,7 @@
             "executionId": invalidExecutionId,
             "href": "",
             "title": "",
-            "message": "There is no results.",
+            "message": "There is no result.",
             "main": {
                 "method": "evaluate",
                 "expression": "",
