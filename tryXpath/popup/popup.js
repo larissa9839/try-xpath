@@ -294,6 +294,12 @@
         sendToSpecifiedFrame({ "event": "requestShowResultsInPopup" });
     };
 
+    genericListener.listeners.insertStyleToPopup = function(message) {
+        var style = document.createElement("style");
+        style.textContent = message.css;
+        document.head.appendChild(style);
+    };
+
     genericListener.listeners.addFrameId = function (message, sender) {
         var opt = document.createElement("option");
         opt.setAttribute("data-frame-id", sender.frameId);
@@ -475,6 +481,7 @@
         resultsTbody.appendChild(fu.createDetailTableHeader());
         contextTbody.appendChild(fu.createDetailTableHeader());
 
+        browser.runtime.sendMessage({ "event": "requestInsertStyleToPopup"});
         browser.runtime.sendMessage({ "event": "requestRestorePopupState" });
     });
 

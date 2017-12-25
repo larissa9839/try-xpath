@@ -10,6 +10,7 @@
     var fu = tryXpath.functions;
 
     var popupState = null;
+    var popupCss = "body{width:367px;height:auto;}";
     var results = {};
     var css = "";
     var attributes = {
@@ -54,7 +55,14 @@
             "event": "restorePopupState",
             "state": popupState
         });
-    }
+    };
+
+    genericListener.listeners.requestInsertStyleToPopup = function () {
+        browser.runtime.sendMessage({
+            "event": "insertStyleToPopup",
+            "css": popupCss
+        });
+    };
 
     genericListener.listeners.showAllResults = function(message, sender) {
         delete message.event;
