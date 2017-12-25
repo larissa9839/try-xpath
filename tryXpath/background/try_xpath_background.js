@@ -12,6 +12,7 @@
     var popupState = null;
     var results = {};
     var css = "";
+    var popupCss = "body { width: 750px; }";
     var attributes = {
         "element": "data-tryxpath-element",
         "context": "data-tryxpath-context",
@@ -54,7 +55,13 @@
             "event": "restorePopupState",
             "state": popupState
         });
-    }
+    };
+
+    genericListener.listeners.insertCssToPopup = function (message, sender) {
+        browser.tabs.insertCSS(sender.tab.id, {
+            "code": popupCss
+        }).catch(fu.onError);
+    };
 
     genericListener.listeners.showAllResults = function(message, sender) {
         delete message.event;
