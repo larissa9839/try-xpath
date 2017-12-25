@@ -1,5 +1,8 @@
 2017-12-25  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/manifest.json:
+	Change version. 1.2.0 -> 1.3.0b1
+
 	* test/unit_test/jasmine/spec/spec.js:
 	Get textContent as value if type is Element.
 
