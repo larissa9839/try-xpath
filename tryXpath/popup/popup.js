@@ -476,7 +476,6 @@
         contextTbody.appendChild(fu.createDetailTableHeader());
 
         browser.runtime.sendMessage({ "event": "requestRestorePopupState" });
-        browser.runtime.sendMessage({ "event": "insertCssToPopup" });
     });
 
 
