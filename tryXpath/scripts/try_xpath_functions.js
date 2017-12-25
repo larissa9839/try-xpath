@@ -194,6 +194,16 @@ if (!tryXpath.functions) {
             return { "type": "Boolean", "name": "", "value": item.toString()};
         }
 
+        // item is Element
+        if (fu.isElementItem(item)) {
+            return {
+                "type": "Node " + fu.getNodeTypeStr(item.nodeType)
+                    + "(nodeType=" + item.nodeType + ")",
+                "name": item.nodeName,
+                "value": item.textContent
+            };
+        }
+        
         // item is Attr
         if (fu.isAttrItem(item)) {
             return { "type": "Attr", "name": item.name, "value": item.value };

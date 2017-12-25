@@ -1,3 +1,8 @@
+2017-12-25  larissa9839  <larissa9839@gmail.com>
+
+	* test/unit_test/jasmine/spec/spec.js:
+	Get textContent as value if type is Element.
+
 2017-11-29  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_content.js:
