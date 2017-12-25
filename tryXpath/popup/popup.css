@@ -23,16 +23,18 @@ dt {
     clear: both;
     float: left;
     text-align: right;
-    width: 96px;
+    width: 25%;
     margin: 0px;
     padding: 2px;
+    box-sizing: border-box;
 }
 
 dd {
     float: left;
-    width: 263px;
+    width: 75%;
     margin: 0px;
     padding: 2px;
+    box-sizing: border-box;
 }
 
 select {
