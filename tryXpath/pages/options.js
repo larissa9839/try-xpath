@@ -20,6 +20,11 @@
         "frameAncestor": "data-tryxpath-frame-ancestor"
     };
 
+    const defaultPopupBodyStyles = {
+        "width": "367px",
+        "height": "auto"
+    };
+
     var elementAttr, contextAttr, focusedAttr, ancestorAttr, frameAttr,
         frameAncestorAttr, style, popupBodyWidth, popupBodyHeight, message,
         testElement;
@@ -140,6 +145,9 @@
                 loadDefaultCss().then(css => {
                     style.value = css;
                 }).catch(fu.onError);
+
+                popupBodyWidth.value = defaultPopupBodyStyles.width;
+                popupBodyHeight.value = defaultPopupBodyStyles.height;
             });
     });
 
