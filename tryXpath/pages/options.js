@@ -47,6 +47,10 @@
         return true;
     };
 
+    function isValidStyleLength(len) {
+        return /^auto$|^[1-9]\d*px$/.test(len);
+    };
+
     function loadDefaultCss() {
         return new Promise((resolve, reject) => {
             var req = new XMLHttpRequest();
@@ -75,6 +79,11 @@
         }
 
         return styles;
+    };
+
+    function createPopupCss(bodyStyles) {
+        return "body{width:" + bodyStyles.width + ";height:"
+            + bodyStyles.height + ";}";
     };
 
     window.addEventListener("load", () => {
@@ -115,9 +124,17 @@
             attrs.focusedAncestor = ancestorAttr.value;
             attrs.frame = frameAttr.value;
             attrs.frameAncestor = frameAncestorAttr.value;
+            var bodyStyles = {};
+            bodyStyles.width = popupBodyWidth.value;
+            bodyStyles.height = popupBodyHeight.value;
 
             if (!isValidAttrNames(attrs)) {
                 message.textContent = "There is a invalid attribute.";
+                return;
+            }
+            if (!(isValidStyleLength(bodyStyles.width)
+                  && isValidStyleLength(bodyStyles.height))) {
+                message.textContent = "There is a invalid style.";
                 return;
             }
 

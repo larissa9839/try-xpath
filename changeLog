@@ -3,6 +3,8 @@
 	* tryXpath/pages/options.js:
 	Define extractStyleValues function.
 	Define defaultBodyStyles constants.
+	Define isValidStyleLength function.
+	Define createPopupCss function.
 
 	* tryXpath/pages/options.html:
 	Fix the div closing tag.
