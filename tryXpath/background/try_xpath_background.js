@@ -112,7 +112,11 @@
 
     genericListener.listeners.loadOptions = function (message, sender,
                                                       sendResponse) {
-        sendResponse({ "attributes": attributes, "css": css });
+        sendResponse({
+            "attributes": attributes,
+            "css": css,
+            "popupCss": popupCss
+        });
         return true;
     };
 

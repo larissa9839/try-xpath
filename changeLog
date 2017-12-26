@@ -1,5 +1,8 @@
 2017-12-26  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/options.js:
+	Define extractStyleValues function.
+
 	* tryXpath/pages/options.html:
 	Fix the div closing tag.
 	Add input fields.

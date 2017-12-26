@@ -21,7 +21,8 @@
     };
 
     var elementAttr, contextAttr, focusedAttr, ancestorAttr, frameAttr,
-        frameAncestorAttr, style, message, testElement;
+        frameAncestorAttr, style, popupBodyWidth, popupBodyHeight, message,
+        testElement;
 
     function isValidAttrName(name) {
         try {
@@ -56,6 +57,21 @@
         });
     };
 
+    function extractBodyStyles(css) {
+        var styles = {};
+
+        var res = /width:(.+?);.*height:(.+?);/.exec(css);
+        if (res) {
+            styles.width = res[1];
+            styles.height = res[2];
+        } else {
+            styles.width = "";
+            styles.height = "";
+        }
+
+        return styles;
+    };
+
     window.addEventListener("load", () => {
         elementAttr = document.getElementById("element-attribute");
         contextAttr = document.getElementById("context-attribute");
@@ -65,6 +81,9 @@
         frameAncestorAttr = document.getElementById(
             "frame-ancestor-attribute");
         style = document.getElementById("style");
+        popupBodyWidth = document.getElementById("popup-body-width");
+        popupBodyHeight = document.getElementById("popup-body-height");
+
         message = document.getElementById("message");
 
         browser.runtime.sendMessage({ "event": "loadOptions" }).then(res => {
@@ -76,6 +95,10 @@
             frameAncestorAttr.value = res.attributes.frameAncestor;
             
             style.value = res.css;
+
+            var bodyStyles = extractBodyStyles(res.popupCss);
+            popupBodyWidth.value = bodyStyles.width;
+            popupBodyHeight.value = bodyStyles.height;
         }).catch(fu.onError);
 
         document.getElementById("save").addEventListener("click", () => {
