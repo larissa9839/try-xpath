@@ -2,6 +2,7 @@
 
 	* tryXpath/pages/options.html:
 	Fix the div closing tag.
+	Add input fields.
 
 2017-12-25  larissa9839  <larissa9839@gmail.com>
 
