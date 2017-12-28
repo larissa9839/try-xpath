@@ -140,7 +140,8 @@
 
             browser.storage.sync.set({
                 "attributes": attrs,
-                "css": styleValue
+                "css": styleValue,
+                "popupCss": createPopupCss(bodyStyles)
             }).then(() => {
                 message.textContent
                     = "Success. Please click the \"Set style\" button in "
