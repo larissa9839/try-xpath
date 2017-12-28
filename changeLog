@@ -1,5 +1,8 @@
 2017-12-28  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/options.html (Style to be inserted):
+	Add some h1 elements.
+
 	* tryXpath/background/try_xpath_background.js:
 	Load body styles when the add-on is loaded.
 
