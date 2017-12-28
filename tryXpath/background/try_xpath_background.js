@@ -137,6 +137,9 @@
         if (changes.css && ("newValue" in changes.css)) {
             css = changes.css.newValue;
         }
+        if (changes.popupCss && ("newValue" in changes.popupCss)) {
+            popupCss = changes.popupCss.newValue;
+        }
     });
 
 
