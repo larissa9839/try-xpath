@@ -1,5 +1,8 @@
 2017-12-28  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/background/try_xpath_background.js:
+	Load body styles when the add-on is loaded.
+
 	* tryXpath/pages/options.js:
 	Set body styles to the storage.sync.
 

@@ -145,9 +145,11 @@
 
     browser.storage.sync.get({
         "attributes": attributes,
-        "css": null
+        "css": null,
+        "popupCss": popupCss
     }).then(items => {
         attributes = items.attributes;
+        popupCss = items.popupCss;
         if (items.css !== null) {
             return items.css;
         } else {
