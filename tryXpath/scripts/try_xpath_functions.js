@@ -481,14 +481,14 @@ if (!tryXpath.functions) {
         return null;
     };
 
-    fu.createHeaderRow = function (keys, opts) {
+    fu.createHeaderRow = function (values, opts) {
         opts = opts || {};
         var doc = opts.document || document;
 
         var tr = doc.createElement("tr");
-        for (let key of keys) {
+        for (let value of values) {
             let th = doc.createElement("th");
-            th.textContent = key;
+            th.textContent = value;
             tr.appendChild(th);
         }
         return tr;
