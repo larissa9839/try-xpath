@@ -481,6 +481,19 @@ if (!tryXpath.functions) {
         return null;
     };
 
+    fu.createHeaderRow = function (keys, opts) {
+        opts = opts || {};
+        var doc = opts.document || document;
+
+        var tr = doc.createElement("tr");
+        for (let key of keys) {
+            let th = doc.createElement("th");
+            th.textContent = key;
+            tr.appendChild(th);
+        }
+        return tr;
+    };
+
     fu.createDetailTableHeader = function (opts) {
         opts = opts || {};
         var doc = opts.document || document;

@@ -2,6 +2,7 @@
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Modify getItemDetail function.
+	Define createHeaderRow function.
 
 2017-12-28  larissa9839  <larissa9839@gmail.com>
 
