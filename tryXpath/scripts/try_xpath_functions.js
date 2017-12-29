@@ -590,13 +590,14 @@ if (!tryXpath.functions) {
         var chunkSize = opts.chunkSize || 1000;
         var begin = opts.begin || 0;
         var end = opts.end || details.length;
+        var headerValues = opts.headerValues
+            || ["Index", "Type", "Name", "Value", "Focus"];
 
         var doc = parent.ownerDocument;
 
         fu.emptyChildNodes(parent);
-        parent.appendChild(fu.createDetailTableHeader({
-            "document": doc
-        }));
+        parent.appendChild(fu.createHeaderRow(headerValues,
+                                              { "document": doc }));
 
         return fu.appendDetailRows(parent, details, {
             "chunkSize": chunkSize,

@@ -7,6 +7,7 @@
 	Add opts.keys parameter to createDetailRow function.
 	Add opts.detailKeys parameter to appendDetailRows function.
 	Rename keys parameter of createHeaderRow function to values parameter.
+	Add opts.headerValues parameter to updateDetailsTable function.
 
 2017-12-28  larissa9839  <larissa9839@gmail.com>
 
