@@ -556,6 +556,7 @@ if (!tryXpath.functions) {
             var begin = opts.begin || 0;
             var end = opts.end || details.length;
             var createRow = opts.createRow || fu.createDetailRow.bind(fu);
+            var detailKeys = opts.detailKeys || undefined;
 
             var doc = parent.ownerDocument;
             var frag = doc.createDocumentFragment();
@@ -564,7 +565,8 @@ if (!tryXpath.functions) {
 
             for ( ; index < chunkEnd; index++) {
                 frag.appendChild(createRow(index, details[index], {
-                    "document": doc
+                    "document": doc,
+                    "keys": detailKeys
                 }));
             }
             parent.appendChild(frag);
@@ -574,7 +576,8 @@ if (!tryXpath.functions) {
                     "chunkSize": chunkSize,
                     "begin": index,
                     "end": end,
-                    "createRow": createRow
+                    "createRow": createRow,
+                    "detailKeys": detailKeys
                 });
             } else {
                 return ;
