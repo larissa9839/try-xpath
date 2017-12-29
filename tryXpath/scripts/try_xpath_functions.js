@@ -592,6 +592,7 @@ if (!tryXpath.functions) {
         var end = opts.end || details.length;
         var headerValues = opts.headerValues
             || ["Index", "Type", "Name", "Value", "Focus"];
+        var detailKeys = opts.detailKeys || undefined;
 
         var doc = parent.ownerDocument;
 
@@ -602,7 +603,8 @@ if (!tryXpath.functions) {
         return fu.appendDetailRows(parent, details, {
             "chunkSize": chunkSize,
             "begin": begin,
-            "end": end
+            "end": end,
+            "detailKeys": detailKeys
         });
     };
 
