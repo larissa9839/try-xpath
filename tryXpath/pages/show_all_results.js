@@ -11,6 +11,8 @@
 
     var document = window.document;
 
+    var detailKeys = ["type", "name", "value", "textContent"];
+    var headerValues = ["Type", "Name", "Value", "textContent"];
     var relatedTabId;
     var relatedFrameId;
     var executionId;
@@ -37,8 +39,10 @@
             let contTbody = document.getElementById("context-detail")
                 .getElementsByTagName("tbody")[0];
             if (cont.itemDetail) {
-                fu.updateDetailsTable(contTbody, [cont.itemDetail])
-                    .catch(fu.onError);
+                fu.updateDetailsTable(contTbody, [cont.itemDetail], {
+                    "headerValues": headerValues,
+                    "detailKeys": detailKeys
+                }).catch(fu.onError);
             }
         } else {
             let area = document.getElementById("context-area");
@@ -58,7 +62,10 @@
             = main.itemDetails.length;
         var mainTbody = document.getElementById("main-details")
             .getElementsByTagName("tbody")[0];
-        fu.updateDetailsTable(mainTbody, main.itemDetails).catch(fu.onError);
+        fu.updateDetailsTable(mainTbody, main.itemDetails, {
+            "headerValues": headerValues,
+            "detailKeys": detailKeys
+        }).catch(fu.onError);
     };
 
     window.addEventListener("load", function() {

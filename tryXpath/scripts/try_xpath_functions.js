@@ -590,9 +590,13 @@ if (!tryXpath.functions) {
         var chunkSize = opts.chunkSize || 1000;
         var begin = opts.begin || 0;
         var end = opts.end || details.length;
-        var headerValues = opts.headerValues
-            || ["Index", "Type", "Name", "Value", "Focus"];
         var detailKeys = opts.detailKeys || undefined;
+        var headerValues;
+        if (opts.headerValues) {
+            headerValues = ["Index"].concat(opts.headerValues, ["Focus"]);
+        } else {
+            headerValues = ["Index", "Type", "Name", "Value", "Focus"];
+        }
 
         var doc = parent.ownerDocument;
 

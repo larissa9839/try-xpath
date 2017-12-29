@@ -1,7 +1,11 @@
 2017-12-30  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/show_all_results.js:
+	Show the textContent column in the show_all_results.html.
+
 	* tryXpath/scripts/try_xpath_functions.js:
 	Add opts.detailKeys parameter to updateDetailsTable function.
+	Modify opts.headerValues parameter of updateDetailsTable function.
 
 2017-12-29  larissa9839  <larissa9839@gmail.com>
 
