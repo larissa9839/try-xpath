@@ -560,6 +560,7 @@ if (!tryXpath.functions) {
             var chunkSize = opts.chunkSize || 1000;
             var begin = opts.begin || 0;
             var end = opts.end || details.length;
+            var createRow = opts.createRow || fu.createDetailRow.bind(fu);
 
             var doc = parent.ownerDocument;
             var frag = doc.createDocumentFragment();
@@ -567,7 +568,7 @@ if (!tryXpath.functions) {
             var chunkEnd = Math.min(index + chunkSize, details.length, end);
 
             for ( ; index < chunkEnd; index++) {
-                frag.appendChild(fu.createDetailRow(index, details[index], {
+                frag.appendChild(createRow(index, details[index], {
                     "document": doc
                 }));
             }
@@ -577,7 +578,8 @@ if (!tryXpath.functions) {
                 return fu.appendDetailRows(parent, details, {
                     "chunkSize": chunkSize,
                     "begin": index,
-                    "end": end
+                    "end": end,
+                    "createRow": createRow
                 });
             } else {
                 return ;
