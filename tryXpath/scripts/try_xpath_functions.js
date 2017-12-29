@@ -187,11 +187,26 @@ if (!tryXpath.functions) {
 
         switch (typeof(item)) {
         case "string":
-            return { "type": "String", "name": "", "value": item };
+            return {
+                "type": "String",
+                "name": "",
+                "value": item,
+                "textContent": ""
+            };
         case "number":
-            return { "type": "Number", "name": "", "value": item.toString() };
+            return {
+                "type": "Number",
+                "name": "",
+                "value": item.toString(),
+                "textContent": ""
+            };
         case "boolean":
-            return { "type": "Boolean", "name": "", "value": item.toString()};
+            return {
+                "type": "Boolean",
+                "name": "",
+                "value": item.toString(),
+                "textContent": ""
+            };
         }
 
         // item is Element
@@ -200,13 +215,19 @@ if (!tryXpath.functions) {
                 "type": "Node " + fu.getNodeTypeStr(item.nodeType)
                     + "(nodeType=" + item.nodeType + ")",
                 "name": item.nodeName,
-                "value": item.textContent
+                "value": "",
+                "textContent": item.textContent
             };
         }
         
         // item is Attr
         if (fu.isAttrItem(item)) {
-            return { "type": "Attr", "name": item.name, "value": item.value };
+            return {
+                "type": "Attr",
+                "name": item.name,
+                "value": item.value,
+                "textContent": ""
+            };
         }
 
         // item is Node
@@ -214,7 +235,8 @@ if (!tryXpath.functions) {
             "type": "Node " + fu.getNodeTypeStr(item.nodeType) + "(nodeType="
                 + item.nodeType + ")",
             "name": item.nodeName,
-            "value": item.nodeValue || ""
+            "value": item.nodeValue || "",
+            "textContent": item.textContent || ""
         };
     };
 
