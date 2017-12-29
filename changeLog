@@ -1,5 +1,8 @@
 2017-12-30  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/manifest.json:
+	Change version. 1.3.0b1	-> 1.3.0b2
+
 	* tryXpath/pages/show_all_results.js:
 	Show the textContent column in the show_all_results.html.
 
