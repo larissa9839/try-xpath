@@ -525,6 +525,7 @@ if (!tryXpath.functions) {
     fu.createDetailRow = function (index, detail, opts) {
         opts = opts || {};
         var doc = opts.document || document;
+        var keys = opts.keys || ["type", "name", "value"];
 
         var tr = doc.createElement("tr");
 
@@ -532,17 +533,11 @@ if (!tryXpath.functions) {
         td.textContent = index;
         tr.appendChild(td);
 
-        td = doc.createElement("td");
-        td.textContent = detail.type;
-        tr.appendChild(td);
-
-        td = doc.createElement("td");
-        td.textContent = detail.name;
-        tr.appendChild(td);
-
-        td = doc.createElement("td");
-        td.textContent = detail.value;
-        tr.appendChild(td);
+        for (let key of keys) {
+            let td = doc.createElement("td");
+            td.textContent = detail[key];
+            tr.appendChild(td);
+        }
 
         td = doc.createElement("td");
         var button = doc.createElement("button");
