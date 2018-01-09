@@ -255,7 +255,7 @@
         resultsCount.textContent = resultedDetails.length;
         resultsFrameId.textContent = sender.frameId;
 
-        if (message.context) {
+        if (message.context && message.context.itemDetail) {
             fu.updateDetailsTable(contextTbody, [message.context.itemDetail])
                 .catch(fu.onError);
         }
