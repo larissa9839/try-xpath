@@ -1,18 +1,15 @@
-body {
-    width: 800px;
-}
 
 table {
     box-sizing: border-box;
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    word-break: break-all;
 }
 
 td,
 th {
     border: solid 1px;
-    word-wrap: break-word;
+    min-width: 60px;
 }
 
 th {
