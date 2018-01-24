@@ -1,5 +1,8 @@
 2018-01-24  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Use detail.matchAboutBlank parameter when executeScript is called.
+
 	* tryXpath/manifest.json:
 	Replace "activeTab" with "<all_urls>" in manifest.json.
 	Change version. 1.3.0 -> 1.3.1b1
