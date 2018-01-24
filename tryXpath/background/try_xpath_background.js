@@ -99,6 +99,7 @@
         browser.tabs.insertCSS(id, {
             "code":css,
             "cssOrigin": "author",
+            "matchAboutBlank": true,
             "frameId": frameId
         }).then(() => {
             return browser.tabs.sendMessage(id, {

@@ -1,5 +1,8 @@
 2018-01-24  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/background/try_xpath_background.js:
+	Use detail.matchAboutBlank parameter when insertCSS is called.
+
 	* tryXpath/popup/popup.js:
 	Use detail.matchAboutBlank parameter when executeScript is called.
 
