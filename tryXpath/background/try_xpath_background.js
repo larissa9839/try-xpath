@@ -85,6 +85,7 @@
         for (let removeCss in message.expiredCssSet) {
             browser.tabs.removeCSS(id, {
                 "code": removeCss,
+                "matchAboutBlank": true,
                 "frameId": frameId
             }).then(() => {
                 return browser.tabs.sendMessage(id, {

@@ -2,6 +2,7 @@
 
 	* tryXpath/background/try_xpath_background.js:
 	Use detail.matchAboutBlank parameter when insertCSS is called.
+	Use detail.matchAboutBlank parameter when removeCSS is called.
 
 	* tryXpath/popup/popup.js:
 	Use detail.matchAboutBlank parameter when executeScript is called.
