@@ -578,10 +578,6 @@
         delete expiredCssSet[css];
     };
 
-    genericListener.listeners.initializeBlankWindows = function () {
-        fu.collectBlankWindows(window).forEach(initBlankWindow);
-    };
-
     browser.storage.onChanged.addListener(changes => {
         if (changes.attributes && ("newValue" in changes.attributes)) {
             attributes = changes.attributes.newValue;

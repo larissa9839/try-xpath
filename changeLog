@@ -1,3 +1,8 @@
+2018-01-25  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/scripts/try_xpath_content.js:
+	Remove genericListener.listeners.initializeBlankWindows function.
+
 2018-01-24  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/background/try_xpath_background.js:
