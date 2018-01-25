@@ -1,5 +1,8 @@
 2018-01-25  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Remove codes sending initializeBlankWindows event in sendToSpecifiedFrame function.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Remove genericListener.listeners.initializeBlankWindows function.
 
