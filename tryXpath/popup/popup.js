@@ -217,7 +217,9 @@
         }).then(() => {
             detailsPageCount.value = index + 1;
             detailsPageIndex = index;
-            window.scrollTo(scrollX, scrollY);
+            window.setTimeout(() => {
+                window.scrollTo(scrollX, scrollY);
+            }, 100);
         }).catch(fu.onError);
     };
 

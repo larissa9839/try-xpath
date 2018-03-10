@@ -1,5 +1,8 @@
 2018-03-10  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/popup/popup.js:
+	Delay calling scrollTo method in the showDetailsPage function.
+
 	* tryXpath/background/try_xpath_background.js:
 	Remove the cssOrigin argument when calling insertCSS.
 
