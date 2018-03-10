@@ -2,6 +2,7 @@
 
 	* tryXpath/manifest.json:
 	Add "strict_max_version", and set "52.*" to it.
+	Change version. 1.3.0 -> 1.3.2
 
 	* tryXpath/popup/popup.js:
 	Delay calling scrollTo method in the showDetailsPage function.
