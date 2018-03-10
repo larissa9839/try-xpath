@@ -98,7 +98,6 @@
 
         browser.tabs.insertCSS(id, {
             "code":css,
-            "cssOrigin": "author",
             "frameId": frameId
         }).then(() => {
             return browser.tabs.sendMessage(id, {
@@ -143,7 +142,7 @@
     });
 
 
-    browser.storage.sync.get({
+    browser.storage.local.get({
         "attributes": attributes,
         "css": null,
         "popupCss": popupCss

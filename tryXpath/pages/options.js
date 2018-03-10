@@ -138,7 +138,7 @@
                 return;
             }
 
-            browser.storage.sync.set({
+            browser.storage.local.set({
                 "attributes": attrs,
                 "css": styleValue,
                 "popupCss": createPopupCss(bodyStyles)
