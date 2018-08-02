@@ -1,3 +1,14 @@
+2018-08-02  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.js: 
+	Modify sendToSpecifiedFrame function to use detail.runAt.
+
+2018-07-20  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/popup/popup.js:
+	Modify execContentScript function to use detail.runAt.
+	Modify "get-all-frame-id" click listener to use detail.runAt.
+
 2018-03-17  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/manifest.json:

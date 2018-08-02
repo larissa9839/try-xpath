@@ -49,6 +49,7 @@
             return browser.tabs.executeScript({
                 "file": "/scripts/try_xpath_check_frame.js",
                 "matchAboutBlank": true,
+                "runAt": "document_start",
                 "frameId": frameId
             });
         }).then(ress => {
@@ -181,11 +182,13 @@
         return browser.tabs.executeScript({
             "file": "/scripts/try_xpath_functions.js",
             "matchAboutBlank": true,
+            "runAt": "document_start",
             "allFrames": true
         }).then(() => {
             return browser.tabs.executeScript({
                 "file": "/scripts/try_xpath_content.js",
                 "matchAboutBlank": true,
+                "runAt": "document_start",
                 "allFrames": true
             });
         });
@@ -392,6 +395,7 @@
                     "code": "browser.runtime.sendMessage"
                         + "({\"event\":\"addFrameId\"});",
                     "matchAboutBlank": true,
+                    "runAt": "document_start",
                     "allFrames": true
                 }).catch(fu.onError);
             });
