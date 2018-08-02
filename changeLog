@@ -1,5 +1,8 @@
 2018-08-02  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/manifest.json:
+	Change version. 1.3.3 -> 1.3.4
+
 	* tryXpath/popup/popup.js: 
 	Modify sendToSpecifiedFrame function to use detail.runAt.
 
