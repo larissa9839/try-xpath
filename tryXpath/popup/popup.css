@@ -3,20 +3,32 @@ body {
     width: 367px;
     margin-left: 8px;
     margin-right: 25px;
+    font-size: 14px;
 }
 
 h1 {
     font-size: 110%;
     border-bottom: solid 3px rgb(128,128,128);
+    margin: 0px 0px 2px;
 }
 
 h2 {
     font-size: 100%;
     border-bottom: solid 1px rgb(128,128,128);
+    margin: 0px 0px 2px;
+}
+
+button {
+    font-size: 100%;
+}
+
+ol {
+    margin: 0px;
 }
 
 dl {
     overflow: hidden;
+    margin: 1px 0px;
 }
 
 dt {
@@ -41,17 +53,20 @@ select {
     box-sizing: border-box;
     width: 100%;
     margin: 0px;
+    font-size: 100%;
 }
 
 input[type="text"] {
     width: 100%;
     box-sizing: border-box;
+    font-size: 100%;
 }
 
 textarea {
     width: 100%;
     height: 1.5em;
     box-sizing: border-box;
+    font-size: 100%;
 }
 
 table {
