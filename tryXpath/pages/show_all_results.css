@@ -4,6 +4,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     word-break: break-all;
+    font-family: Consolas, Monaco, "Ubuntu Mono", monospace;
 }
 
 td,
