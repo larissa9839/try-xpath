@@ -751,5 +751,18 @@ if (!tryXpath.functions) {
         return -1;
     };
 
+    fu.makeDetailText = function (detail, keys, separator = ",",
+                                  replacers = Object.create(null)) {
+        let texts = [];
+
+        keys.forEach(key => {
+            let val = detail[key];
+            if (replacers[key]) {
+                val = replacers[key](val);
+            }
+            texts.push(val);
+        })
+        return texts.join(separator);
+    };
 
 })(window);
