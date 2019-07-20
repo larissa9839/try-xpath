@@ -68,12 +68,107 @@
         }).catch(fu.onError);
     };
 
+    function makeTextDownloadUrl(text) {
+        return URL.createObjectURL(new Blob([text], { "type": "text/plain"}));
+    };
+
+    function makeInfoText(results) {
+        let cont = results.context;
+        let main = results.main;
+        return `[Information]
+Message:     ${results.message}
+Title:       ${results.title}
+URL:         ${results.href}
+frameId:     ${results.frameId}
+
+${!cont ? "" : `[Context information]
+Method:                  ${cont.method}
+Expression:              ${cont.expression}
+Specified resultType:    ${cont.specifiedResultType}
+resultType:              ${cont.resultType}
+Resolver:                ${cont.resolver}
+
+[Context detail]
+${headerValues.join(", ")}
+${fu.makeDetailText(cont.itemDetail, detailKeys, ", ")}
+`}
+[Main information]
+Method:                  ${main.method}
+Expression:              ${main.expression}
+Specified resultType:    ${main.specifiedResultType}
+resultType:              ${main.resultType}
+Resolver:                ${main.resolver}
+
+[Main details]
+${["Index"].concat(headerValues).join(", ")}
+${main.itemDetails.map((detail, ind) => {
+      return fu.makeDetailText(detail, ["index"].concat(detailKeys), ", ", {
+          "index": val => { return ind; }
+      });
+  }).join("\n")}
+`;
+    };
+
+    function makeConvertedInfoText(results) {
+        let cont = results.context;
+        let main = results.main;
+        return `[Information]
+Message:     ${results.message}
+Title:       ${results.title}
+URL:         ${results.href}
+frameId:     ${results.frameId}
+
+${!cont ? "" : `[Context information]
+Method:                  ${cont.method}
+Expression(JSON):        ${JSON.stringify(cont.expression)}
+Specified resultType:    ${cont.specifiedResultType}
+resultType:              ${cont.resultType}
+Resolver:                ${cont.resolver}
+
+[Context detail]
+Type, Name, Value(JSON), textContent(JSON)
+${fu.makeDetailText(cont.itemDetail, detailKeys, ", ", {
+    "value": JSON.stringify,
+    "textContent": JSON.stringify
+})}
+`}
+[Main information]
+Method:                  ${main.method}
+Expression(JSON):        ${JSON.stringify(main.expression)}
+Specified resultType:    ${main.specifiedResultType}
+resultType:              ${main.resultType}
+Resolver:                ${main.resolver}
+
+[Main details]
+Type, Name, Value(JSON), textContent(JSON)
+${main.itemDetails.map((detail, ind) => {
+      return fu.makeDetailText(detail, ["index"].concat(detailKeys), ", ", {
+          "index": val => { return ind; },
+          "value": JSON.stringify,
+          "textContent": JSON.stringify
+      });
+  }).join("\n")}
+`;
+    };
+
     window.addEventListener("load", function() {
         browser.runtime.sendMessage({"event":"loadResults"}).then(results => {
             if (results) {
                 relatedTabId = results.tabId;
                 relatedFrameId = results.frameId;
                 executionId = results.executionId;
+
+                let expoText = document.getElementById("export-text");
+                expoText.setAttribute(
+                    "download", `tryxpath-${results.title}.txt`);
+                expoText.href =  makeTextDownloadUrl(makeInfoText(results));
+                let expoPartConv = document.getElementById(
+                    "export-partly-converted");
+                expoPartConv.setAttribute(
+                    "download", `tryxpath-converted-${results.title}.txt`);
+                expoPartConv.href =  makeTextDownloadUrl(
+                    makeConvertedInfoText(results));
+
                 showAllResults(results);
             }
         }).catch(fu.onError);

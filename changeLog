@@ -1,8 +1,17 @@
+2019-07-21  larissa9839  <larissa9839@gmail.com>
+
+	* tryXpath/pages/show_all_results.js:
+	Define makeTextDownloadUrl function.
+	Define makeInfoText function.
+	Define makeConvertedInfoText function.
+
+	* tryXpath/pages/show_all_results.html:
+	Add export links.
+
 2019-07-20  larissa9839  <larissa9839@gmail.com>
 
 	* tryXpath/scripts/try_xpath_functions.js:
 	Define makeDetailText function.
-	
 
 2019-07-18  larissa9839  <larissa9839@gmail.com>
 
