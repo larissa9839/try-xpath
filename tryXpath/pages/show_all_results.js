@@ -98,6 +98,7 @@ Expression:              ${main.expression}
 Specified resultType:    ${main.specifiedResultType}
 resultType:              ${main.resultType}
 Resolver:                ${main.resolver}
+Count:                   ${main.itemDetails.length}
 
 [Main details]
 ${["Index"].concat(headerValues).join(", ")}
@@ -138,9 +139,10 @@ Expression(JSON):        ${JSON.stringify(main.expression)}
 Specified resultType:    ${main.specifiedResultType}
 resultType:              ${main.resultType}
 Resolver:                ${main.resolver}
+Count:                   ${main.itemDetails.length}
 
 [Main details]
-Type, Name, Value(JSON), textContent(JSON)
+Index, Type, Name, Value(JSON), textContent(JSON)
 ${main.itemDetails.map((detail, ind) => {
       return fu.makeDetailText(detail, ["index"].concat(detailKeys), ", ", {
           "index": val => { return ind; },

@@ -1,5 +1,11 @@
 2019-07-22  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/show_all_results.js:
+	Add "Count:" line to the [Main information] section in the
+	exported text.
+	Fix the header line of the [Main details] section in the exported
+	text.
+
 	* tryXpath/scripts/try_xpath_content.js:
 	Fix values of "resolver" property in some messages.
 
