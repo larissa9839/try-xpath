@@ -370,7 +370,7 @@
         sendMsg.main.expression = main.expression;
         sendMsg.main.specifiedResultType = makeTypeStr(mainType);
         sendMsg.main.resultType = "";
-        sendMsg.main.resolver = main.resolver;
+        sendMsg.main.resolver = main.resolver || "";
         sendMsg.main.itemDetails = [];
 
         contextItem = document;
@@ -418,7 +418,7 @@
             sendMsg.context.method = cont.method;
             sendMsg.context.expression = cont.expression;
             sendMsg.context.specifiedResultType = makeTypeStr(contType);
-            sendMsg.context.resolver = cont.resolver;
+            sendMsg.context.resolver = cont.resolver || "";
             sendMsg.context.itemDetail = null;
 
             let contRes;
