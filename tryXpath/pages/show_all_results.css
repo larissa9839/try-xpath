@@ -1,4 +1,30 @@
 
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 120%;
+    margin: 20px 0px 0px;
+}
+
+body > div:first-child > h1 {
+    margin: 0px;
+}
+
+ul {
+    margin: 0px;
+    padding-left: 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 table {
     box-sizing: border-box;
     width: 100%;

@@ -1,5 +1,11 @@
 2019-07-22  larissa9839  <larissa9839@gmail.com>
 
+	* tryXpath/pages/show_all_results.css:
+	Modify css.
+
+	* tryXpath/pages/show_all_results.html:
+	Modify html.
+
 	* tryXpath/pages/show_all_results.js:
 	Add "Count:" line to the [Main information] section in the
 	exported text.
